@@ -1,0 +1,204 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1694957071039228}
+  m_IsPrefabParent: 1
+--- !u!1 &1694957071039228
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4180477557853056}
+  - component: {fileID: 114922379971334286}
+  - component: {fileID: 114868176095021428}
+  - component: {fileID: 114253153636150194}
+  - component: {fileID: 114655713026901974}
+  m_Layer: 0
+  m_Name: Test_GameManager
+  m_TagString: GameManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4180477557853056
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1694957071039228}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.57817507, y: -0.49684387, z: -0.0843122}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114253153636150194
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1694957071039228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a93616dd61c04644b839c10534cd14d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myLevelManager: {fileID: 114655713026901974}
+  myGameSettings: {fileID: 114868176095021428}
+  mainMenu: {fileID: 0}
+  confirmationMenu: {fileID: 0}
+  roleMenu: {fileID: 0}
+  confirmRoleChangePrompt: Are you sure?
+  simMenu: {fileID: 0}
+  confirmSimChangePrompt: Are you sure?
+  mainMenu_keyShortcut: 109
+  roleMenu_keyShortcut: 106
+  simMenu_keyShortcut: 118
+  executeIfConfirmed: 
+  newRoleIfConfirmed: 0
+  newSimIfConfirmed: 0
+--- !u!114 &114655713026901974
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1694957071039228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21cd11b90ba309e42a24bffa2f96e162, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myGameManager: {fileID: 1694957071039228}
+  simulations:
+  - sceneFile: VRS 1
+    simID: 0
+    loadHospital: 1
+    isLoaded: 0
+    startTime: 0
+    endTime: 0
+    score: 0
+  - sceneFile: 
+    simID: 1
+    loadHospital: 1
+    isLoaded: 0
+    startTime: 0
+    endTime: 0
+    score: 0
+  - sceneFile: 
+    simID: 2
+    loadHospital: 1
+    isLoaded: 0
+    startTime: 0
+    endTime: 0
+    score: 0
+  - sceneFile: 
+    simID: 3
+    loadHospital: 1
+    isLoaded: 0
+    startTime: 0
+    endTime: 0
+    score: 0
+  tutorialLevel:
+    sceneFile: 
+    simID: 0
+    loadHospital: 0
+    isLoaded: 0
+    startTime: 0
+    endTime: 0
+    score: 0
+  reportCardLevel:
+    sceneFile: 
+    simID: 0
+    loadHospital: 0
+    isLoaded: 0
+    startTime: 0
+    endTime: 0
+    score: 0
+  splashScreenLevel:
+    sceneFile: 
+    simID: 0
+    loadHospital: 0
+    isLoaded: 0
+    startTime: 0
+    endTime: 0
+    score: 0
+  creditsLevel:
+    sceneFile: 
+    simID: 0
+    loadHospital: 0
+    isLoaded: 0
+    startTime: 0
+    endTime: 0
+    score: 0
+  masterLevel:
+    sceneFile: 
+    simID: 0
+    loadHospital: 0
+    isLoaded: 0
+    startTime: 0
+    endTime: 0
+    score: 0
+  hospitalGeometryLevel:
+    sceneFile: 
+    simID: 0
+    loadHospital: 0
+    isLoaded: 0
+    startTime: 0
+    endTime: 0
+    score: 0
+  curLevel:
+    sceneFile: 
+    simID: 0
+    loadHospital: 0
+    isLoaded: 0
+    startTime: 0
+    endTime: 0
+    score: 0
+--- !u!114 &114868176095021428
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1694957071039228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b97be52009f3854781a9d7b07fd9c98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightPct: 0.1
+  selectedColor: {r: 1, g: 0.64137924, b: 0, a: 1}
+  normalColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  rightColor: {r: 0, g: 1, b: 0, a: 1}
+  wrongColor: {r: 1, g: 0, b: 0, a: 1}
+  correctSFX: {fileID: 8300000, guid: dc776542307435e45a010963364a50bf, type: 3}
+  wrongSFX: {fileID: 8300000, guid: a67a83e3a532321408a9e812e63715c9, type: 3}
+  usingVR: 0
+  curFPC: {fileID: 0}
+  jobRole: 0
+  simulation: 0
+  reportCardManager: {fileID: 114922379971334286}
+--- !u!114 &114922379971334286
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1694957071039228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e260bd683bc71394caef4c6535a05c08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 0
+  MaxScore: 0
+  enteredFileName: REPORTCARD-TEST

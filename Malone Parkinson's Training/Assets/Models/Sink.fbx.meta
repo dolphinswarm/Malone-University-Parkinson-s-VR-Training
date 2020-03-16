@@ -1,0 +1,260 @@
+fileFormatVersion: 2
+guid: 8d86a73e9ec414c238c9647ba7b0e069
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Counter
+    100002: Door_1
+    100004: Door_1 1
+    100006: Door_2
+    100008: Door_2 1
+    100010: Doors
+    100012: Doors 1
+    100014: Drawer_L1
+    100016: Drawer_L2
+    100018: Drawer_L3
+    100020: Drawer_L4
+    100022: Drawer_R1
+    100024: Drawer_R2
+    100026: Drawer_R3
+    100028: Drawer_R4
+    100030: Drawers_Left
+    100032: Drawers_Right
+    100034: Faucet
+    100036: Handle_1
+    100038: Handle_1 1
+    100040: Handle_1 2
+    100042: Handle_1 3
+    100044: Handle_2
+    100046: Handle_2 1
+    100048: Handle_2 2
+    100050: Handle_2 3
+    100052: Handle_2 4
+    100054: Handle_2 5
+    100056: Handle_2 6
+    100058: Handle_2 7
+    100060: Light_Cover
+    100062: Paper_Towel_Dispenser
+    100064: Paper_Towels
+    100066: Sink
+    100068: //RootNode
+    100070: Sink_Cabinet
+    100072: Soap_Dispenser
+    100074: Tap_Handle_C
+    100076: Tap_Handle_H
+    100078: UnderCabinet_Light
+    100080: Upper_Cabinet
+    400000: Counter
+    400002: Door_1
+    400004: Door_1 1
+    400006: Door_2
+    400008: Door_2 1
+    400010: Doors
+    400012: Doors 1
+    400014: Drawer_L1
+    400016: Drawer_L2
+    400018: Drawer_L3
+    400020: Drawer_L4
+    400022: Drawer_R1
+    400024: Drawer_R2
+    400026: Drawer_R3
+    400028: Drawer_R4
+    400030: Drawers_Left
+    400032: Drawers_Right
+    400034: Faucet
+    400036: Handle_1
+    400038: Handle_1 1
+    400040: Handle_1 2
+    400042: Handle_1 3
+    400044: Handle_2
+    400046: Handle_2 1
+    400048: Handle_2 2
+    400050: Handle_2 3
+    400052: Handle_2 4
+    400054: Handle_2 5
+    400056: Handle_2 6
+    400058: Handle_2 7
+    400060: Light_Cover
+    400062: Paper_Towel_Dispenser
+    400064: Paper_Towels
+    400066: Sink
+    400068: //RootNode
+    400070: Sink_Cabinet
+    400072: Soap_Dispenser
+    400074: Tap_Handle_C
+    400076: Tap_Handle_H
+    400078: UnderCabinet_Light
+    400080: Upper_Cabinet
+    2300000: Counter
+    2300002: Door_1
+    2300004: Door_1 1
+    2300006: Door_2
+    2300008: Door_2 1
+    2300010: Drawer_L1
+    2300012: Drawer_L2
+    2300014: Drawer_L3
+    2300016: Drawer_L4
+    2300018: Drawer_R1
+    2300020: Drawer_R2
+    2300022: Drawer_R3
+    2300024: Drawer_R4
+    2300026: Faucet
+    2300028: Handle_1
+    2300030: Handle_1 1
+    2300032: Handle_1 2
+    2300034: Handle_1 3
+    2300036: Handle_2
+    2300038: Handle_2 1
+    2300040: Handle_2 2
+    2300042: Handle_2 3
+    2300044: Handle_2 4
+    2300046: Handle_2 5
+    2300048: Handle_2 6
+    2300050: Handle_2 7
+    2300052: Light_Cover
+    2300054: Paper_Towel_Dispenser
+    2300056: Paper_Towels
+    2300058: Sink
+    2300060: Sink_Cabinet
+    2300062: Soap_Dispenser
+    2300064: Tap_Handle_C
+    2300066: Tap_Handle_H
+    2300068: UnderCabinet_Light
+    2300070: Upper_Cabinet
+    3300000: Counter
+    3300002: Door_1
+    3300004: Door_1 1
+    3300006: Door_2
+    3300008: Door_2 1
+    3300010: Drawer_L1
+    3300012: Drawer_L2
+    3300014: Drawer_L3
+    3300016: Drawer_L4
+    3300018: Drawer_R1
+    3300020: Drawer_R2
+    3300022: Drawer_R3
+    3300024: Drawer_R4
+    3300026: Faucet
+    3300028: Handle_1
+    3300030: Handle_1 1
+    3300032: Handle_1 2
+    3300034: Handle_1 3
+    3300036: Handle_2
+    3300038: Handle_2 1
+    3300040: Handle_2 2
+    3300042: Handle_2 3
+    3300044: Handle_2 4
+    3300046: Handle_2 5
+    3300048: Handle_2 6
+    3300050: Handle_2 7
+    3300052: Light_Cover
+    3300054: Paper_Towel_Dispenser
+    3300056: Paper_Towels
+    3300058: Sink
+    3300060: Sink_Cabinet
+    3300062: Soap_Dispenser
+    3300064: Tap_Handle_C
+    3300066: Tap_Handle_H
+    3300068: UnderCabinet_Light
+    3300070: Upper_Cabinet
+    4300000: Sink_Cabinet
+    4300002: Drawer_R4
+    4300004: Handle_2
+    4300006: Drawer_R3
+    4300008: Handle_2
+    4300010: Drawer_R2
+    4300012: Handle_2
+    4300014: Drawer_R1
+    4300016: Handle_2
+    4300018: Drawer_L1
+    4300020: Handle_2
+    4300022: Drawer_L2
+    4300024: Handle_2
+    4300026: Drawer_L3
+    4300028: Handle_2
+    4300030: Drawer_L4
+    4300032: Handle_2
+    4300034: Door_2
+    4300036: Handle_1
+    4300038: Door_1
+    4300040: Handle_1
+    4300042: Counter
+    4300044: Sink
+    4300046: Faucet
+    4300048: Tap_Handle_H
+    4300050: Tap_Handle_C
+    4300052: Upper_Cabinet
+    4300054: Door_2
+    4300056: Handle_1
+    4300058: Door_1
+    4300060: Handle_1
+    4300062: UnderCabinet_Light
+    4300064: Light_Cover
+    4300066: Paper_Towel_Dispenser
+    4300068: Paper_Towels
+    4300070: Soap_Dispenser
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

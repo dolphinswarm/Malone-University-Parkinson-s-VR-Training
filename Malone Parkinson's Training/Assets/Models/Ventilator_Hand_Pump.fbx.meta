@@ -1,0 +1,138 @@
+fileFormatVersion: 2
+guid: 1e2030207acf1a94ebefbe22e382eea0
+timeCreated: 1483567794
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Base
+    100002: Bulb
+    100004: Cap
+    100006: Diaphram
+    100008: Mask
+    100010: MaskCushion
+    100012: MaskPipe
+    100014: MaskStem
+    100016: tab_1
+    100018: tab_2
+    100020: tab_3
+    100022: Valve
+    100024: ValveStem
+    100026: //RootNode
+    400000: Base
+    400002: Bulb
+    400004: Cap
+    400006: Diaphram
+    400008: Mask
+    400010: MaskCushion
+    400012: MaskPipe
+    400014: MaskStem
+    400016: tab_1
+    400018: tab_2
+    400020: tab_3
+    400022: Valve
+    400024: ValveStem
+    400026: //RootNode
+    2300000: Base
+    2300002: Bulb
+    2300004: Cap
+    2300006: Diaphram
+    2300008: Mask
+    2300010: MaskCushion
+    2300012: MaskPipe
+    2300014: MaskStem
+    2300016: tab_1
+    2300018: tab_2
+    2300020: tab_3
+    2300022: Valve
+    2300024: ValveStem
+    3300000: Base
+    3300002: Bulb
+    3300004: Cap
+    3300006: Diaphram
+    3300008: Mask
+    3300010: MaskCushion
+    3300012: MaskPipe
+    3300014: MaskStem
+    3300016: tab_1
+    3300018: tab_2
+    3300020: tab_3
+    3300022: Valve
+    3300024: ValveStem
+    4300000: Bulb
+    4300002: Cap
+    4300004: ValveStem
+    4300006: Valve
+    4300008: MaskStem
+    4300010: MaskPipe
+    4300012: Mask
+    4300014: MaskCushion
+    4300016: Diaphram
+    4300018: Base
+    4300020: tab_1
+    4300022: tab_2
+    4300024: tab_3
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 10
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

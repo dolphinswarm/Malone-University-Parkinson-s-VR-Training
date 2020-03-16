@@ -1,0 +1,568 @@
+fileFormatVersion: 2
+guid: ed0fcd2c31c9847188f78d2a815c10a7
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: _Measure_Cube_
+    100002: Cabinet
+    100004: Ceiling
+    100006: Closet
+    100008: Closet_Door
+    100010: Closet_North_Wall
+    100012: Closet_West_Wall
+    100014: Door_Frame
+    100016: Door_Frame 1
+    100018: Door_Frame1
+    100020: Door_Frame2
+    100022: Door_L
+    100024: Door_L 1
+    100026: Door_L 2
+    100028: Door_R
+    100030: Door_R 1
+    100032: Door_R 2
+    100034: East_Wall
+    100036: East_Wall6
+    100038: East_Wall7
+    100040: Exit_Sign
+    100042: Floor
+    100044: Hall_South_Wall
+    100046: Hallway
+    100048: Leg_Left
+    100050: Leg_Right
+    100052: North_Wall
+    100054: Outlet_2_1
+    100056: Outlet_4_1
+    100058: Outlet_4_10
+    100060: Outlet_4_2
+    100062: Outlet_4_3
+    100064: Outlet_4_3 1
+    100066: Outlet_4_3 2
+    100068: Outlet_4_4
+    100070: Outlet_4_4 1
+    100072: Outlet_4_4 2
+    100074: Outlet_4_5
+    100076: Outlet_4_6
+    100078: Outlet_4_7
+    100080: Outlet_4_8
+    100082: Outlet_4_9
+    100084: Outlet_Network_1
+    100086: Outlet_Network_2
+    100088: Outlet_Network_2 1
+    100090: Outlet_Network_3
+    100092: Outlet_Network_3 1
+    100094: Outlet_Network_3 2
+    100096: Outlet_Network_4
+    100098: pasted__Desk_Drawers
+    100100: pasted__Desk_Leg
+    100102: pasted__Door_Left
+    100104: pasted__Door_Right
+    100106: pasted__Handle
+    100108: pasted__Handle1
+    100110: pasted__Hinge
+    100112: pasted__Hinge 1
+    100114: pasted__Hinge 2
+    100116: pasted__Hinge1
+    100118: pasted__Hinge1 1
+    100120: pasted__Hinge1 2
+    100122: pasted__Hinge10
+    100124: pasted__Hinge11
+    100126: pasted__Hinge2
+    100128: pasted__Hinge2 1
+    100130: pasted__Hinge2 2
+    100132: pasted__Hinge3
+    100134: pasted__Hinge3 1
+    100136: pasted__Hinge3 2
+    100138: pasted__Hinge4
+    100140: pasted__Hinge4 1
+    100142: pasted__Hinge4 2
+    100144: pasted__Hinge5
+    100146: pasted__Hinge5 1
+    100148: pasted__Hinge5 2
+    100150: pasted__Hinge6
+    100152: pasted__Hinge6 1
+    100154: pasted__Hinge6 2
+    100156: pasted__Hinge7
+    100158: pasted__Hinge7 1
+    100160: pasted__Hinge7 2
+    100162: pasted__Hinge8
+    100164: pasted__Hinge9
+    100166: pasted__Shelf
+    100168: pasted__Shelf1
+    100170: pasted__Shelf2
+    100172: pasted__Shelf3
+    100174: pCube1
+    100176: Planter
+    100178: //RootNode
+    100180: Shelf
+    100182: Shelf1
+    100184: Shelf2
+    100186: Shelf3
+    100188: Shelf4
+    100190: South_Wall
+    100192: Table1
+    100194: Table_Drawers
+    100196: Trash_Can
+    100198: UtilityPanel
+    100200: Walls
+    100202: West_Wall
+    400000: _Measure_Cube_
+    400002: Cabinet
+    400004: Ceiling
+    400006: Closet
+    400008: Closet_Door
+    400010: Closet_North_Wall
+    400012: Closet_West_Wall
+    400014: Door_Frame
+    400016: Door_Frame 1
+    400018: Door_Frame1
+    400020: Door_Frame2
+    400022: Door_L
+    400024: Door_L 1
+    400026: Door_L 2
+    400028: Door_R
+    400030: Door_R 1
+    400032: Door_R 2
+    400034: East_Wall
+    400036: East_Wall6
+    400038: East_Wall7
+    400040: Exit_Sign
+    400042: Floor
+    400044: Hall_South_Wall
+    400046: Hallway
+    400048: Leg_Left
+    400050: Leg_Right
+    400052: North_Wall
+    400054: Outlet_2_1
+    400056: Outlet_4_1
+    400058: Outlet_4_10
+    400060: Outlet_4_2
+    400062: Outlet_4_3
+    400064: Outlet_4_3 1
+    400066: Outlet_4_3 2
+    400068: Outlet_4_4
+    400070: Outlet_4_4 1
+    400072: Outlet_4_4 2
+    400074: Outlet_4_5
+    400076: Outlet_4_6
+    400078: Outlet_4_7
+    400080: Outlet_4_8
+    400082: Outlet_4_9
+    400084: Outlet_Network_1
+    400086: Outlet_Network_2
+    400088: Outlet_Network_2 1
+    400090: Outlet_Network_3
+    400092: Outlet_Network_3 1
+    400094: Outlet_Network_3 2
+    400096: Outlet_Network_4
+    400098: pasted__Desk_Drawers
+    400100: pasted__Desk_Leg
+    400102: pasted__Door_Left
+    400104: pasted__Door_Right
+    400106: pasted__Handle
+    400108: pasted__Handle1
+    400110: pasted__Hinge
+    400112: pasted__Hinge 1
+    400114: pasted__Hinge 2
+    400116: pasted__Hinge1
+    400118: pasted__Hinge1 1
+    400120: pasted__Hinge1 2
+    400122: pasted__Hinge10
+    400124: pasted__Hinge11
+    400126: pasted__Hinge2
+    400128: pasted__Hinge2 1
+    400130: pasted__Hinge2 2
+    400132: pasted__Hinge3
+    400134: pasted__Hinge3 1
+    400136: pasted__Hinge3 2
+    400138: pasted__Hinge4
+    400140: pasted__Hinge4 1
+    400142: pasted__Hinge4 2
+    400144: pasted__Hinge5
+    400146: pasted__Hinge5 1
+    400148: pasted__Hinge5 2
+    400150: pasted__Hinge6
+    400152: pasted__Hinge6 1
+    400154: pasted__Hinge6 2
+    400156: pasted__Hinge7
+    400158: pasted__Hinge7 1
+    400160: pasted__Hinge7 2
+    400162: pasted__Hinge8
+    400164: pasted__Hinge9
+    400166: pasted__Shelf
+    400168: pasted__Shelf1
+    400170: pasted__Shelf2
+    400172: pasted__Shelf3
+    400174: pCube1
+    400176: Planter
+    400178: //RootNode
+    400180: Shelf
+    400182: Shelf1
+    400184: Shelf2
+    400186: Shelf3
+    400188: Shelf4
+    400190: South_Wall
+    400192: Table1
+    400194: Table_Drawers
+    400196: Trash_Can
+    400198: UtilityPanel
+    400200: Walls
+    400202: West_Wall
+    2300000: _Measure_Cube_
+    2300002: Cabinet
+    2300004: Ceiling
+    2300006: Closet_Door
+    2300008: Closet_North_Wall
+    2300010: Closet_West_Wall
+    2300012: Door_Frame
+    2300014: Door_Frame 1
+    2300016: Door_Frame1
+    2300018: Door_Frame2
+    2300020: Door_L
+    2300022: Door_L 1
+    2300024: Door_L 2
+    2300026: Door_R
+    2300028: Door_R 1
+    2300030: Door_R 2
+    2300032: East_Wall
+    2300034: East_Wall6
+    2300036: East_Wall7
+    2300038: Exit_Sign
+    2300040: Floor
+    2300042: Hall_South_Wall
+    2300044: Leg_Left
+    2300046: Leg_Right
+    2300048: North_Wall
+    2300050: Outlet_2_1
+    2300052: Outlet_4_1
+    2300054: Outlet_4_10
+    2300056: Outlet_4_2
+    2300058: Outlet_4_3
+    2300060: Outlet_4_3 1
+    2300062: Outlet_4_3 2
+    2300064: Outlet_4_4
+    2300066: Outlet_4_4 1
+    2300068: Outlet_4_4 2
+    2300070: Outlet_4_5
+    2300072: Outlet_4_6
+    2300074: Outlet_4_7
+    2300076: Outlet_4_8
+    2300078: Outlet_4_9
+    2300080: Outlet_Network_1
+    2300082: Outlet_Network_2
+    2300084: Outlet_Network_2 1
+    2300086: Outlet_Network_3
+    2300088: Outlet_Network_3 1
+    2300090: Outlet_Network_3 2
+    2300092: Outlet_Network_4
+    2300094: pasted__Desk_Drawers
+    2300096: pasted__Desk_Leg
+    2300098: pasted__Door_Left
+    2300100: pasted__Door_Right
+    2300102: pasted__Handle
+    2300104: pasted__Handle1
+    2300106: pasted__Hinge
+    2300108: pasted__Hinge 1
+    2300110: pasted__Hinge 2
+    2300112: pasted__Hinge1
+    2300114: pasted__Hinge1 1
+    2300116: pasted__Hinge1 2
+    2300118: pasted__Hinge10
+    2300120: pasted__Hinge11
+    2300122: pasted__Hinge2
+    2300124: pasted__Hinge2 1
+    2300126: pasted__Hinge2 2
+    2300128: pasted__Hinge3
+    2300130: pasted__Hinge3 1
+    2300132: pasted__Hinge3 2
+    2300134: pasted__Hinge4
+    2300136: pasted__Hinge4 1
+    2300138: pasted__Hinge4 2
+    2300140: pasted__Hinge5
+    2300142: pasted__Hinge5 1
+    2300144: pasted__Hinge5 2
+    2300146: pasted__Hinge6
+    2300148: pasted__Hinge6 1
+    2300150: pasted__Hinge6 2
+    2300152: pasted__Hinge7
+    2300154: pasted__Hinge7 1
+    2300156: pasted__Hinge7 2
+    2300158: pasted__Hinge8
+    2300160: pasted__Hinge9
+    2300162: pasted__Shelf
+    2300164: pasted__Shelf1
+    2300166: pasted__Shelf2
+    2300168: pasted__Shelf3
+    2300170: pCube1
+    2300172: Planter
+    2300174: Shelf
+    2300176: Shelf1
+    2300178: Shelf2
+    2300180: Shelf3
+    2300182: Shelf4
+    2300184: South_Wall
+    2300186: Table1
+    2300188: Table_Drawers
+    2300190: Trash_Can
+    2300192: UtilityPanel
+    2300194: West_Wall
+    3300000: _Measure_Cube_
+    3300002: Cabinet
+    3300004: Ceiling
+    3300006: Closet_Door
+    3300008: Closet_North_Wall
+    3300010: Closet_West_Wall
+    3300012: Door_Frame
+    3300014: Door_Frame 1
+    3300016: Door_Frame1
+    3300018: Door_Frame2
+    3300020: Door_L
+    3300022: Door_L 1
+    3300024: Door_L 2
+    3300026: Door_R
+    3300028: Door_R 1
+    3300030: Door_R 2
+    3300032: East_Wall
+    3300034: East_Wall6
+    3300036: East_Wall7
+    3300038: Exit_Sign
+    3300040: Floor
+    3300042: Hall_South_Wall
+    3300044: Leg_Left
+    3300046: Leg_Right
+    3300048: North_Wall
+    3300050: Outlet_2_1
+    3300052: Outlet_4_1
+    3300054: Outlet_4_10
+    3300056: Outlet_4_2
+    3300058: Outlet_4_3
+    3300060: Outlet_4_3 1
+    3300062: Outlet_4_3 2
+    3300064: Outlet_4_4
+    3300066: Outlet_4_4 1
+    3300068: Outlet_4_4 2
+    3300070: Outlet_4_5
+    3300072: Outlet_4_6
+    3300074: Outlet_4_7
+    3300076: Outlet_4_8
+    3300078: Outlet_4_9
+    3300080: Outlet_Network_1
+    3300082: Outlet_Network_2
+    3300084: Outlet_Network_2 1
+    3300086: Outlet_Network_3
+    3300088: Outlet_Network_3 1
+    3300090: Outlet_Network_3 2
+    3300092: Outlet_Network_4
+    3300094: pasted__Desk_Drawers
+    3300096: pasted__Desk_Leg
+    3300098: pasted__Door_Left
+    3300100: pasted__Door_Right
+    3300102: pasted__Handle
+    3300104: pasted__Handle1
+    3300106: pasted__Hinge
+    3300108: pasted__Hinge 1
+    3300110: pasted__Hinge 2
+    3300112: pasted__Hinge1
+    3300114: pasted__Hinge1 1
+    3300116: pasted__Hinge1 2
+    3300118: pasted__Hinge10
+    3300120: pasted__Hinge11
+    3300122: pasted__Hinge2
+    3300124: pasted__Hinge2 1
+    3300126: pasted__Hinge2 2
+    3300128: pasted__Hinge3
+    3300130: pasted__Hinge3 1
+    3300132: pasted__Hinge3 2
+    3300134: pasted__Hinge4
+    3300136: pasted__Hinge4 1
+    3300138: pasted__Hinge4 2
+    3300140: pasted__Hinge5
+    3300142: pasted__Hinge5 1
+    3300144: pasted__Hinge5 2
+    3300146: pasted__Hinge6
+    3300148: pasted__Hinge6 1
+    3300150: pasted__Hinge6 2
+    3300152: pasted__Hinge7
+    3300154: pasted__Hinge7 1
+    3300156: pasted__Hinge7 2
+    3300158: pasted__Hinge8
+    3300160: pasted__Hinge9
+    3300162: pasted__Shelf
+    3300164: pasted__Shelf1
+    3300166: pasted__Shelf2
+    3300168: pasted__Shelf3
+    3300170: pCube1
+    3300172: Planter
+    3300174: Shelf
+    3300176: Shelf1
+    3300178: Shelf2
+    3300180: Shelf3
+    3300182: Shelf4
+    3300184: South_Wall
+    3300186: Table1
+    3300188: Table_Drawers
+    3300190: Trash_Can
+    3300192: UtilityPanel
+    3300194: West_Wall
+    4300000: Hall_South_Wall
+    4300002: Door_Frame
+    4300004: Door_R
+    4300006: pasted__Hinge4
+    4300008: pasted__Hinge5
+    4300010: pasted__Hinge6
+    4300012: pasted__Hinge7
+    4300014: Door_L
+    4300016: pasted__Hinge2
+    4300018: pasted__Hinge3
+    4300020: pasted__Hinge1
+    4300022: pasted__Hinge
+    4300024: Door_Frame2
+    4300026: Door_R
+    4300028: pasted__Hinge4
+    4300030: pasted__Hinge5
+    4300032: pasted__Hinge6
+    4300034: pasted__Hinge7
+    4300036: Door_L
+    4300038: pasted__Hinge2
+    4300040: pasted__Hinge3
+    4300042: pasted__Hinge1
+    4300044: pasted__Hinge
+    4300046: Outlet_4_9
+    4300048: Outlet_4_10
+    4300050: East_Wall6
+    4300052: Outlet_4_3
+    4300054: Outlet_Network_3
+    4300056: Outlet_4_4
+    4300058: East_Wall7
+    4300060: Outlet_Network_2
+    4300062: Outlet_4_3
+    4300064: Outlet_Network_3
+    4300066: Outlet_4_4
+    4300068: East_Wall
+    4300070: Outlet_Network_2
+    4300072: Outlet_4_3
+    4300074: Outlet_Network_3
+    4300076: Outlet_4_4
+    4300078: West_Wall
+    4300080: UtilityPanel
+    4300082: Outlet_Network_4
+    4300084: Outlet_4_5
+    4300086: Outlet_4_6
+    4300088: North_Wall
+    4300090: Outlet_4_7
+    4300092: Outlet_4_8
+    4300094: South_Wall
+    4300096: Door_Frame
+    4300098: Door_R
+    4300100: pasted__Hinge4
+    4300102: pasted__Hinge5
+    4300104: pasted__Hinge6
+    4300106: pasted__Hinge7
+    4300108: Door_L
+    4300110: pasted__Hinge2
+    4300112: pasted__Hinge3
+    4300114: pasted__Hinge1
+    4300116: pasted__Hinge
+    4300118: Outlet_4_1
+    4300120: Outlet_2_1
+    4300122: Outlet_Network_1
+    4300124: Outlet_4_2
+    4300126: Closet_North_Wall
+    4300128: Closet_West_Wall
+    4300130: Floor
+    4300132: Ceiling
+    4300134: Leg_Right
+    4300136: Leg_Left
+    4300138: Table1
+    4300140: Table_Drawers
+    4300142: pasted__Desk_Leg
+    4300144: pasted__Desk_Drawers
+    4300146: Cabinet
+    4300148: pasted__Shelf3
+    4300150: pasted__Shelf2
+    4300152: pasted__Shelf1
+    4300154: pasted__Shelf
+    4300156: pasted__Door_Left
+    4300158: pasted__Door_Right
+    4300160: _Measure_Cube_
+    4300162: Exit_Sign
+    4300164: Trash_Can
+    4300166: Door_Frame1
+    4300168: Closet_Door
+    4300170: pasted__Handle1
+    4300172: pasted__Handle
+    4300174: pasted__Hinge8
+    4300176: pasted__Hinge9
+    4300178: pasted__Hinge10
+    4300180: pasted__Hinge11
+    4300182: Shelf
+    4300184: Shelf1
+    4300186: Shelf2
+    4300188: Shelf3
+    4300190: Shelf4
+    4300192: Planter
+    4300194: pCube1
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
