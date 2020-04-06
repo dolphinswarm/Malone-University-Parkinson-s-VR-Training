@@ -24,7 +24,7 @@ public class PickupEvent : InfoBoardEvent {
             pickupObject = GetComponentInChildren<InteractiveObject>().GetGameObject();
 
         // If the object should be hidden before pickup, hide it
-        if (hideBeforePickup) pickupObject.SetActive(false);
+        if (hideBeforePickup) pickupObject.GetComponent<InteractiveObject>().SetHideBeforeEvent(true);
 
         // If particles is not set, set it
         if (particles == null)
@@ -44,6 +44,11 @@ public class PickupEvent : InfoBoardEvent {
     public override void Go(int prevEventNum) {
         // Show the object, if hidden
         if (hideBeforePickup) pickupObject.SetActive(true);
+
+        // Set the pickup object to interactive
+        InteractiveObject intObj = pickupObject.GetComponent<InteractiveObject>();
+        intObj.enabled = true;
+        intObj.isCurrentlyInteractable = true;
 
         // Start particle effect
         if (particles != null) particles.Play();
@@ -86,6 +91,7 @@ public class PickupEvent : InfoBoardEvent {
         // Else, attach to hand
         else
         {
+            // If oculus...
             if (gameManager.controlType == ControlType.OCULUS)
             {
                 // If instructions specified, follow them
@@ -101,6 +107,13 @@ public class PickupEvent : InfoBoardEvent {
                 {
                     pickupObject.transform.SetParent(gameManager.currentHand.transform);
                 }
+            }
+
+            // If mouse and keyboard...
+            else if (gameManager.controlType == ControlType.MOUSE_KEYBOARD)
+            {
+                pickupObject.transform.position = gameManager.currentHand.transform.position;
+                pickupObject.transform.SetParent(gameManager.currentHand.transform);
             }
         }
 

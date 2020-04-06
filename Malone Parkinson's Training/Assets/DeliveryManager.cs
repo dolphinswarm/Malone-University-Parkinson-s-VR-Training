@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 
+/// </summary>
 public class DeliveryManager : Interactive
 {
     // ======================================================== Variables
@@ -36,7 +39,7 @@ public class DeliveryManager : Interactive
 
     protected override void Select()
     {
-        if (owningEvent != null && !oneClick)
+        if (owningEvent != null && !oneClick && owningEvent.isActive)
         {
             oneClick = true;
             owningEvent.Clicked();

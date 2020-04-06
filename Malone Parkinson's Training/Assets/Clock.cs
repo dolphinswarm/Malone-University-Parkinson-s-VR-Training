@@ -17,7 +17,7 @@ public class Clock : MonoBehaviour
     public GameObject minuteHand;
     public GameObject secondHand;
     public AudioClip clockTick;
-    public bool isClockRunning = true;
+    public bool isClockRunning = false;
 
     // ======================================================== Methods
     /// <summary>
@@ -36,9 +36,6 @@ public class Clock : MonoBehaviour
         // If second hand is not attached, get it
         if (secondHand == null)
             secondHand = GameObject.Find("Clock:Second");
-
-        // Start the clock
-        StartClock();
     }
 
     /// <summary>
@@ -46,7 +43,16 @@ public class Clock : MonoBehaviour
     /// </summary>
     public void StartClock()
     {
+        isClockRunning = true;
         StartCoroutine(MoveSecondsHand());
+    }
+
+    /// <summary>
+    /// Stops the clock's animation.
+    /// </summary>
+    public void StopClock()
+    {
+        isClockRunning = false;
     }
 
     /// <summary>
@@ -74,8 +80,7 @@ public class Clock : MonoBehaviour
         while (isClockRunning)
         {
             secondHand.transform.Rotate(Vector3.right, 6.0f); // 1/60th of 360 degrees
-            SetTime(Random.Range(0, 12), Random.Range(0, 60));
-            AudioSource.PlayClipAtPoint(clockTick, transform.position);
+            AudioSource.PlayClipAtPoint(clockTick, transform.position, 0.5f);
             yield return new WaitForSeconds(1);
         }
     }

@@ -9,6 +9,7 @@ public class ObjectInteractionEvent : InfoBoardEvent
 {
     // ======================================================== Variables
     [Header("Interaction Event Properties")]
+    public bool hideBeforeInteraction = false;
     public List<GameObject> interactionObjects;
     public ParticleSystem particles;
     public SpecialAnimationInstructions specialAnimationInstructions;
@@ -19,8 +20,6 @@ public class ObjectInteractionEvent : InfoBoardEvent
     /// </summary>
     protected override void Initialize()
     {
-        // If the pickup object is not set, get it
-
         // If particles is not set, set it
         if (particles == null)
             particles = GetComponentInChildren<ParticleSystem>();
@@ -28,12 +27,15 @@ public class ObjectInteractionEvent : InfoBoardEvent
         // Stop the particle system
         if (particles != null) particles.Stop();
 
-        // Set all reliant's interactive object scripts to inactive
-        foreach (GameObject interactiveObject in interactionObjects)
+        // If the object should be hidden before pickup, hide it
+        if (hideBeforeInteraction)
         {
-            interactiveObject.GetComponent<InteractiveObject>().enabled = false;
+            // Set all reliant's interactive object scripts to active
+            foreach (GameObject interactiveObject in interactionObjects)
+            {
+                interactiveObject.GetComponent<InteractiveObject>().SetHideBeforeEvent(true);
+            }
         }
-
         // Call base intialize
         base.Initialize();
     }
@@ -56,7 +58,19 @@ public class ObjectInteractionEvent : InfoBoardEvent
         // Set all reliant's interactive object scripts to active
         foreach (GameObject interactiveObject in interactionObjects)
         {
-            interactiveObject.GetComponent<InteractiveObject>().enabled = true;
+            // Show the object, if hidden
+            if (hideBeforeInteraction) interactiveObject.SetActive(true);
+
+            // Enable the interactive object
+            InteractiveObject intObj = interactiveObject.GetComponent<InteractiveObject>();
+            intObj.enabled = true;
+            intObj.isCurrentlyInteractable = true;
+
+            // Change the interaction type, if reliant on oculus hands
+            if ((intObj.highlightType == HighlightType.HAND_DISTANCE || intObj.highlightType == HighlightType.POINTAT) && gameManager.controlType == ControlType.MOUSE_KEYBOARD)
+            {
+                intObj.highlightType = HighlightType.MOUSEOVER;
+            }
         }
 
         // If using Oculus, hide the reticle
@@ -95,7 +109,11 @@ public class ObjectInteractionEvent : InfoBoardEvent
         // Set all reliant's interactive object scripts to inactive
         foreach (GameObject interactiveObject in interactionObjects)
         {
-            interactiveObject.GetComponent<InteractiveObject>().enabled = false;
+            // Enable the interactive object
+            InteractiveObject intObj = interactiveObject.GetComponent<InteractiveObject>();
+            intObj.isCurrentlyInteractable = false;
+            intObj.enabled = false;
+            intObj.isMouseOver = false;
         }
 
         // If special animation instructions, play them

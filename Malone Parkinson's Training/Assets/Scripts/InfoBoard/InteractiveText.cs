@@ -9,8 +9,8 @@ using UnityEngine.UI;
 public class InteractiveText : Interactive {
     // ======================================================== Properties
     [Header("Text Properties")]
-    protected QuestionDisplayManager myQuestion;
-    protected Text myText;
+    protected QuestionDisplayManager myQuestion;    // The question display manager for this text.
+    protected Text myText;                          // The text component attached to this text object.
 
     // ======================================================== Methods
     /// <summary>
@@ -27,7 +27,11 @@ public class InteractiveText : Interactive {
         base.Initialize();
     }
 
+    /// <summary>
+    /// Highlight this text.
+    /// </summary>
     protected override void Highlight() {
+        //myText.color = infoBoard.selectedColor;
         myColor = GetComponent<Text>().color;
         GetComponent<Text>().color = new Vector4(
                 myColor.r + infoBoard.highlightPct,
@@ -36,7 +40,11 @@ public class InteractiveText : Interactive {
                 myColor.a);
     }
 
+    /// <summary>
+    /// Dim this text.
+    /// </summary>
     public override void Dim() {
+        //myText.color = infoBoard.normalColor;
         myColor = GetComponent<Text>().color;
         GetComponent<Text>().color = new Vector4(
                 myColor.r - infoBoard.highlightPct,

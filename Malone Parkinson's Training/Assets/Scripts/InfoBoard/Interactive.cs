@@ -5,6 +5,9 @@ using UnityEngine.UI;
 using OVR;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// The base class for interaction.
+/// </summary>
 public class Interactive : MonoBehaviour {
     // ======================================================== Variables
     [Header("Info Board Interface")]
@@ -15,17 +18,17 @@ public class Interactive : MonoBehaviour {
     public GameSettings gameManager;
 
     [Header("Interactive Properties")]
-    public bool onlyClickOnce = false;
-    public bool hasBeenClicked = false; //protected   <-- causes problems
     public bool isHighlighted = false;
     public bool matchTag = false;
     public string requiredTag = "Reticle";
+    public bool isMouseOver = false;
+    public bool isCurrentlyInteractable = true;
 
     // ======================================================== Methods
     /// <summary>
     /// Initialize this interactive item.
     /// </summary>
-    protected void Start() {
+    protected virtual void Start() {
         // If renderer is not null, set my color to the renderer's color
         if (GetComponent<Renderer>() != null) {
             myColor = GetComponent<Renderer>().material.color;
@@ -72,120 +75,135 @@ public class Interactive : MonoBehaviour {
     /// </summary>
     protected virtual void Select() { } // OVERRIDE THIS METHOD TO DO SOMETHING WHEN SELECTED
 
-
-    // ---------- MOUSE INTERACTION (NON-UI) ----------
-    protected void OnMouseEnter() {if (!isHighlighted) { Highlight(); isHighlighted = true; } }
-    protected void OnMouseExit() { if (isHighlighted) { Dim(); isHighlighted = false; } }
-    protected void OnMouseDown() { Select(); }
-    //    if (true) { // (!onlyClickOnce || (onlyClickOnce && !hasBeenClicked)) {
-    //        //Debug.Log("What about you?");
-    //        //hasBeenClicked = true; // only permit a single click   <-- this breaks things
-    //        Select();
-    //    }
-    //}
-
-    // ---------- MOUSE INTERACTION (UI) ----------
-    //public override void OnPointerEnter(PointerEventData data) { if (!isHighlighted) { Highlight(); isHighlighted = true; } }
-    //public override void OnPointerDown(PointerEventData data) { Select(); }
-
-    // ---------- 3D RETICLE INTERACTION W/ COLLIDER ----------
-    // Oncollision enter/exit are called once on the enter/exit event
-    protected void OnCollisionEnter(Collision other) {
-        //Debug.Log("Checking Collision-Enter: " + gameObject.name + " - " + other.gameObject.name);
-        if (matchTag && other.gameObject.tag == requiredTag) {
-            //Debug.Log("recognizes hover?");
-            if (!isHighlighted) {
-                Highlight();
-                isHighlighted = true;
-            }
-        }
+    // ---------- MOUSE INTERACTION ----------
+    /// <summary>
+    /// On mouse enter...
+    /// </summary>
+    protected virtual void OnMouseEnter() 
+    { 
+        // If not highlighted, highlight
+        if (!isHighlighted && gameManager.controlType == ControlType.MOUSE_KEYBOARD && isCurrentlyInteractable)
+        {
+            Highlight(); 
+            isHighlighted = true;
+            isMouseOver = true;
+        } 
     }
 
-    protected void OnCollisionExit(Collision other) {
-        if (isHighlighted) {
+    /// <summary>
+    /// On mouse exit...
+    /// </summary>
+    protected virtual void OnMouseExit()
+    {
+        // If not highlighted, dim
+        if (isHighlighted && gameManager.controlType == ControlType.MOUSE_KEYBOARD && isCurrentlyInteractable)
+        {
             Dim();
             isHighlighted = false;
-            //Debug.Log("Dimming OnCollisionExit - " + gameObject.name);
+            isMouseOver = false;
         }
     }
 
+    /// <summary>
+    ///  On mouse down...
+    /// </summary>
+    protected void OnMouseDown() { Select(); }
 
-    // OncollisionStay is called every frame during a collision
-    protected virtual void OnCollisionStay(Collision other) {
-        if (other.gameObject.tag == requiredTag) {  //matchTag && 
-                                                    // check for input
+    // ---------- 3D RETICLE INTERACTION W/ COLLIDER ----------
+    /// <summary>
+    /// On collision enter...
+    /// </summary>
+    /// <param name="other">The other collision.</param>
+    protected void OnCollisionEnter(Collision other) 
+    {
+        // If we should match tag and the other game object matches that tag, OR
+        // If we don't check for matching tags...
+        if (((matchTag && other.gameObject.CompareTag(requiredTag)) || !matchTag) && !isHighlighted && isCurrentlyInteractable)
+        {
+            Highlight();
+            isHighlighted = true;
+        }
+    }
 
-            // ** SECONDARY = RIGHT, PRIMARY = LEFT!
-            if (!hasBeenClicked && ( Input.GetButtonDown("Fire1") || GetCorrectOVRInput())) { // Add regular GetButton / Get?
-                hasBeenClicked = true;
-                //Debug.Log("Click detected");
-                // submit the answer
-                //hasBeenClicked = false;
-                Select();
-                //Debug.Log(gameObject.name + "Has been clicked");
-                // hasBeenClicked = false;
-                //StartCoroutine(ReturnClickedToFalse());
-            } else
-            {
+    /// <summary>
+    /// On collision exit...
+    /// </summary>
+    /// <param name="other">The other collision.</param>
+    protected void OnCollisionExit(Collision other)
+    {
+        // If currently highlighted, dim
+        if (isHighlighted && isCurrentlyInteractable)
+        {
+            Dim();
+            isHighlighted = false;
+        }
+    }
 
-            }
-            if (Input.GetButtonUp("Fire1") || OVRInput.GetUp(OVRInput.Button.SecondaryIndexTrigger)) { hasBeenClicked = false; }
-
-
+    /// <summary>
+    /// On collision stay....
+    /// </summary>
+    /// <param name="other">The other collision.</param>
+    protected virtual void OnCollisionStay(Collision other)
+    {
+        // If we should match tag and the other game object matches that tag, OR
+        // If we don't check for matching tags...
+        if ((matchTag && other.gameObject.CompareTag(requiredTag) || !matchTag) && isCurrentlyInteractable)
+        {
+            // If we haven't been clicked and we receive the appropriate input button, toggle
+            if (Input.GetButtonDown("Fire1") || GetCorrectOVRInput()) Select();
         }
     }
 
 
     // ---------- 3D RETICLE INTERACTION W/ TRIGGER REGION ----------
-    protected void OnTriggerEnter(Collider other) {
-        //Debug.Log("Checking Trigger-Enter: " + gameObject.name + " - " + other.gameObject.name);
-        if (matchTag && other.gameObject.tag == requiredTag) {
-            if (!isHighlighted) {
-                Highlight();
-                isHighlighted = true;
-            }
-            //Debug.Log("recognizes hover");
+    /// <summary>
+    /// On trigger enter...
+    /// </summary>
+    /// <param name="other">The other collider.</param>
+    protected void OnTriggerEnter(Collider other) 
+    {
+        // If we should match tag and the other game object matches that tag, OR
+        // If we don't check for matching tags...
+        if (((matchTag && other.gameObject.CompareTag(requiredTag)) || !matchTag) && !isHighlighted && isCurrentlyInteractable)
+        {
+            Highlight();
+            isHighlighted = true;
         }
     }
 
-    protected virtual void OnTriggerStay(Collider other) {
-        if (other.gameObject.tag == requiredTag) { //matchTag && 
-                                                   // check for input
-
-            //if (((!onlyClickOnce && !hasBeenClicked) || (onlyClickOnce && !hasBeenClicked)) &&
-            if (!hasBeenClicked && (Input.GetButtonDown("Fire1") || GetCorrectOVRInput())) { // Add regular GetButton / Get?
-                Select();
-
-                hasBeenClicked = true;
-                // submit the answer
-                
-                //hasBeenClicked = false;
-                //StartCoroutine(ReturnClickedToFalse());
-                
-            }
-            if (Input.GetButtonUp("Fire1") || OVRInput.GetUp(OVRInput.Button.SecondaryIndexTrigger)) { hasBeenClicked = false; }
-        }
-    }
-
-    void OnTriggerExit() { hasBeenClicked = false; }
-    void OnCollisionExit() { hasBeenClicked = false; }
-
-
-    protected virtual void OnTriggerExit(Collider other) {
-        if (isHighlighted) {
+    /// <summary>
+    /// On trigger exit...
+    /// </summary>
+    /// <param name="other">The other collider.</param>
+    protected virtual void OnTriggerExit(Collider other)
+    {
+        // If currently highlighted, dim
+        if (isHighlighted && isCurrentlyInteractable)
+        {
             Dim();
             isHighlighted = false;
-            //Debug.Log("Dimming OnCollisionExit - " + gameObject.name);
         }
     }
 
-    IEnumerator ReturnClickedToFalse ()
+    /// <summary>
+    /// On trigger stay....
+    /// </summary>
+    /// <param name="other">The other collider.</param>
+    protected virtual void OnTriggerStay(Collider other) 
     {
-        yield return new WaitForSeconds(1);
-        //hasBeenClicked = false;
-        StopCoroutine(ReturnClickedToFalse());
+        // If we should match tag and the other game object matches that tag, OR
+        // If we don't check for matching tags...
+        if ((matchTag && other.gameObject.CompareTag(requiredTag) || !matchTag) && isCurrentlyInteractable)
+        {
+            // If we haven't been clicked and we receive the appropriate input button, toggle
+            if (Input.GetButtonDown("Fire1") || GetCorrectOVRInput()) Select();
+        }
     }
 
+    /// <summary>
+    /// Gets the correct OVR input from the user, based off the dominant hand.
+    /// </summary>
+    /// <returns></returns>
     private bool GetCorrectOVRInput()
     {
         if (gameManager.dominantHand == DominantHand.RIGHT)

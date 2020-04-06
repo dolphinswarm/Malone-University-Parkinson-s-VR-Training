@@ -50,15 +50,13 @@ public class GameSettings : MonoBehaviour {
     public GameObject currentFPC;                               // Current first person controller
     private GameObject mouseController;                         // The game's mouse controller
     private GameObject ovrController;                           // The game's OVR controller
-
     public DominantHand dominantHand = DominantHand.RIGHT;      // The dominant hand of the player
     private GameObject leftReticle;                             // The left hand reticle
     private GameObject rightReticle;                            // The right hand reticle
     public GameObject currentReticle;                           // The active reticle
     public GameObject currentHand;                              // The current hand
     public GameObject offHand;                                  // The OFF hand
-    public bool hideCursor = false;                             // Should the cursor be hidden?
-
+    //public bool hideCursor = false;                             // Should the cursor be hidden?
 
     [Header("Game Flow")]
     public SimState currentState;                               // The current state of the simulation.
@@ -68,7 +66,7 @@ public class GameSettings : MonoBehaviour {
     public GameObject controlChooseEvent;                       // The event which houses the control selection stuff.
     public bool skipControlChoose;                              // Skip choosing the control settings?
     public bool skipHandSelection;                              // Skip hand selection?
-    public GameObject tutorialEvent;                            // The event which houses the tutorial stuff.
+    public GameObject tutorialParentEvent;                      // The event which houses the tutorial stuff.
     public bool skipTutorial;                                   // Skip the tutorial?
     public OVRScreenFade screenFader;                           // Oculus screen fade script
     public Transform tutorialStartPosition;
@@ -106,7 +104,7 @@ public class GameSettings : MonoBehaviour {
         if (infoBoard == null)
             infoBoard = FindObjectOfType<InfoBoardUI>(); // Should only be one InfoBoardUI (hopefully)
 
-        // Get the control choose event to to active
+        // If the control choose event is present, set it to active
         if (controlChooseEvent != null)
         {
             controlChooseEvent.SetActive(true);
@@ -118,19 +116,19 @@ public class GameSettings : MonoBehaviour {
         }
 
         // Find the tutorial event, if not present
-        if (tutorialEvent == null)
-            tutorialEvent = GameObject.FindGameObjectWithTag("TutorialStep");
+        if (tutorialParentEvent == null)
+            tutorialParentEvent = GameObject.FindGameObjectWithTag("TutorialStep");
 
         // If we should skip tutorial, set it to inactive and get the first regular event
         if (skipTutorial)
         {
-            tutorialEvent.SetActive(false); // Hides this first event from the scene
+            tutorialParentEvent.SetActive(false); // Hides this first event from the scene
             firstEvent = FindObjectOfType<FirstEvent>();
         }
         // Else, make the first event this item
         else
         {
-            firstEvent = tutorialEvent.GetComponentInChildren<FirstEvent>();
+            firstEvent = tutorialParentEvent.GetComponentInChildren<FirstEvent>();
         }
 
         // Get the audio player and set its song
@@ -168,18 +166,6 @@ public class GameSettings : MonoBehaviour {
 
     void Update()
     {
-        // Check if cursor should be hidden
-        if (hideCursor)
-        {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-        // Else, show it
-        else
-        {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-        }
         //if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger)) { firstEvent.StartFirstEvent(); }
     }
 
@@ -252,20 +238,23 @@ public class GameSettings : MonoBehaviour {
         // Immediately change the game state
         currentState = SimState.TUTORIAL;
 
+        // Hide the cursor
+        HideCursor(true);
+
         // Enable the appropriate camera
         // Mouse and keyboard
         if (controlType == ControlType.MOUSE_KEYBOARD)
         {
             mouseController.SetActive(true);
             currentFPC = mouseController;
-            hideCursor = false;
+            currentHand = GameObject.Find("Mouse-Hand");
+            currentReticle = GameObject.FindGameObjectWithTag("Reticle");
         }
         // Oculus
         else
         {
             ovrController.SetActive(true);
             currentFPC = ovrController;
-            hideCursor = true;
             leftReticle = GameObject.Find("Pointer-Left");
             rightReticle = GameObject.Find("Pointer-Right");
 
@@ -307,7 +296,10 @@ public class GameSettings : MonoBehaviour {
             infoBoard.gameObject.transform.rotation = GameObject.Find("Info Board Location #1").transform.rotation;
 
             // Move the FPC to the start room
-            currentFPC.transform.position = tutorialStartPosition.position;
+            CharacterController charCont = currentFPC.GetComponent<CharacterController>();
+            charCont.enabled = false;                                     // All this is necessary to move the character controller
+            charCont.transform.position = tutorialStartPosition.position; // Else, it will just snap back to its default position
+            charCont.enabled = true;
 
             // Start the tutorial
             firstEvent.GetStarted();
@@ -327,20 +319,25 @@ public class GameSettings : MonoBehaviour {
         {
             // Fade the user out and move them
             StartCoroutine(Fade(callEvent));
-
         }
         // Else, start the first event
         else
         {
-            // Move the user to a new position
-            currentFPC.transform.position = simStartPosition.position;
-
             // Move the info board to the second location
             infoBoard.gameObject.transform.position = GameObject.Find("Info Board Location #2").transform.position;
             infoBoard.gameObject.transform.rotation = GameObject.Find("Info Board Location #2").transform.rotation;
 
+            // Move the user to a new position
+            CharacterController charCont = currentFPC.GetComponent<CharacterController>();
+            charCont.enabled = false;
+            charCont.transform.position = simStartPosition.position;
+            charCont.enabled = true;
+
             // Fade in the screen
             screenFader.FadeIn();
+
+            // Start the clock
+            GameObject.FindObjectOfType<Clock>().StartClock();
 
             // Start the tutorial
             firstEvent.GetStarted();
@@ -354,20 +351,41 @@ public class GameSettings : MonoBehaviour {
 
         yield return new WaitForSeconds(2);
 
-        // Move the user to a new position
-        currentFPC.transform.position = simStartPosition.position;
-
         // Move the info board to the second location
         infoBoard.gameObject.transform.position = GameObject.Find("Info Board Location #2").transform.position;
         infoBoard.gameObject.transform.rotation = GameObject.Find("Info Board Location #2").transform.rotation;
 
-        // Finish call event
-        callEvent.Finished();
+        // Move the user to a new position
+        CharacterController charCont = currentFPC.GetComponent<CharacterController>();
+        charCont.enabled = false;
+        charCont.transform.position = simStartPosition.position;
+        charCont.enabled = true;
+
+        // Start the clock
+        GameObject.FindObjectOfType<Clock>().StartClock();
 
         // Fade in the screen
         screenFader.FadeIn();
 
+        // Finish call event
+        callEvent.Finished();
+
         yield return null;
+    }
+
+    public void HideCursor(bool shouldBeHidden)
+    {
+        // If should be hidden...
+        Cursor.visible = !shouldBeHidden;
+        if (shouldBeHidden)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        // Else, show
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 }
 

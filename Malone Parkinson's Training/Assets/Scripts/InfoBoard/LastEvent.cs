@@ -37,6 +37,6 @@ public class LastEvent : InfoBoardEvent {
         }
 
         //reveal the cursor for the credits  
-        GameObject.Find("Game Manager").GetComponent<HideCursor>().Show();
+        //GameObject.Find("Game Manager").GetComponent<HideCursor>().Show();
     }
 }
