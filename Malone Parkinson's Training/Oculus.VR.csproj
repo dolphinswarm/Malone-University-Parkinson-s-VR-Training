@@ -136,10 +136,10 @@
     <None Include="Assets\Oculus\VR\Resources\Underlay Impostor.shader" />
     <None Include="Assets\Oculus\VR\Plugins\placeholder.txt" />
     <Reference Include="UnityEditor.UI">
-      <HintPath>C:/Users/HP/Documents/GitHub/Malone-University-Parkinson-s-VR-Training/Malone Parkinson's Training/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>C:/Users/SIVC/Documents/GitHub/Malone-University-Parkinson-s-VR-Training/Malone Parkinson's Training/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>C:/Users/HP/Documents/GitHub/Malone-University-Parkinson-s-VR-Training/Malone Parkinson's Training/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>C:/Users/SIVC/Documents/GitHub/Malone-University-Parkinson-s-VR-Training/Malone Parkinson's Training/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.17f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -327,20 +327,8 @@
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.17f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.Android.Extensions">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.17f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.17f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll</HintPath>
-    </Reference>
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/16.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.17f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Common">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.17f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Common.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.17f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

@@ -63,21 +63,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\AdjustCharecterHeight.cs" />
-    <Compile Include="Assets\Clock.cs" />
-    <Compile Include="Assets\ControlSchemeManager.cs" />
-    <Compile Include="Assets\DeliveryManager.cs" />
-    <Compile Include="Assets\DontDestroyMe.cs" />
-    <Compile Include="Assets\DoubleDoorsNPCOnly.cs" />
-    <Compile Include="Assets\EndTutorialEvent.cs" />
-    <Compile Include="Assets\GameSettings.cs" />
-    <Compile Include="Assets\InformationEvent.cs" />
-    <Compile Include="Assets\InteractiveObject.cs" />
-    <Compile Include="Assets\LocatorEvent.cs" />
-    <Compile Include="Assets\LocatorObject.cs" />
-    <Compile Include="Assets\MyMouseLook.cs" />
-    <Compile Include="Assets\O2TankData.cs" />
-    <Compile Include="Assets\ObjectInteractionEvent.cs" />
+    <Compile Include="Assets\AnimationHandlerForSink.cs" />
+    <Compile Include="Assets\ButtonEvent.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scenes\Scripts\TestScript.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\AmbienceEmitter.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\AudioManager.cs" />
@@ -362,39 +349,19 @@
     <Compile Include="Assets\Oculus\VoiceMod\Scripts\Helpers\OVRMicInput.cs" />
     <Compile Include="Assets\Oculus\VoiceMod\Scripts\OVRVoiceMod.cs" />
     <Compile Include="Assets\Oculus\VoiceMod\Scripts\OVRVoiceModContext.cs" />
-    <Compile Include="Assets\PedestrianTest.cs" />
-    <Compile Include="Assets\PointConstraint.cs" />
-    <Compile Include="Assets\ReturnToMaster.cs" />
-    <Compile Include="Assets\ReverseNormals.cs" />
-    <Compile Include="Assets\Scripts\activateObjectViaNavDestination.cs" />
-    <Compile Include="Assets\Scripts\ActivateVentilation.cs" />
-    <Compile Include="Assets\Scripts\alwaysShowCursor.cs" />
-    <Compile Include="Assets\Scripts\BabyData.cs" />
-    <Compile Include="Assets\Scripts\basketHideShow.cs" />
-    <Compile Include="Assets\Scripts\changeNavMeshDestination.cs" />
-    <Compile Include="Assets\Scripts\CheckForReportCardFolder.cs" />
-    <Compile Include="Assets\Scripts\ClickToNext.cs" />
-    <Compile Include="Assets\Scripts\ClickToSkip.cs" />
-    <Compile Include="Assets\Scripts\CursorHit.cs" />
-    <Compile Include="Assets\Scripts\DeactivateVentilation.cs" />
-    <Compile Include="Assets\Scripts\DefaultCursorHit.cs" />
-    <Compile Include="Assets\Scripts\Events\changeResults.cs" />
-    <Compile Include="Assets\Scripts\Events\characterSelectManager.cs" />
-    <Compile Include="Assets\Scripts\Events\characterSelectQuestion.cs" />
-    <Compile Include="Assets\Scripts\Events\Checklist.cs" />
+    <Compile Include="Assets\Scripts\DeliveryManager.cs" />
+    <Compile Include="Assets\Scripts\EndTutorialEvent.cs" />
     <Compile Include="Assets\Scripts\Events\CompletionTimer.cs" />
     <Compile Include="Assets\Scripts\Events\DataStorage.cs" />
     <Compile Include="Assets\Scripts\Events\deliveryScript.cs" />
     <Compile Include="Assets\Scripts\Events\destination.cs" />
     <Compile Include="Assets\Scripts\Events\endCardScript.cs" />
-    <Compile Include="Assets\Scripts\Events\eventLoadoutManager.cs" />
     <Compile Include="Assets\Scripts\Events\EventManager.cs" />
     <Compile Include="Assets\Scripts\Events\Fade_To_Black.cs" />
     <Compile Include="Assets\Scripts\Events\FadeObjectInOut.cs" />
     <Compile Include="Assets\Scripts\Events\FadeScreenIn.cs" />
     <Compile Include="Assets\Scripts\Events\finalEvent.cs" />
     <Compile Include="Assets\Scripts\Events\FindCompletionCode.cs" />
-    <Compile Include="Assets\Scripts\Events\gameManager.cs" />
     <Compile Include="Assets\Scripts\Events\HideOnWake.cs" />
     <Compile Include="Assets\Scripts\Events\JobManager.cs" />
     <Compile Include="Assets\Scripts\Events\LoadNextLevel.cs" />
@@ -402,10 +369,7 @@
     <Compile Include="Assets\Scripts\Events\LongCheckList.cs" />
     <Compile Include="Assets\Scripts\Events\MessageOnWake.cs" />
     <Compile Include="Assets\Scripts\Events\Question.cs" />
-    <Compile Include="Assets\Scripts\Events\QuestionLoadoutManager.cs" />
     <Compile Include="Assets\Scripts\Events\questionObjectTest.cs" />
-    <Compile Include="Assets\Scripts\Events\QuestionSeriesManager.cs" />
-    <Compile Include="Assets\Scripts\Events\questiontest.cs" />
     <Compile Include="Assets\Scripts\Events\RandomizeCompletionCode.cs" />
     <Compile Include="Assets\Scripts\Events\RemoveOnTrigger.cs" />
     <Compile Include="Assets\Scripts\Events\ReportCardManager.cs" />
@@ -418,92 +382,49 @@
     <Compile Include="Assets\Scripts\Events\ToggleTimer.cs" />
     <Compile Include="Assets\Scripts\Events\WorldRunner.cs" />
     <Compile Include="Assets\Scripts\Events\WristBandCheck.cs" />
-    <Compile Include="Assets\Scripts\FinishVentilation.cs" />
-    <Compile Include="Assets\Scripts\followPlayerScript.cs" />
-    <Compile Include="Assets\Scripts\FrontDoorToggle.cs" />
-    <Compile Include="Assets\Scripts\HeadLookControllerModified.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\AllOfTheAbove.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\AnswerManager.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\BranchingEvent.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\DeliveryEvent.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\DeliveryEventOld.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\DestinationEvent.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\DestinationTrigger.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\DoorCloseEvent.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\FirstEvent.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\goToDestination.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\HilightMatSwap.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\InfoBoardEvent.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\InfoBoardUI.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\InfoObject.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\Interactive.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\InteractiveObjectOld.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\InteractiveText.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\LastEvent.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\OpenEndedQuestion.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\PickupEvent.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\PickupEventOld.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\QuestionDisplayManager.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\QuestionEvent.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\SkipHandler.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\SlidingDoor_Check.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\SlidingDoor_CheckForClicks.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\slidingDoor_TextToggle.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\slidingDoorToggle_2.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\StayOnTop.cs" />
-    <Compile Include="Assets\Scripts\InfoBoard\SubmitAnswer.cs" />
-    <Compile Include="Assets\Scripts\maintainYPositionValue.cs" />
-    <Compile Include="Assets\Scripts\navMeshTesting.cs" />
-    <Compile Include="Assets\Scripts\object controllers\blockageScript.cs" />
-    <Compile Include="Assets\Scripts\object controllers\changeNPCDestination.cs" />
-    <Compile Include="Assets\Scripts\object controllers\cribScript.cs" />
-    <Compile Include="Assets\Scripts\object controllers\DelaySpawn.cs" />
-    <Compile Include="Assets\Scripts\object controllers\doorCloseCheck.cs" />
-    <Compile Include="Assets\Scripts\object controllers\DoorRot.cs" />
-    <Compile Include="Assets\Scripts\object controllers\DoubleDoorTime.cs" />
-    <Compile Include="Assets\Scripts\object controllers\GrabCrib.cs" />
-    <Compile Include="Assets\Scripts\object controllers\InDoorRot.cs" />
-    <Compile Include="Assets\Scripts\object controllers\lightFlicker.cs" />
-    <Compile Include="Assets\Scripts\object controllers\NewNewSingleDoor.cs" />
-    <Compile Include="Assets\Scripts\object controllers\NPCMoveTo.cs" />
-    <Compile Include="Assets\Scripts\object controllers\OneAction.cs" />
-    <Compile Include="Assets\Scripts\object controllers\OpenDrawer.cs" />
-    <Compile Include="Assets\Scripts\object controllers\PedestrianController.cs" />
-    <Compile Include="Assets\Scripts\object controllers\RandomAvatar.cs" />
-    <Compile Include="Assets\Scripts\object controllers\RandomNPCs.cs" />
-    <Compile Include="Assets\Scripts\object controllers\rotationFreeze.cs" />
-    <Compile Include="Assets\Scripts\object controllers\SingleDoor.cs" />
-    <Compile Include="Assets\Scripts\object controllers\SingleDoor_eh.cs" />
-    <Compile Include="Assets\Scripts\object controllers\slidingDoorToggle.cs" />
-    <Compile Include="Assets\Scripts\object controllers\Spin.cs" />
-    <Compile Include="Assets\Scripts\object controllers\TextLookAtPlayer.cs" />
-    <Compile Include="Assets\Scripts\object controllers\ToggleDisplayOfRegion.cs" />
-    <Compile Include="Assets\Scripts\object controllers\TSliding.cs" />
-    <Compile Include="Assets\Scripts\Premade\LoopRotate.cs" />
-    <Compile Include="Assets\Scripts\Premade\Target.cs" />
-    <Compile Include="Assets\Scripts\Premade\TargetPoleMover.cs" />
-    <Compile Include="Assets\Scripts\RenderOnTop.cs" />
-    <Compile Include="Assets\Scripts\ReturnToMasterVR.cs" />
-    <Compile Include="Assets\Scripts\RoleSelectOrientation.cs" />
-    <Compile Include="Assets\Scripts\rotateScript.cs" />
-    <Compile Include="Assets\Scripts\ShowO2Cart.cs" />
-    <Compile Include="Assets\Scripts\ShowWornEvacBasket.cs" />
-    <Compile Include="Assets\Scripts\StartOver.cs" />
-    <Compile Include="Assets\Scripts\testScripts\activateNavMeshFollow.cs" />
-    <Compile Include="Assets\Scripts\testScripts\testNavMeshFollow.cs" />
-    <Compile Include="Assets\Scripts\Ventilation.cs" />
-    <Compile Include="Assets\Scripts\ventilationTestScript.cs" />
-    <Compile Include="Assets\Scripts\ventilationTime.cs" />
-    <Compile Include="Assets\SkipAfterSuccessfulAttempt.cs" />
-    <Compile Include="Assets\SpecialAnimationInstructions.cs" />
-    <Compile Include="Assets\SpecialTransformInstructions.cs" />
-    <Compile Include="Assets\test_npc_avoidance.cs" />
-    <Compile Include="Assets\TestFireAlarmLight.cs" />
-    <Compile Include="Assets\testRemoveSubmit.cs" />
-    <Compile Include="Assets\TestSingleDoorOpening.cs" />
-    <Compile Include="Assets\Toggle_HMD_KB_multi.cs" />
-    <Compile Include="Assets\VRMouseLook.cs" />
-    <Compile Include="Assets\WashHandsSpecialAnimation.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Info Board Scripts\AllOfTheAbove.cs" />
+    <Compile Include="Assets\Scripts\Info Board Scripts\AnswerManager.cs" />
+    <Compile Include="Assets\Scripts\Info Board Scripts\BranchingEvent.cs" />
+    <Compile Include="Assets\Scripts\Info Board Scripts\ClickToNext.cs" />
+    <Compile Include="Assets\Scripts\Info Board Scripts\ClickToSkip.cs" />
+    <Compile Include="Assets\Scripts\Info Board Scripts\DeliveryEvent.cs" />
+    <Compile Include="Assets\Scripts\Info Board Scripts\DestinationEvent.cs" />
+    <Compile Include="Assets\Scripts\Info Board Scripts\DestinationTrigger.cs" />
+    <Compile Include="Assets\Scripts\Info Board Scripts\FirstEvent.cs" />
+    <Compile Include="Assets\Scripts\Info Board Scripts\goToDestination.cs" />
+    <Compile Include="Assets\Scripts\Info Board Scripts\HilightMatSwap.cs" />
+    <Compile Include="Assets\Scripts\Info Board Scripts\InfoBoardEvent.cs" />
+    <Compile Include="Assets\Scripts\Info Board Scripts\InfoBoardUI.cs" />
+    <Compile Include="Assets\Scripts\Info Board Scripts\InfoObject.cs" />
+    <Compile Include="Assets\Scripts\Info Board Scripts\Interactive.cs" />
+    <Compile Include="Assets\Scripts\Info Board Scripts\InteractiveText.cs" />
+    <Compile Include="Assets\Scripts\Info Board Scripts\LastEvent.cs" />
+    <Compile Include="Assets\Scripts\Info Board Scripts\OpenEndedQuestion.cs" />
+    <Compile Include="Assets\Scripts\Info Board Scripts\PickupEvent.cs" />
+    <Compile Include="Assets\Scripts\Info Board Scripts\QuestionDisplayManager.cs" />
+    <Compile Include="Assets\Scripts\Info Board Scripts\QuestionEvent.cs" />
+    <Compile Include="Assets\Scripts\Info Board Scripts\SkipHandler.cs" />
+    <Compile Include="Assets\Scripts\Info Board Scripts\SubmitAnswer.cs" />
+    <Compile Include="Assets\Scripts\InformationEvent.cs" />
+    <Compile Include="Assets\Scripts\InteractiveObject.cs" />
+    <Compile Include="Assets\Scripts\LocatorEvent.cs" />
+    <Compile Include="Assets\Scripts\LocatorObject.cs" />
+    <Compile Include="Assets\Scripts\MicrophoneEvent.cs" />
+    <Compile Include="Assets\Scripts\MyMouseLook.cs" />
+    <Compile Include="Assets\Scripts\ObjectInteractionEvent.cs" />
+    <Compile Include="Assets\Scripts\Old Scripts\DeliveryEventOld.cs" />
+    <Compile Include="Assets\Scripts\Old Scripts\InteractiveObjectOld.cs" />
+    <Compile Include="Assets\Scripts\Old Scripts\PickupEventOld.cs" />
+    <Compile Include="Assets\Scripts\ReverseNormals.cs" />
+    <Compile Include="Assets\Scripts\SpecialAnimationInstructions.cs" />
+    <Compile Include="Assets\Scripts\SpecialTransformInstructions.cs" />
+    <Compile Include="Assets\Scripts\Utility\AdjustCharecterHeight.cs" />
+    <Compile Include="Assets\Scripts\Utility\AlwaysShowCursor.cs" />
+    <Compile Include="Assets\Scripts\Utility\Clock.cs" />
+    <Compile Include="Assets\Scripts\Utility\DontDestroyMe.cs" />
+    <Compile Include="Assets\Scripts\Utility\ParticleContainer.cs" />
+    <Compile Include="Assets\Scripts\WashHandsSpecialAnimation.cs" />
     <None Include="Assets\Oculus\Avatar\Content\Materials\AvatarMaterialStateShader.cginc" />
     <None Include="Assets\Text\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\Oculus\Avatar\Samples\CrossPlatform\Readme.txt" />
@@ -551,31 +472,31 @@
     <None Include="Assets\Text\Resources\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\Oculus\SampleFramework\Usage\DistanceGrab\Materials\CrosshairZCheat.shader" />
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>C:/Users/HP/Documents/GitHub/Malone-University-Parkinson-s-VR-Training/Malone Parkinson's Training/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>C:/Users/SIVC/Documents/GitHub/Malone-University-Parkinson-s-VR-Training/Malone Parkinson's Training/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>C:/Users/HP/Documents/GitHub/Malone-University-Parkinson-s-VR-Training/Malone Parkinson's Training/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>C:/Users/SIVC/Documents/GitHub/Malone-University-Parkinson-s-VR-Training/Malone Parkinson's Training/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/HP/Documents/GitHub/Malone-University-Parkinson-s-VR-Training/Malone Parkinson's Training/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/SIVC/Documents/GitHub/Malone-University-Parkinson-s-VR-Training/Malone Parkinson's Training/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>C:/Users/HP/Documents/GitHub/Malone-University-Parkinson-s-VR-Training/Malone Parkinson's Training/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>C:/Users/SIVC/Documents/GitHub/Malone-University-Parkinson-s-VR-Training/Malone Parkinson's Training/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>C:/Users/HP/Documents/GitHub/Malone-University-Parkinson-s-VR-Training/Malone Parkinson's Training/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>C:/Users/SIVC/Documents/GitHub/Malone-University-Parkinson-s-VR-Training/Malone Parkinson's Training/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/Users/HP/Documents/GitHub/Malone-University-Parkinson-s-VR-Training/Malone Parkinson's Training/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>C:/Users/SIVC/Documents/GitHub/Malone-University-Parkinson-s-VR-Training/Malone Parkinson's Training/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>C:/Users/HP/Documents/GitHub/Malone-University-Parkinson-s-VR-Training/Malone Parkinson's Training/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>C:/Users/SIVC/Documents/GitHub/Malone-University-Parkinson-s-VR-Training/Malone Parkinson's Training/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/HP/Documents/GitHub/Malone-University-Parkinson-s-VR-Training/Malone Parkinson's Training/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/SIVC/Documents/GitHub/Malone-University-Parkinson-s-VR-Training/Malone Parkinson's Training/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>C:/Users/HP/Documents/GitHub/Malone-University-Parkinson-s-VR-Training/Malone Parkinson's Training/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>C:/Users/SIVC/Documents/GitHub/Malone-University-Parkinson-s-VR-Training/Malone Parkinson's Training/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.17f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -753,12 +674,6 @@
     </Reference>
     <Reference Include="UnityEngine.XRModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.17f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.17f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Common">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.17f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Common.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.17f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
