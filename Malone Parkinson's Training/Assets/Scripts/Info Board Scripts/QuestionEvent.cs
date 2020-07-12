@@ -21,9 +21,11 @@ public class Answer {
 /// <summary>
 /// A question event, which displays a question for the participant to answer on the board.
 /// </summary>
-public class QuestionEvent : InfoBoardEvent {
+public class QuestionEvent : InfoBoardEvent
+{
     // ======================================================== Variables
-    [Header("Info Board / UI")]
+    [Header("Question Event Properties")]
+    [TextArea]
     public string questionText;			                    // Text of question
 	public string redirectionText;                          // Text to display / Log if wrong
     public bool showAllOfTheAbove = false;                  // Display "All of the Above" as an option and use for toggling
@@ -68,7 +70,7 @@ public class QuestionEvent : InfoBoardEvent {
         base.Go(prevEventNum);
 
         // Print message to console
-        Debug.Log("*** Starting Question Event***: Event #" + myEventNum);
+        Debug.Log("*** Starting + " + name + " (Question Event: Event #" + myEventNum + ")");
     }
 
     /// <summary>

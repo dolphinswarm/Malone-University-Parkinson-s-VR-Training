@@ -18,7 +18,8 @@ public class AllOfTheAbove : InteractiveText {
     /// <summary>
     /// If selected, toggle / untoggle all answers.
     /// </summary>
-    protected override void Select () {
+    protected override void Select ()
+    {
         // Toggle if all are selected
         allSelected = !allSelected;
 

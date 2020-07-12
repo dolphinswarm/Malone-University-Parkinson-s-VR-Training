@@ -3,27 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using OVR;
+using System;
 
 /// <summary>
 /// Enumeration for the control type.
 /// </summary>
-[System.Serializable]
+[Serializable]
 public enum ControlType { MOUSE_KEYBOARD, OCULUS };
 
 /// <summary>
 /// Enumeration for the dominant hand, if using Oculus.
 /// </summary>
-[System.Serializable]
+[Serializable]
 public enum DominantHand { LEFT, RIGHT };
 
 /// <summary>
-/// The state of the simulation.
+/// Which state should we start the game at?
 /// </summary>
-[System.Serializable]
-public enum SimState { PRETUTORIAL, TUTORIAL, SIMULATION };
+[Serializable]
+public enum SimState { Tutorial, State1And2, State3, State4, State5, State6, State7 }
 
 //*****************************MainMenu Additions
-[System.Serializable]
+[Serializable]
 public enum NextMenuAction { None, Tutorial, VRS1, VRS2, VRS3, VRS4 };
 
 /// <summary>
@@ -50,36 +51,41 @@ public class GameManager : MonoBehaviour {
     [Header("Player Settings")]
     public ControlType controlType = ControlType.OCULUS;        // The default control type
     public GameObject currentFPC;                               // Current first person controller
-    private GameObject mouseController;                         // The game's mouse controller
-    private GameObject ovrController;                           // The game's OVR controller
+    public GameObject mouseController;                         // The game's mouse controller
+    public GameObject ovrController;                           // The game's OVR controller
     public DominantHand dominantHand = DominantHand.RIGHT;      // The dominant hand of the player
     private GameObject leftReticle;                             // The left hand reticle
     private GameObject rightReticle;                            // The right hand reticle
     public GameObject currentReticle;                           // The active reticle
     public GameObject currentHand;                              // The current hand
     public GameObject offHand;                                  // The OFF hand
+    public OVRHapticsManager leftHandOVRHaptics;
+    public OVRHapticsManager rightHandOVRHaptics;
     //public bool hideCursor = false;                           // Should the cursor be hidden?
 
 
     [Header("Game Flow")]
-    public SimState currentState;                               // The current state of the simulation.
-    public ReportCardManager reportCardManager;                 // The report card manager, for collecting user metrics
-    public InfoBoardUI infoBoard;                               // The info board.
+    public SimState currentState;                               // The current state of the game
+    public SimState startAtState;                               // The state we should start at
+    public InfoBoardUI infoBoard;                               // The game's info board (should only be one)
+    public List<FirstEvent> firstEvents;                        // A list of all first events, IN ORDER!
+    private Dictionary<SimState, FirstEvent> firstEventDictionary;          // A private dictionary of first event / sim state associations
     public FirstEvent firstEvent;                               // The first event in the chain
+    public InfoBoardEvent currentEvent;                         // The current info board event.
     public GameObject controlChooseEvent;                       // The event which houses the control selection stuff.
     public bool skipControlChoose;                              // Skip choosing the control settings?
     public bool skipHandSelection;                              // Skip hand selection?
     public GameObject tutorialParentEvent;                      // The event which houses the tutorial stuff.
-    public bool skipTutorial;                                   // Skip the tutorial?
     public OVRScreenFade screenFader;                           // Oculus screen fade script
-    public Transform tutorialStartPosition;                     // The start position of the tutorial
-    public Transform simStartPosition;                          // The start position of the simulaiton
+    public bool playAnimations = true;                          // Should we play animations?
 
 
     [Header("Clipboard and Scoring Mangaing")]
     public GameObject clipboardUI;                              // The clipboard object for the camera.
+    public ClipboardScript clipboardText;                       // The script for getting / changing clipboard information.
     public OVRInput.RawButton targetButtonType;                 // The OVR button type to check for.
     public KeyCode targetKey;                                   // The keyboard type to check for.
+    public ReportCardManager reportCardManager;                 // The report card manager, for collecting user metrics
 
 
     // Private stuff for managing control select
@@ -88,8 +94,6 @@ public class GameManager : MonoBehaviour {
     private GameObject mouseButton;
     private GameObject leftButton;
     private GameObject rightButton;
-    private float waitTimer = 10.0f;
-    private float time = 0.0f;
 
     // ======================================================== Methods
     /// <summary>
@@ -101,12 +105,15 @@ public class GameManager : MonoBehaviour {
         Debug.Log("==================================================== Starting simulation!");
 
         // Immediately set the game state to pre-tutorial
-        currentState = SimState.PRETUTORIAL;
+        currentState = SimState.Tutorial;
 
         // Immediately disable both controllers
-        mouseController = GameObject.Find("Mouse and Keyboard Player Controller");
+        if (mouseController == null)
+            mouseController = GameObject.Find("Mouse and Keyboard Player Controller");
         mouseController.SetActive(false);
-        ovrController = GameObject.Find("OVR Player Controller");
+
+        if (ovrController == null)
+            ovrController = GameObject.Find("OVR Player Controller");
         ovrController.SetActive(false);
 
         // If info board is not set, then set it
@@ -115,29 +122,33 @@ public class GameManager : MonoBehaviour {
 
         // If the control choose event is present, set it to active
         if (controlChooseEvent != null)
-        {
             controlChooseEvent.SetActive(true);
-        }
         // Else, if not present, try to find it
         else
-        {
             controlChooseEvent = GameObject.FindGameObjectWithTag("ControlSelectStep");
-        }
 
         // Find the tutorial event, if not present
         if (tutorialParentEvent == null)
             tutorialParentEvent = GameObject.FindGameObjectWithTag("TutorialStep");
 
-        // If we should skip tutorial, set it to inactive and get the first regular event
-        if (skipTutorial)
+        // Populate the "first event" dictionary
+        firstEventDictionary = new Dictionary<SimState, FirstEvent>();
+        firstEventDictionary.Add(SimState.Tutorial, firstEvents[0]);
+        firstEventDictionary.Add(SimState.State1And2, firstEvents[1]);
+        firstEventDictionary.Add(SimState.State3, firstEvents[2]);
+        firstEventDictionary.Add(SimState.State4, firstEvents[3]);
+        firstEventDictionary.Add(SimState.State5, firstEvents[4]);
+        firstEventDictionary.Add(SimState.State6, firstEvents[5]);
+        firstEventDictionary.Add(SimState.State7, firstEvents[6]);
+
+        // if we should ignore animations, remove them all from game
+        if (!playAnimations)
         {
-            tutorialParentEvent.SetActive(false); // Hides this first event from the scene
-            firstEvent = FindObjectOfType<FirstEvent>();
-        }
-        // Else, make the first event this item
-        else
-        {
-            firstEvent = tutorialParentEvent.GetComponentInChildren<FirstEvent>();
+            // Get all animators
+            Animator[] animators = FindObjectsOfType<Animator>();
+
+            // Foreach animator, remove the animations attached
+            foreach (Animator animator in animators) animator.enabled = false;
         }
 
         // Get the audio player and set its song
@@ -158,8 +169,9 @@ public class GameManager : MonoBehaviour {
             ovrController.SetActive(true);
 
             // Proceed to title screen
-            StartTutorial();
+            FinishSimulationSetup();
         }
+
         // Else, get the UI elements and wait until a button is selected
         else
         {
@@ -185,7 +197,7 @@ public class GameManager : MonoBehaviour {
         // Proceed to the title screen, if skip bool flag toggled
         if (skipHandSelection)
         {
-            StartTutorial();
+            FinishSimulationSetup();
         }
         // Hide both buttons and show the hand buttons
         else
@@ -207,7 +219,7 @@ public class GameManager : MonoBehaviour {
         controlType = ControlType.MOUSE_KEYBOARD;
 
         // Proceed to the title screen
-        StartTutorial();
+        FinishSimulationSetup();
     }
 
     /// <summary>
@@ -219,7 +231,7 @@ public class GameManager : MonoBehaviour {
         dominantHand = DominantHand.RIGHT;
 
         // Proceed to the title screen
-        StartTutorial();
+        FinishSimulationSetup();
     }
 
     /// <summary>
@@ -231,17 +243,14 @@ public class GameManager : MonoBehaviour {
         dominantHand = DominantHand.LEFT;
 
         // Proceed to the title screen
-        StartTutorial();
+        FinishSimulationSetup();
     }
 
     /// <summary>
     /// Method for starting the display of the title screen
     /// </summary>
-    private void StartTutorial()
+    private void FinishSimulationSetup()
     {
-        // Immediately change the game state
-        currentState = SimState.TUTORIAL;
-
         // Hide the cursor
         HideCursor(true);
 
@@ -286,106 +295,29 @@ public class GameManager : MonoBehaviour {
 
         // Get the screen fader of the appropriate camera, if not set
         if (screenFader == null)
-            screenFader = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<OVRScreenFade>();
+            screenFader = Camera.main.GetComponent<OVRScreenFade>();
 
         // Set the camera position of each interactive object
-        Transform cameraTransform = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        Transform cameraTransform = Camera.main.transform;
         foreach (InteractiveObject interactiveObject in Resources.FindObjectsOfTypeAll(typeof(InteractiveObject)))
             interactiveObject.SetCameraPos(cameraTransform);
 
-        // Attach the UI to the main camera
-        clipboardUI.transform.parent = GameObject.FindGameObjectWithTag("MainCamera").transform;
-        clipboardUI.transform.localPosition = new Vector3(0.0f, 0.0f, 1.0f);
+        // Set the clipboard properties
+        clipboardUI.transform.parent = Camera.main.transform;
+        clipboardUI.GetComponentInChildren<Canvas>().worldCamera = Camera.main;
+        clipboardUI.GetComponentInChildren<Canvas>().planeDistance = 1.1f;
         clipboardUI.SetActive(false);
+        clipboardText = clipboardUI.GetComponentInChildren<ClipboardScript>();
 
-        // Do things depending on if the tutorial should be skipped
-        if (skipTutorial)
+        // Set which event is the first
+        foreach (var item in firstEventDictionary)
         {
-            StartSimulation(null);
+            if (item.Key == startAtState) 
+                firstEvent = item.Value;
         }
-        // Else, do tutorial as normal
-        else
-        {
-            // Move the info board to the first location
-            infoBoard.gameObject.transform.position = GameObject.Find("Info Board Location #1").transform.position;
-            infoBoard.gameObject.transform.rotation = GameObject.Find("Info Board Location #1").transform.rotation;
 
-            // Move the FPC to the start room
-            CharacterController charCont = currentFPC.GetComponent<CharacterController>();
-            charCont.enabled = false;                                     // All this is necessary to move the character controller
-            charCont.transform.position = tutorialStartPosition.position; // Else, it will just snap back to its default position
-            charCont.enabled = true;
-
-            // Start the tutorial
-            firstEvent.GetStarted();
-
-            // Fade in the screen
-            screenFader.FadeIn();
-        }
-    }
-
-    /// <summary>
-    /// Starts the actual simulation.
-    /// </summary>
-    public void StartSimulation(InfoBoardEvent callEvent)
-    {
-        // If call event is not null, call the callEvent's finished
-        if (callEvent != null)
-        {
-            // Fade the user out and move them
-            StartCoroutine(Fade(callEvent));
-        }
-        // Else, start the first event
-        else
-        {
-            // Move the info board to the second location
-            infoBoard.gameObject.transform.position = GameObject.Find("Info Board Location #2").transform.position;
-            infoBoard.gameObject.transform.rotation = GameObject.Find("Info Board Location #2").transform.rotation;
-
-            // Move the user to a new position
-            CharacterController charCont = currentFPC.GetComponent<CharacterController>();
-            charCont.enabled = false;
-            charCont.transform.position = simStartPosition.position;
-            charCont.enabled = true;
-
-            // Fade in the screen
-            screenFader.FadeIn();
-
-            // Start the clock
-            GameObject.FindObjectOfType<Clock>().StartClock();
-
-            // Start the tutorial
-            firstEvent.GetStarted();
-        }
-    }
-
-    IEnumerator Fade(InfoBoardEvent callEvent)
-    {
-        // Fade the screen out
-        screenFader.FadeOut();
-
-        yield return new WaitForSeconds(2);
-
-        // Move the info board to the second location
-        infoBoard.gameObject.transform.position = GameObject.Find("Info Board Location #2").transform.position;
-        infoBoard.gameObject.transform.rotation = GameObject.Find("Info Board Location #2").transform.rotation;
-
-        // Move the user to a new position
-        CharacterController charCont = currentFPC.GetComponent<CharacterController>();
-        charCont.enabled = false;
-        charCont.transform.position = simStartPosition.position;
-        charCont.enabled = true;
-
-        // Start the clock
-        GameObject.FindObjectOfType<Clock>().StartClock();
-
-        // Fade in the screen
-        screenFader.FadeIn();
-
-        // Finish call event
-        callEvent.Finished();
-
-        yield return null;
+        // Start the first event
+        firstEvent.GetStarted();
     }
 
     public void HideCursor(bool shouldBeHidden)
@@ -412,7 +344,13 @@ public class GameManager : MonoBehaviour {
         if (OVRInput.GetDown(targetButtonType) || Input.GetKeyDown(targetKey))
         {
             clipboardUI.SetActive(!clipboardUI.activeSelf);
-        } 
+        }
+
+        // Commmand for skipping the current event
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Tab) && currentEvent != null)
+        {
+            currentEvent.Finished();
+        }
     }
 }
 

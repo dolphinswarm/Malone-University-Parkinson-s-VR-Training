@@ -2,14 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The delivery state of this object.
+/// </summary>
+public enum DeliveryState { HIDE_IMMEDIATELY, HIDE_AFTER_EVENT, NO_HIDE }
+
+/// <summary>
+/// An event for delivering an object to a location.
+/// </summary>
 public class DeliveryEvent : InfoBoardEvent
 {
     // ======================================================== Variables
     [Header("Delivery Event Properties")]
     public PickupEvent pickupEvent;
-    public bool hideImmmediatelyAfterDelivery = false;
-    public bool hideAfterEvent = false;
+    public DeliveryState hideType = DeliveryState.NO_HIDE;
     public ParticleSystem particles;
+    public List<GameObject> stuffToShowOnDelivery;
     public Transform deliveryLocaiton;
 
     // ======================================================== Methods
@@ -68,40 +76,39 @@ public class DeliveryEvent : InfoBoardEvent
         base.Go(prevEventNum);
 
         // Print message to console
-        Debug.Log("*** Starting Delivery Event***: Event #" + myEventNum);
+        Debug.Log("*** Starting + " + name + " (Delivery Event: Event #" + myEventNum + ")");
     }
 
     /// <summary>
     /// When this item is clicked...
     /// </summary>
     public override void Clicked() {
+        // Show everything that should be hidden
+        foreach (GameObject showThing in stuffToShowOnDelivery)
+        {
+            showThing.SetActive(true);
+        }
+
         // Hide, if should be hidden immediately
-        if (hideImmmediatelyAfterDelivery)
+        if (hideType == DeliveryState.HIDE_IMMEDIATELY)
         {
             pickupEvent.pickupObject.SetActive(false);
         }
         // Else, set the pickup object down
-        else
+        else if (hideType == DeliveryState.NO_HIDE)
         {
             pickupEvent.pickupObject.transform.position = deliveryLocaiton.transform.position;
             pickupEvent.pickupObject.transform.rotation = deliveryLocaiton.transform.rotation;
             pickupEvent.pickupObject.transform.parent = deliveryLocaiton.transform;
-           
+            pickupEvent.pickupObject.GetComponent<InteractiveObject>().Dim();
         }
 
         // Turn off particles
-        particles.Stop();
+        if (particles != null)
+            particles.Stop();
 
-        // play sound effect  &  move on to next thing
-        if (completedSFX != null) {
-            infoBoard.GetComponent<AudioSource>().PlayOneShot(completedSFX);
-            Invoke("Finished", completedSFX.length + delayBeforeAdvance);
-        }
-        else if (infoBoard.correctSFX != null) {
-            infoBoard.GetComponent<AudioSource>().PlayOneShot(infoBoard.correctSFX);
-            Invoke("Finished", infoBoard.correctSFX.length + delayBeforeAdvance);
-        }
-        else { Invoke("Finished", delayBeforeAdvance); }
+        // Call base clicked
+        base.Clicked();
     }
 
     /// <summary>
@@ -109,10 +116,14 @@ public class DeliveryEvent : InfoBoardEvent
     /// </summary>
     public override void Finished() {
         // If should be hidden, hide now
-        if (hideAfterEvent)
+        if (hideType == DeliveryState.HIDE_AFTER_EVENT)
         {
             pickupEvent.pickupObject.SetActive(false);
         }
+
+        // Turn off particles
+        if (particles != null)
+            particles.Stop();
 
         // Call base finished
         base.Finished();

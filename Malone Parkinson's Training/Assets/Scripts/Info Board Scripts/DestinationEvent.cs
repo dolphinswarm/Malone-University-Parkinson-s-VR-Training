@@ -37,22 +37,12 @@ public class DestinationEvent : InfoBoardEvent {
         destinationTrigger.lingerInTriggerForSec = lingerInTriggerForSec;
     }
     
-    // WHAT DOES THE CLICK DO???
+    /// <summary>
+    /// On event completion...
+    /// </summary>
     public override void Clicked() {
         // Log stuff to file here
-        Debug.Log(name + ": Click!");
-        
-        // play sound effect  &  move on to next thing
-        if (completedSFX != null) {
-            infoBoard.GetComponent<AudioSource>().PlayOneShot(completedSFX);
-            Invoke("Finished", completedSFX.length + delayBeforeAdvance);
-        }
-        else if (infoBoard.correctSFX != null) {
-            infoBoard.GetComponent<AudioSource>().PlayOneShot(infoBoard.correctSFX);
-            Invoke("Finished", infoBoard.correctSFX.length + delayBeforeAdvance);
-        }
-
-        else { Invoke("Finished", delayBeforeAdvance); }
+        base.Clicked();
     }
 
     /// <summary>

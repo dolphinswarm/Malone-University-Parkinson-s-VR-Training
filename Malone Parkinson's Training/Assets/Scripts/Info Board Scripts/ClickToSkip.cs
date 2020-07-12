@@ -7,12 +7,12 @@ using UnityEngine;
 /// </summary>
 public class ClickToSkip : InteractiveText {
     // ======================================================== Properties
-    public GameObject clickHandler;
+    public GameObject informationEvent;
 
     // ======================================================== Methods
     protected override void Select() {
         //transform.parent.gameObject.SendMessage("Skip", SendMessageOptions.DontRequireReceiver);
-        clickHandler.GetComponent<SkipHandler>().Skip();
+        informationEvent.GetComponent<SkipHandler>().Skip();
     }
 
     // respond to mouse clicks for mouse/keyboard

@@ -9,9 +9,10 @@ public class InformationEvent : InfoBoardEvent
 {
     // ======================================================== Variables
     [Header("Information Event UI and Properties")]
-    public GameObject nextButton;
-    public List<string> infoTextList;
-    public int currentIndex = 0;
+    public GameObject nextButton;               // The "next" button on the info board.
+    [TextArea]
+    public List<string> infoTextList;           // The text list to display.
+    public int currentIndex = 0;                // The current index to display.
 
     // ======================================================== Methods
     /// <summary>
@@ -19,6 +20,14 @@ public class InformationEvent : InfoBoardEvent
     /// </summary>
     protected override void Initialize()
     {
+        // Find next button, if not set
+        if (nextButton == null)
+            nextButton = GameObject.Find("Next");
+
+        // Set it to inactive, if found
+        if (nextButton != null)
+            nextButton.SetActive(false);
+
         // Call base intialize
         base.Initialize();
     }
@@ -52,13 +61,18 @@ public class InformationEvent : InfoBoardEvent
         {
             infoBoard.GetComponent<AudioSource>().PlayOneShot(voiceOver);
         }
-        
-        // Activate next button. NOTE - if no next button, results in a softlock. FIX!! *****************************************************************************************************
+
+        // Set next button
+        if (nextButton == null)
+            nextButton = infoBoard.next.gameObject;
+
         if (nextButton != null)
         {
             nextButton.SetActive(true);
-            nextButton.GetComponent<ClickToNext>().clickHandler = this;
+            nextButton.GetComponent<ClickToNext>().informationEvent = this;
+            nextButton.GetComponent<ClickToNext>().finishedClicking = false;
         }
+        else Debug.LogError("Cannot find next button!");
 
         // Show / hide the appropriate reticles
         showOnStart.Add(gameManager.currentReticle);
@@ -68,8 +82,16 @@ public class InformationEvent : InfoBoardEvent
         base.Go(prevEventNum);
 
         // Print message to console
-        Debug.Log("*** Starting Information Event***: Event #" + myEventNum);
+        Debug.Log("*** Starting + " + name + " (Information Event: Event #" + myEventNum + ")");
+    }
 
+    /// <summary>
+    /// When this item is clicked...
+    /// </summary>
+    public override void Clicked()
+    {
+        // Call the base clicked
+        base.Clicked();
     }
 
     /// <summary>

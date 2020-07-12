@@ -1,16 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
+
 
 /// <summary>
 /// An enumeration to determine the type of interactive object.
 /// </summary>
-public enum ObjectType { PICKUP, TOUCH };
+[System.Serializable]
+public enum ObjectType { PICKUP, TOUCH, POINTAT, HANDS_BELOW };
 
 /// <summary>
 /// An enumeration to determine the type of interactive object.
 /// </summary>
-public enum HighlightType { BODY_DISTANCE, HAND_DISTANCE, LOOKAT, POINTAT, ALWAYS, NEVER };
+[System.Serializable]
+public enum HighlightType { BODY_DISTANCE, HAND_DISTANCE, LOOKAT, POINTAT, RETICLE_OVER, ALWAYS, NEVER };
 
 /// <summary>
 /// The class for a generic interactive object.
@@ -22,6 +26,7 @@ public class InteractiveObject : Interactive
     public InfoBoardEvent owningEvent;                      // The object this script is calling back to.
     public ObjectType objectType;                           // The type of interactive object.
     public Animator animator;                               // The animator for playing animations.
+    public string activateName;                             // The name of this object passed to the EndActivate objects.     
 
 
     [Header("Object Hightlight")]
@@ -30,14 +35,15 @@ public class InteractiveObject : Interactive
     public HighlightType highlightType;                     // How should this object be highlit?
     [Range(0.0f, 25.0f)]
     public float highlightDistance = 10.0f;                 // The highlight distance.
-    private bool hideBeforeEvent = false;                   // Should this object be hidden before its event?
 
 
     [Header("Animation Properties")]
     public string animationName;                             // The name of the animation to play upon triggering.
-
+    public Transform hoverUnderTransform;
+    public List<EndActivate> activateAfterInteraction;
 
     private Transform cameraPos;                            // The position of the camera
+    private GameObject contactedHand = null;
 
     // ======================================================== Methods
     /// <summary>
@@ -79,13 +85,9 @@ public class InteractiveObject : Interactive
 
         // Set the proper looking tag
         if (gameManager.controlType == ControlType.OCULUS)
-        {
             requiredTag = "OVR Grabber";
-        }
         else
-        {
             requiredTag = "Reticle";
-        }
 
         // Lastly, set this to inactive after intialization
         enabled = false;
@@ -118,14 +120,19 @@ public class InteractiveObject : Interactive
                 Highlight();
             }
             // Else, if look at, check it via the dot procduct
-            else if (highlightType == HighlightType.LOOKAT && Vector3.Dot(cameraVec.normalized, cameraPos.forward) > 0.95f)
+            else if (highlightType == HighlightType.LOOKAT && Vector3.Dot(cameraVec.normalized, cameraPos.forward) > 0.97f)
             {
                 Highlight();
             }
             // Else, if point at, check it via the dot procduct
             else if (highlightType == HighlightType.POINTAT && (isMouseOver || 
-                Vector3.Dot(domHandVec.normalized, gameManager.currentHand.transform.forward) > 0.95f ||
-                Vector3.Dot(offHandVec.normalized, gameManager.offHand.transform.forward) > 0.95f))
+                Vector3.Dot(domHandVec.normalized, gameManager.currentHand.transform.forward) > 0.97f ||
+                Vector3.Dot(offHandVec.normalized, gameManager.offHand.transform.forward) > 0.97f))
+            {
+                Highlight();
+            }
+            // Else, if reticle over, check via intersection with reticle
+            else if (highlightType == HighlightType.RETICLE_OVER && isHighlighted)
             {
                 Highlight();
             }
@@ -143,6 +150,24 @@ public class InteractiveObject : Interactive
             else
             {
                 Dim();
+            }
+        }
+
+        // If proximity below, then do a raycast and check for the hands
+        if (objectType == ObjectType.HANDS_BELOW && isCurrentlyInteractable)
+        {
+            // Debug a ray
+            Debug.DrawRay(hoverUnderTransform.position, Vector3.down * 0.2f, Color.blue);
+
+            // If the hands are beneath us...
+            RaycastHit hit;
+            if (Physics.Raycast(hoverUnderTransform.position, Vector3.down, out hit, 0.2f))
+            {
+                // Check to make sure raycast hit
+                //Debug.Log("Raycast Hit");
+
+                // If the tags are OVR Grabbers
+                if (hit.transform.CompareTag("OVR Grabber")) Select();
             }
         }
     }
@@ -193,12 +218,21 @@ public class InteractiveObject : Interactive
             // Turn off interactivity to this object
             isCurrentlyInteractable = false;
 
-            // Toggle "clicked" in the owning event
-            owningEvent.Clicked();
-
             // If we have an animator, play the animation
             if (animator != null)
-                animator.SetBool("HasBeenTriggered", true);
+                animator.SetTrigger("HasBeenTriggered");
+                //animator.SetBool("HasBeenTriggered", true);
+
+            // If we should hide this object after interaction, do so
+            if (hideAfterInteraction)
+                gameObject.SetActive(false);
+
+            // Activate each object
+            foreach (EndActivate endActivate in activateAfterInteraction)
+                endActivate.Activate(activateName);
+
+            // Toggle "clicked" in the owning event
+            owningEvent.Clicked();
         }     
     }
 
@@ -237,15 +271,6 @@ public class InteractiveObject : Interactive
     }
 
     /// <summary>
-    /// Toggle whether this object should be hidden before its event.
-    /// </summary>
-    /// <param name="hide">Should the gameobject be hidden?</param>
-    public void SetHideBeforeEvent(bool hide)
-    {
-        hideBeforeEvent = hide;
-    }
-
-    /// <summary>
     /// Sets the camera's transform.
     /// </summary>
     /// <param name="transform">The transform of the main camera.</param>
@@ -254,3 +279,27 @@ public class InteractiveObject : Interactive
         cameraPos = transform;
     }
 }
+
+// EXPERIMENT MORE WITH LATER
+
+///// <summary>
+///// A custom UI for the interactive object.
+///// </summary>
+//[CustomEditor(typeof(InteractiveObject))]
+//public class InteractiveObjectEditor : Editor
+//{
+//    /// <summary>
+//    /// On inspector gui...
+//    /// </summary>
+//    public override void OnInspectorGUI()
+//    {
+//        // Get the target object
+//        InteractiveObject interactiveObject = (InteractiveObject)target;
+
+//        // Get the highlight type
+//        if (interactiveObject.objectType == ObjectType.HANDS_BELOW)
+//        {
+//            Object meow = EditorGUILayout.ObjectField(interactiveObject.hoverUnderTransform, typeof(Transform), true);
+//        }
+//    }
+//}

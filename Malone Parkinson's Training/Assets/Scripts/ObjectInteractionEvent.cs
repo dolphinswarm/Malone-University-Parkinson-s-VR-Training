@@ -10,9 +10,9 @@ public class ObjectInteractionEvent : InfoBoardEvent
     // ======================================================== Variables
     [Header("Interaction Event Properties")]
     public List<GameObject> interactionObjects;         // The list of possible interaction objects.
-    public bool hideBeforeInteraction = false;          // Should the interactive object be hidden before its event?
-    public bool interactWithAllObjects = false;         // Do we need to interact with all objects? NEED TO IMPLEMENT!!!!!!!!!!!!!!!!!!!!!!!
+    public bool interactWithAllObjects = false;         // Do we need to interact with all objects?
     public ParticleSystem particles;                    // The particle system used for display. ALWAYS IN CHILD
+    public bool hideReticles = true;                    // Should we hide the reticles?
 
     [System.Obsolete("Don't use this - instead, an animation component plays in the child")]
     public SpecialAnimationInstructions specialAnimationInstructions; // <------- Removed in favor of animation component
@@ -43,13 +43,9 @@ public class ObjectInteractionEvent : InfoBoardEvent
         {
             // Add particle system to object, if not null
             if (particleSystemForAnimation != null) { 
-                ParticleContainer particleContainer = interactiveObject.GetComponentInParent<ParticleContainer>();
+                AnimationActionContainer particleContainer = interactiveObject.GetComponentInParent<AnimationActionContainer>();
                 if (particleContainer != null) particleContainer.particleSystemForAnimation = particleSystemForAnimation;
             }
-
-            // If we should hide before interaction, hide this object
-            if (hideBeforeInteraction)
-                interactiveObject.GetComponent<InteractiveObject>().SetHideBeforeEvent(true);
 
             // Make this object the owning game event
             interactiveObject.GetComponent<InteractiveObject>().owningEvent = this;
@@ -77,23 +73,38 @@ public class ObjectInteractionEvent : InfoBoardEvent
         // Set all reliant's interactive object scripts to active
         foreach (GameObject interactiveObject in interactionObjects)
         {
-            // Show the object, if hidden
-            if (hideBeforeInteraction) interactiveObject.SetActive(true);
+            // Set the object as active
+            interactiveObject.SetActive(true);
 
             // Enable the interactive object
             InteractiveObject intObj = interactiveObject.GetComponent<InteractiveObject>();
             intObj.enabled = true;
             intObj.isCurrentlyInteractable = true;
+            intObj.owningEvent = this;
 
             // Change the interaction type, if reliant on oculus hands
             if (intObj.highlightType == HighlightType.HAND_DISTANCE && gameManager.controlType == ControlType.MOUSE_KEYBOARD)
             {
                 intObj.highlightType = HighlightType.POINTAT;
             }
+
+            // Change the interaction type, if reliant on oculus hands
+            if (intObj.objectType == ObjectType.HANDS_BELOW && gameManager.controlType == ControlType.MOUSE_KEYBOARD)
+            {
+                intObj.highlightType = HighlightType.POINTAT;
+                intObj.objectType = ObjectType.POINTAT;
+            }
+
+            // Change the matching tag, if OVR dependent
+            if ((intObj.requiredTag == "OVR Grabber" && gameManager.controlType == ControlType.MOUSE_KEYBOARD) ||
+                (intObj.requiredTag == "OVR Grabber" && !hideReticles))
+            {
+                intObj.requiredTag = "Reticle";
+            }
         }
 
         // If using Oculus, hide the reticle
-        if (gameManager.controlType == ControlType.OCULUS)
+        if (gameManager.controlType == ControlType.OCULUS && hideReticles)
         {
             hideOnStart.Add(gameManager.currentReticle);
             showAtEnd.Add(gameManager.currentReticle);
@@ -108,7 +119,8 @@ public class ObjectInteractionEvent : InfoBoardEvent
         base.Go(prevEventNum);
 
         // Print message to console
-        Debug.Log("*** Starting Interaction Event: Event #" + myEventNum);
+        Debug.Log("*** Starting + " + name + " (Interaction Event: Event #" + myEventNum + ")");
+
     }
 
     /// <summary>
@@ -135,21 +147,13 @@ public class ObjectInteractionEvent : InfoBoardEvent
                 intObj.isMouseOver = false;
             }
 
-            // If we have a completed sound effect, play it
-            if (completedSFX != null)
-            {
-                infoBoard.GetComponent<AudioSource>().PlayOneShot(completedSFX);
-                Invoke("Finished", completedSFX.length + delayBeforeAdvance);
-            }
-
-            // If not, check the info board for one then play it
-            else if (infoBoard.correctSFX != null)
-            {
-                infoBoard.GetComponent<AudioSource>().PlayOneShot(infoBoard.correctSFX);
-                Invoke("Finished", infoBoard.correctSFX.length + delayBeforeAdvance);
-            }
-            // Else, invoke finished normally
-            else { Invoke("Finished", delayBeforeAdvance); }
+            // Call base clicked
+            base.Clicked();
+        }
+        // 
+        else
+        {
+            infoBoard.GetComponent<AudioSource>().PlayOneShot(infoBoard.minorCorrectSFX);
         }
     }
 
@@ -158,6 +162,13 @@ public class ObjectInteractionEvent : InfoBoardEvent
     /// </summary>
     public override void Finished()
     {
+        // Disable each interactive object
+        foreach (GameObject interactiveObject in interactionObjects)
+        {
+            interactiveObject.GetComponent<InteractiveObject>().isCurrentlyInteractable = false;
+        }
+        
+        // Call the base finish class
         base.Finished();
     }
 
@@ -173,8 +184,11 @@ public class ObjectInteractionEvent : InfoBoardEvent
         // Loop through each interactive object, checking to see if any are still interactable
         foreach (GameObject interactiveObject in interactionObjects)
         {
+            // Create temp interactive object
+            InteractiveObject intObj = interactiveObject.GetComponent<InteractiveObject>();
+
             // If we find one, break
-            if (interactiveObject.GetComponent<InteractiveObject>().isCurrentlyInteractable)
+            if (intObj.isCurrentlyInteractable)
             {
                 haveAllbeenSelected = false;
                 break;

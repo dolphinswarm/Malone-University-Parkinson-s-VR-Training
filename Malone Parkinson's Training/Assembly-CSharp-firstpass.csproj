@@ -115,6 +115,14 @@
     <Compile Include="Assets\Standard Assets\ParticleSystems\Scripts\ParticleSystemMultiplier.cs" />
     <Compile Include="Assets\Standard Assets\ParticleSystems\Scripts\SmokeParticles.cs" />
     <Compile Include="Assets\Standard Assets\ParticleSystems\Scripts\WaterHoseParticles.cs" />
+    <Compile Include="Assets\Standard Assets\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
+    <Compile Include="Assets\Standard Assets\SampleScenes\Menu\Scripts\PauseMenu.cs" />
+    <Compile Include="Assets\Standard Assets\SampleScenes\Menu\Scripts\SceneAndURLLoader.cs" />
+    <Compile Include="Assets\Standard Assets\SampleScenes\Scripts\CameraSwitch.cs" />
+    <Compile Include="Assets\Standard Assets\SampleScenes\Scripts\LevelReset.cs" />
+    <Compile Include="Assets\Standard Assets\SampleScenes\Scripts\ParticleSceneControls.cs" />
+    <Compile Include="Assets\Standard Assets\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
+    <Compile Include="Assets\Standard Assets\SampleScenes\Scripts\SlowMoButton.cs" />
     <Compile Include="Assets\Standard Assets\Utility\ActivateTrigger.cs" />
     <Compile Include="Assets\Standard Assets\Utility\AlphaButtonClickMask.cs" />
     <Compile Include="Assets\Standard Assets\Utility\AutoMobileShaderSwitch.cs" />
@@ -161,7 +169,6 @@
     <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
     <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonBasic.shader" />
     <None Include="Assets\Standard Assets\Prototyping\Shaders\WorldCoordDiffuse.shader" />
-    <None Include="Assets\Standard Assets\Environment\Water (Basic)\DO_NOT_WORK_IN_VR.txt" />
     <None Include="Assets\Standard Assets\Effects\TessellationShaders\Shaders\BumpedSpecularSmooth.shader" />
     <None Include="Assets\Standard Assets\Effects\Projectors\Guidelines.txt" />
     <None Include="Assets\Standard Assets\Effects\ImageEffects\Readme.txt" />
@@ -172,7 +179,6 @@
     <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonBasicOutline.shader" />
     <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAlpha.shader" />
     <None Include="Assets\Standard Assets\Vehicles\Car\Shaders\ReflectiveDiffuseSpec.shader" />
-    <None Include="Assets\Standard Assets\Environment\Water\DO_NOT_WORK_IN_VR.txt" />
     <None Include="Assets\Standard Assets\ParticleSystems\ParticleSystemsGuidelines.txt" />
     <None Include="Assets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
     <None Include="Assets\Standard Assets\Fonts\OpenSans\License!.txt" />
@@ -192,6 +198,7 @@
     <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
     <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAdd.shader" />
     <None Include="Assets\Standard Assets\Effects\TessellationShaders\Shaders\BumpedSpecularDisplacement.shader" />
+    <None Include="Assets\Standard Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/SIVC/Documents/GitHub/Malone-University-Parkinson-s-VR-Training/Malone Parkinson's Training/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

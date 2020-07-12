@@ -3,7 +3,17 @@ guid: c48503b2557850b46ba72e51bc551781
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ID_Bracelet_texture
+    second: {fileID: 2100000, guid: a7c060f7ba88e1442a688c0e61bb32a2, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: IDBracelet
+    second: {fileID: 2800000, guid: 3976229e200306b41a00ccccebae920c, type: 3}
   materials:
     importMaterials: 1
     materialName: 0
@@ -58,7 +68,7 @@ ModelImporter:
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
-    useFileScale: 1
+    useFileScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0

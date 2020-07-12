@@ -64,7 +64,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AnimationHandlerForSink.cs" />
+    <Compile Include="Assets\ArrowScript.cs" />
     <Compile Include="Assets\ButtonEvent.cs" />
+    <Compile Include="Assets\ClipboardScript.cs" />
+    <Compile Include="Assets\EndActivate.cs" />
+    <Compile Include="Assets\FadeInEvent.cs" />
+    <Compile Include="Assets\FadeOutEvent.cs" />
+    <Compile Include="Assets\IVScript.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scenes\Scripts\TestScript.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\AmbienceEmitter.cs" />
     <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\AudioManager.cs" />
@@ -349,8 +355,15 @@
     <Compile Include="Assets\Oculus\VoiceMod\Scripts\Helpers\OVRMicInput.cs" />
     <Compile Include="Assets\Oculus\VoiceMod\Scripts\OVRVoiceMod.cs" />
     <Compile Include="Assets\Oculus\VoiceMod\Scripts\OVRVoiceModContext.cs" />
+    <Compile Include="Assets\OldManAnimationEvents.cs" />
+    <Compile Include="Assets\OVRHapticsManager.cs" />
+    <Compile Include="Assets\OVRHapticsTrigger.cs" />
+    <Compile Include="Assets\PointObjectAtEvent.cs" />
+    <Compile Include="Assets\Prefabs\Controllers\FirstPersion AIO Pack\DemoScene\MiscScripts\Doors.cs" />
+    <Compile Include="Assets\Prefabs\Controllers\FirstPersion AIO Pack\FirstPersonAIO\FirstPersonAIO.cs" />
+    <Compile Include="Assets\RoomOrganizationEvent.cs" />
+    <Compile Include="Assets\Scripts\BillboardScript.cs" />
     <Compile Include="Assets\Scripts\DeliveryManager.cs" />
-    <Compile Include="Assets\Scripts\EndTutorialEvent.cs" />
     <Compile Include="Assets\Scripts\Events\CompletionTimer.cs" />
     <Compile Include="Assets\Scripts\Events\DataStorage.cs" />
     <Compile Include="Assets\Scripts\Events\deliveryScript.cs" />
@@ -416,15 +429,16 @@
     <Compile Include="Assets\Scripts\Old Scripts\DeliveryEventOld.cs" />
     <Compile Include="Assets\Scripts\Old Scripts\InteractiveObjectOld.cs" />
     <Compile Include="Assets\Scripts\Old Scripts\PickupEventOld.cs" />
+    <Compile Include="Assets\Scripts\Old Scripts\SpecialAnimationInstructions.cs" />
+    <Compile Include="Assets\Scripts\Old Scripts\WashHandsSpecialAnimation.cs" />
     <Compile Include="Assets\Scripts\ReverseNormals.cs" />
-    <Compile Include="Assets\Scripts\SpecialAnimationInstructions.cs" />
     <Compile Include="Assets\Scripts\SpecialTransformInstructions.cs" />
     <Compile Include="Assets\Scripts\Utility\AdjustCharecterHeight.cs" />
     <Compile Include="Assets\Scripts\Utility\AlwaysShowCursor.cs" />
+    <Compile Include="Assets\Scripts\Utility\AnimationActionContainer.cs" />
     <Compile Include="Assets\Scripts\Utility\Clock.cs" />
     <Compile Include="Assets\Scripts\Utility\DontDestroyMe.cs" />
-    <Compile Include="Assets\Scripts\Utility\ParticleContainer.cs" />
-    <Compile Include="Assets\Scripts\WashHandsSpecialAnimation.cs" />
+    <Compile Include="Assets\SoapDispenserScript.cs" />
     <None Include="Assets\Oculus\Avatar\Content\Materials\AvatarMaterialStateShader.cginc" />
     <None Include="Assets\Text\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\Oculus\Avatar\Samples\CrossPlatform\Readme.txt" />
@@ -454,6 +468,7 @@
     <None Include="Assets\Oculus\SampleFramework\Core\CustomHands\Shaders\Hands_01.shader" />
     <None Include="Assets\Text\Resources\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\Text\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\Prefabs\Controllers\FirstPersion AIO Pack\DemoScene\Working Materials\GlassBumpedDistort.shader" />
     <None Include="Assets\Text\Resources\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\Models\Clipboard\ReadMe\ReadMe.txt" />
     <None Include="Assets\Text\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
@@ -468,6 +483,7 @@
     <None Include="Assets\Oculus\Avatar\Resources\Materials\AvatarSurfaceShader.shader" />
     <None Include="Assets\Oculus\SampleFramework\Usage\DistanceGrab\Materials\ToyCubeWithOutline.shader" />
     <None Include="Assets\Text\Resources\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\Prefabs\Controllers\FirstPersion AIO Pack\README.txt" />
     <None Include="Assets\Text\Resources\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\Text\Resources\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\Oculus\SampleFramework\Usage\DistanceGrab\Materials\CrosshairZCheat.shader" />

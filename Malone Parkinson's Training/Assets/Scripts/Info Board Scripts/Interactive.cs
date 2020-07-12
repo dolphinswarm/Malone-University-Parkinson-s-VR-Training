@@ -23,6 +23,9 @@ public class Interactive : MonoBehaviour {
     public string requiredTag = "Reticle";
     public bool isMouseOver = false;
     public bool isCurrentlyInteractable = true;
+    public bool hideBeforeEvent = false;                   // Should this object be hidden before its event?
+    public bool hideAfterInteraction = false;               // Should we hide with this object after interacting with it?
+    public bool requireClick = true;                        // Should w
 
     // ======================================================== Methods
     /// <summary>
@@ -87,6 +90,8 @@ public class Interactive : MonoBehaviour {
             Highlight(); 
             isHighlighted = true;
             isMouseOver = true;
+
+            if (!requireClick) Select();
         } 
     }
 
@@ -122,6 +127,7 @@ public class Interactive : MonoBehaviour {
         {
             Highlight();
             isHighlighted = true;
+            if (!requireClick) Select();
         }
     }
 
@@ -150,7 +156,9 @@ public class Interactive : MonoBehaviour {
         if ((matchTag && other.gameObject.CompareTag(requiredTag) || !matchTag) && isCurrentlyInteractable)
         {
             // If we haven't been clicked and we receive the appropriate input button, toggle
-            if (Input.GetButtonDown("Fire1") || GetCorrectOVRInput()) Select();
+            if (Input.GetButtonDown("Fire1") || OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger) ||
+                OVRInput.GetDown(OVRInput.RawButton.LIndexTrigger))
+                Select();
         }
     }
 
@@ -168,6 +176,7 @@ public class Interactive : MonoBehaviour {
         {
             Highlight();
             isHighlighted = true;
+            if (!requireClick) Select();
         }
     }
 
@@ -189,30 +198,32 @@ public class Interactive : MonoBehaviour {
     /// On trigger stay....
     /// </summary>
     /// <param name="other">The other collider.</param>
-    protected virtual void OnTriggerStay(Collider other) 
+    protected virtual void OnTriggerStay(Collider other)
     {
         // If we should match tag and the other game object matches that tag, OR
         // If we don't check for matching tags...
         if ((matchTag && other.gameObject.CompareTag(requiredTag) || !matchTag) && isCurrentlyInteractable)
         {
             // If we haven't been clicked and we receive the appropriate input button, toggle
-            if (Input.GetButtonDown("Fire1") || GetCorrectOVRInput()) Select();
-        }
-    }
-
-    /// <summary>
-    /// Gets the correct OVR input from the user, based off the dominant hand.
-    /// </summary>
-    /// <returns></returns>
-    private bool GetCorrectOVRInput()
-    {
-        if (gameManager.dominantHand == DominantHand.RIGHT)
-        {
-            return OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger);
-        }
-        else
-        {
-            return OVRInput.GetDown(OVRInput.RawButton.LIndexTrigger);
+            if (Input.GetButtonDown("Fire1") || OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger) ||
+                OVRInput.GetDown(OVRInput.RawButton.LIndexTrigger))
+                Select();
         }
     }
 }
+
+///// <summary>
+///// Gets the correct OVR input from the user, based off the dominant hand.
+///// </summary>
+///// <returns></returns>
+//private bool GetCorrectOVRInput()
+//{
+//    if (gameManager.dominantHand == DominantHand.RIGHT)
+//    {
+//        return OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger);
+//    }
+//    else
+//    {
+//        return OVRInput.GetDown(OVRInput.RawButton.LIndexTrigger);
+//    }
+//}

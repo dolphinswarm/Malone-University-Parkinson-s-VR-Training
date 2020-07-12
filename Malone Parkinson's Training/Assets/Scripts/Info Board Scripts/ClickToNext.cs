@@ -8,45 +8,35 @@ using UnityEngine;
 public class ClickToNext : InteractiveText {
     // ======================================================== Properties
     [Header("Current Information Event")]
-    public InformationEvent clickHandler;
+    public InformationEvent informationEvent;
+    public bool finishedClicking = false;
 
     // ======================================================== Methods
-    /// <summary>
-    /// Initializes this script.
-    /// </summary>
-    void Start()
-    {
-        // If info board is not set, then set it
-        if (infoBoard == null)
-            infoBoard = FindObjectOfType<InfoBoardUI>(); // Should only be one InfoBoardUI (hopefully)
-
-        // If game manager is not set, then set it
-        if (gameManager == null)
-            gameManager = FindObjectOfType<GameManager>(); // Should only be one GameManager
-
-        // Call the remainder of the base start
-        base.Start();
-    }
+    // Inherits base start / initialize
 
     /// <summary>
     /// Once this object is selected, advances the event.
     /// </summary>
     protected override void Select() {
-        // Get current number in list
-        int currentItemInList = clickHandler.currentIndex + 1;
+        // To prevent spam-clicking...
+        if (!finishedClicking) { 
+            // Get current number in list
+            int currentItemInList = informationEvent.currentIndex + 1;
 
-        // Are we on the last item?
-        if (currentItemInList == clickHandler.infoTextList.Count)
-        {
-            clickHandler.GetComponent<InformationEvent>().Finished();
-        }
+            // Are we on the last item?
+            if (currentItemInList == informationEvent.infoTextList.Count)
+            {
+                informationEvent.GetComponent<InformationEvent>().Clicked();
+                finishedClicking = true;
+            }
 
-        // Else, show the next instruction
-        else
-        {
-            clickHandler.infoBoard.ShowInstructions(clickHandler.infoTextList[currentItemInList]);
-            clickHandler.currentIndex++;
-            Debug.Log("Displaying message at index " + clickHandler.currentIndex + " to the console.");
+            // Else, show the next instruction
+            else
+            {
+                informationEvent.infoBoard.ShowInstructions(informationEvent.infoTextList[currentItemInList]);
+                informationEvent.currentIndex++;
+                Debug.Log("Displaying message at index " + informationEvent.currentIndex + ".");
+            }
         }
     }
 }

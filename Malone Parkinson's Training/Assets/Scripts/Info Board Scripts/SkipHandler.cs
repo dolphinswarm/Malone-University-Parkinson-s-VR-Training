@@ -44,7 +44,7 @@ public class SkipHandler : MonoBehaviour {
             // then....
             enableSkip = true;                                                      // prevent this code from running again
             skipButton.SetActive(true);                                             // turn on the skip button
-            skipButton.GetComponent<ClickToSkip>().clickHandler = gameObject;       // grab the handle to our click handler
+            skipButton.GetComponent<ClickToSkip>().informationEvent = gameObject;       // grab the handle to our click handler
             //Debug.Log(gameObject.name + " enabled skipping");
         }
 

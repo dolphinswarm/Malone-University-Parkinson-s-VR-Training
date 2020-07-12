@@ -11,7 +11,9 @@ public class InfoBoardEvent : MonoBehaviour {
     // ======================================================== Variables
     [Header("Info Board Interface")]
     public InfoBoardUI infoBoard;               // Which message board are we displaying to?
+    [TextArea]
     public string infoText = "";                // Text to display on infromation board
+    [TextArea]
     public string helpReminderText = "";        // Text to display in help / reminder popup
 
     [Header("Game Manager")]
@@ -28,6 +30,7 @@ public class InfoBoardEvent : MonoBehaviour {
     public AudioClip completedSFX;              // The sound effect which plays when a player completes a task
     public float delayBeforeAdvance;            // The duration before starting the next event
     public bool isTutorialEvent = false;        // This is event a tutorial event?
+    public bool playJingle = true;              // Should we play the jingle upon completion?
 
     [Header("Animation Properties")]
     public ParticleSystem particleSystemForAnimation;   // A particle system used by the success animation. ALWAYS IN THIS OBJECT
@@ -85,7 +88,37 @@ public class InfoBoardEvent : MonoBehaviour {
     /// <summary>
     /// Upon event activation...
     /// </summary>
-    public virtual void Clicked() { }
+    public virtual void Clicked()
+    {
+        // Check the completed sound effect. If null, set it equal to info board's
+        if (completedSFX == null)
+            completedSFX = infoBoard.correctSFX;
+
+        // If we should play the jingle, invoke delay w/ jingle length
+        if (completedSFX != null && playJingle)
+            Invoke("Finished", completedSFX.length + delayBeforeAdvance);
+
+        // Else, just behave normally
+        else
+            Invoke("Finished", delayBeforeAdvance);
+
+        // Play the sound after x seconds
+        if (playJingle)
+            StartCoroutine(WaitForSecondsToCorrectSound(delayBeforeAdvance));
+        
+        // If we have a completed sound effect, play it
+        //if (completedSFX != null && playJingle)
+        //{
+        //}
+        //// If not, check the info board for one then play it
+        //else if (infoBoard.correctSFX != null && playJingle)
+        //{
+        //infoBoard.GetComponent<AudioSource>().PlayOneShot(infoBoard.correctSFX);
+        //    Invoke("Finished", infoBoard.correctSFX.length + delayBeforeAdvance);
+        //}
+        //// Else, invoke finished normally
+        //else { }
+    }
 
     /// <summary>
     /// The alter Go method, which takes a parameter for tracking the event number. Called externally to start an event.
@@ -104,6 +137,7 @@ public class InfoBoardEvent : MonoBehaviour {
     /// The default Go method, which takes no parameters. Called externally to start an event.
     /// </summary>
     public virtual void Go() {
+        gameManager.currentEvent = this;
         useEventNum = false;
         isActive = true;
         //GameObject.Find("Instruction_Text").GetComponent<TextMeshPro>().text = helpReminderText;
@@ -164,5 +198,19 @@ public class InfoBoardEvent : MonoBehaviour {
         // Set the delay before advance to the animation duration
         //**************************************************************** WILL NEED TO REVISE TO MAKE ROOM FOR CUSTOM DURATIONS
         delayBeforeAdvance = animationDuration;
+    }
+
+    /// <summary>
+    /// A coroutine for waiting to play a sound.
+    /// </summary>
+    /// <param name="seconds"></param>
+    /// <returns></returns>
+    IEnumerator WaitForSecondsToCorrectSound(float seconds)
+    {
+        // Wait x seconds
+        yield return new WaitForSeconds(seconds);
+
+        // Play correct sound
+        infoBoard.GetComponent<AudioSource>().PlayOneShot(infoBoard.correctSFX);
     }
 }

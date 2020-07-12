@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LocatorObject : Interactive
+public class LocatorObject : InteractiveObject
 {
     // ======================================================== Variables
-    public LocatorEvent owningEvent;          // The object this script is calling back to.
+    [Header("Locator Object Properties")]
     private bool oneClick = false;
+    public bool hideOnClick = true;             // Should this object be hidden on click?
 
     // ======================================================== Methods
     /// <summary>
@@ -31,12 +32,6 @@ public class LocatorObject : Interactive
     }
 
     /// <summary>
-    /// Override the base highlight and dim to do nothing
-    /// </summary>
-    protected override void Highlight() { }
-    public override void Dim() { }
-
-    /// <summary>
     /// On pickup...
     /// </summary>
     protected override void Select()
@@ -46,20 +41,13 @@ public class LocatorObject : Interactive
         {
             // Hide this object
             oneClick = true;
-            owningEvent.targets.Remove(this);
+            if (TryGetComponent<LocatorEvent>(out LocatorEvent locator))
+                locator.targets.Remove(this);
             owningEvent.Clicked();
 
             // Set this to inactive
-            gameObject.SetActive(false);
+            if (hideOnClick)
+                gameObject.SetActive(false);
         }
-    }
-
-    /// <summary>
-    /// A method for returning this game object.
-    /// </summary>
-    /// <returns>This script's owning game object.</returns>
-    public GameObject GetGameObject()
-    {
-        return gameObject;
     }
 }

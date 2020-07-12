@@ -35,9 +35,16 @@ public class InfoBoardUI : MonoBehaviour {
 	public Color rightColor = Color.green;
 	public Color wrongColor = Color.red;
 
+    [Header("UI Images and Buttons")]
+    public ArrowScript[] arrows;
+    public GameObject oculusControllers;
+    public ClickToSkip skip;
+    public ClickToNext next;
+
     [Header("Audio")]
     public AudioClip correctSFX;
-	public AudioClip wrongSFX;
+    public AudioClip minorCorrectSFX;
+    public AudioClip wrongSFX;
 
     [Header("Question Display Managers")]
     public QuestionDisplayManager questionDisplay_4;    // change the type to QuestionDisplayManager
@@ -48,7 +55,6 @@ public class InfoBoardUI : MonoBehaviour {
     public QuestionDisplayManager questionDisplay_14;
     public GameObject infoDisplay;      // change type?
     QuestionDisplayManager questionDisplay; // generic hook, gets overwritten later
-    public GameObject controllerImage;
 
     // ======================================================== Methods
     /// <summary>
@@ -59,13 +65,16 @@ public class InfoBoardUI : MonoBehaviour {
         if (gameManager == null)
             gameManager = FindObjectOfType<GameManager>(); // Should only be one GameManager
 
-        // If controller image not found, add it
-        if (controllerImage == null)
-        {
-            controllerImage = GameObject.Find("Oculus Controllers Image");
-            controllerImage.SetActive(false);
-        }
-
+        // Set the arrows, if not present
+        if (arrows == null || arrows.Length == 0)
+            arrows = FindObjectsOfType<ArrowScript>();
+        foreach (ArrowScript arrow in arrows)
+            arrow.gameObject.SetActive(false);
+            
+        // Find the Oculus controllers, if not present
+        if (oculusControllers == null)
+            oculusControllers = GameObject.Find("Oculus Controllers Image");
+        if (oculusControllers != null) oculusControllers.SetActive(false);
 
         // Adds Question-4 as a default question display
         if (questionDisplay == null)
@@ -205,5 +214,4 @@ public class InfoBoardUI : MonoBehaviour {
     public void Log(string dataToLog) {
         gameManager.reportCardManager.writeLine(dataToLog);
     }
-
 }
