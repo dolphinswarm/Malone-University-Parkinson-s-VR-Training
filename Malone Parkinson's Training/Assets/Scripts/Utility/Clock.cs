@@ -53,6 +53,7 @@ public class Clock : MonoBehaviour
     public void StopClock()
     {
         isClockRunning = false;
+        StopCoroutine(MoveSecondsHand());
     }
 
     /// <summary>

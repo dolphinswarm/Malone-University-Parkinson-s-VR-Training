@@ -204,7 +204,7 @@ public class MicrophoneEvent : InfoBoardEvent
         checkerRunning = false;
 
         // If not talking, stop
-        if (currentAverageVolume < baseline + 0.0001f && audioSource.isPlaying)
+        if (currentAverageVolume < baseline + 0.0001f && audioSource.isPlaying && !hasBeenTriggered)
         {
             hasBeenTriggered = true;
             Clicked();

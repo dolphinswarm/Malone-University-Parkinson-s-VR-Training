@@ -305,7 +305,7 @@ public class GameManager : MonoBehaviour {
         // Set the clipboard properties
         clipboardUI.transform.parent = Camera.main.transform;
         clipboardUI.GetComponentInChildren<Canvas>().worldCamera = Camera.main;
-        clipboardUI.GetComponentInChildren<Canvas>().planeDistance = 1.1f;
+        clipboardUI.GetComponentInChildren<Canvas>().planeDistance = 0.5f;
         clipboardUI.SetActive(false);
         clipboardText = clipboardUI.GetComponentInChildren<ClipboardScript>();
 
