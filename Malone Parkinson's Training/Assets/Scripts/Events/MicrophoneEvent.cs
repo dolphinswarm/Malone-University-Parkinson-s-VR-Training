@@ -70,13 +70,29 @@ public class MicrophoneEvent : InfoBoardEvent
     private void RecordAudio()
     {
         // Get a recording from the primary microphone
-        audioSource.clip = Microphone.Start(Microphone.devices[0], true, 3, 44100);
+        audioSource.clip = Microphone.Start(GetProperMicrophone(), true, 3, 44100);
         audioSource.loop = true;
         //audioSource.volume = 0.0f;
 
         // Play back the recording
         while (!(Microphone.GetPosition(null) > 0)) { }
         audioSource.Play();
+    }
+
+    /// <summary>
+    /// Chooses the Oculus microphone for speech.
+    /// </summary>
+    /// <returns></returns>
+    private string GetProperMicrophone()
+    {
+        // Check if a Rift mic is there
+        // TODO update for Quest and other Oculus devices!
+        foreach (string mic in Microphone.devices)
+        {
+            if (mic.Contains("Rift")) return mic;
+        }
+
+        return Microphone.devices[0];
     }
 
     /// <summary>
@@ -112,14 +128,6 @@ public class MicrophoneEvent : InfoBoardEvent
         if (loudFlag && quietFlag && !hasBeenTriggered && !checkerRunning)
         {
             StartCoroutine(CheckIfStillTalkingSeconds());
-        }
-
-        // If this event is active, the Left Shift Key is being held down, and the Tab key is pressed, skip this event
-        if (isActive && Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Tab))
-        {
-
-            // Call the finished event
-            Finished();
         }
     }
 

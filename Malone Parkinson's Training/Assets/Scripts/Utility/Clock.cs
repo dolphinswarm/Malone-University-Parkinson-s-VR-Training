@@ -19,6 +19,8 @@ public class Clock : MonoBehaviour
     public AudioClip clockTick;
     public bool isClockRunning = false;
 
+    private Coroutine clockCoroutine;
+
     // ======================================================== Methods
     /// <summary>
     /// On game start...
@@ -44,7 +46,7 @@ public class Clock : MonoBehaviour
     public void StartClock()
     {
         isClockRunning = true;
-        StartCoroutine(MoveSecondsHand());
+        clockCoroutine = StartCoroutine(MoveSecondsHand());
     }
 
     /// <summary>
@@ -53,7 +55,7 @@ public class Clock : MonoBehaviour
     public void StopClock()
     {
         isClockRunning = false;
-        StopCoroutine(MoveSecondsHand());
+        if (clockCoroutine != null) StopCoroutine(clockCoroutine);
     }
 
     /// <summary>

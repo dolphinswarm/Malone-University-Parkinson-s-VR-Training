@@ -100,6 +100,7 @@ public class PickupEvent : InfoBoardEvent
         if (pickupObject.activeSelf == true)
         {
             // BREAKS WHEN THE USER CLICKS WITH OPPOSITE HAND---- FIX! **************************************
+            // If we want to place in the main hand...
             if (placeInMainHand)
             {
                 // Attach the item to the hand
@@ -118,13 +119,16 @@ public class PickupEvent : InfoBoardEvent
                         pickupObject.transform.localPosition = pickupObjectPosition;
                         pickupObject.transform.localRotation = Quaternion.Euler(pickupObjectRotation);
                     }
+                    // Else, if we want to use actual instructions...
                     else
                     {
+                        // If right-handed, place in right hand
                         if (gameManager.dominantHand == DominantHand.RIGHT)
                         {
                             pickupObject.transform.localPosition = rightPickupObjectPosition;
                             pickupObject.transform.localRotation = Quaternion.Euler(rightPickupObjectRotation);
                         }
+                        // If left-handed, place in left hand
                         else
                         {
                             pickupObject.transform.localPosition = leftPickupObjectPosition;
@@ -133,6 +137,7 @@ public class PickupEvent : InfoBoardEvent
                     }
                 }
             }
+            // Else, place in the OPPOSITE hand
             else
             {
                 // Attach the item to the hand
@@ -154,17 +159,20 @@ public class PickupEvent : InfoBoardEvent
                         pickupObject.transform.localPosition = pickupObjectPosition;
                         pickupObject.transform.localRotation = Quaternion.Euler(pickupObjectRotation);
                     }
+                    // Else, if we want to use actual instructions...
                     else
                     {
+                        // If right-handed, place in left
                         if (gameManager.dominantHand == DominantHand.RIGHT)
-                        {
-                            pickupObject.transform.localPosition = rightPickupObjectPosition;
-                            pickupObject.transform.localRotation = Quaternion.Euler(rightPickupObjectRotation);
-                        }
-                        else
                         {
                             pickupObject.transform.localPosition = leftPickupObjectPosition;
                             pickupObject.transform.localRotation = Quaternion.Euler(leftPickupObjectRotation);
+                        }
+                        // If left-handed, place in right
+                        else
+                        {
+                            pickupObject.transform.localPosition = rightPickupObjectPosition;
+                            pickupObject.transform.localRotation = Quaternion.Euler(rightPickupObjectRotation);
                         }
                     }
                 }
