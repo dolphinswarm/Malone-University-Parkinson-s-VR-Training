@@ -21,7 +21,7 @@ public enum DominantHand { LEFT, RIGHT };
 /// Which state should we start the game at?
 /// </summary>
 [Serializable]
-public enum SimState { Tutorial, State1And2, State3, State4, State5, State6, State7 }
+public enum SimState { Tutorial, State1And2, State3, State4, State5, State6 }
 
 //*****************************MainMenu Additions
 [Serializable]
@@ -139,7 +139,6 @@ public class GameManager : MonoBehaviour {
         firstEventDictionary.Add(SimState.State4, firstEvents[3]);
         firstEventDictionary.Add(SimState.State5, firstEvents[4]);
         firstEventDictionary.Add(SimState.State6, firstEvents[5]);
-        firstEventDictionary.Add(SimState.State7, firstEvents[6]);
 
         // if we should ignore animations, remove them all from game
         if (!playAnimations)
