@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
 /// Manages how the question displays on the Info Board.
@@ -26,7 +27,8 @@ public class QuestionDisplayManager : MonoBehaviour {
     /// <summary>
     /// Intializes the question display manager.
     /// </summary>
-    void Awake () {
+    void Awake ()
+    {
         // If SubmitButton is not manually added, find it
         if (mySubmitButton == null)
             mySubmitButton = transform.Find("Submit Answer").gameObject;
@@ -48,7 +50,8 @@ public class QuestionDisplayManager : MonoBehaviour {
     /// Sets the total number of answers selected. Used by AnswerManager and AllOfTheAbove for multiple-choice questions.
     /// </summary>
     /// <param name="val">Value to which the total selected answers is set</param>
-    public void SetTotal(int val) {
+    public void SetTotal(int val)
+    {
         // Set the value, if within the limits
         if (val >= 0 && val <= answerObjects.Length)
             totalAnswersSelected = val;
@@ -64,7 +67,8 @@ public class QuestionDisplayManager : MonoBehaviour {
     /// Selects all the answers.
     /// </summary>
     /// <param name="select"></param>
-    public void SelectAll(bool select = true) {
+    public void SelectAll(bool select = true)
+    {
         foreach (AnswerManager ans in answerObjects) {
             // This method is more general, and lets us do it either way
             ans.selected = select;
@@ -76,7 +80,8 @@ public class QuestionDisplayManager : MonoBehaviour {
     /// Sets the answers and their individual texts.
     /// </summary>
     /// <param name="newAnswers"></param>
-	public void SetAnswers(Answer[] newAnswers) {
+	public void SetAnswers(Answer[] newAnswers)
+    {
         // Set the answer array to be equal to the new answers passed in
         myAnswers = newAnswers;
 
@@ -101,7 +106,8 @@ public class QuestionDisplayManager : MonoBehaviour {
     /// Of a new answer is selected, handle it appropriately.
     /// </summary>
     /// <param name="newAns"></param>
-    public void NewAnswerSelected (AnswerManager newAns) {
+    public void NewAnswerSelected (AnswerManager newAns)
+    {
         // If only one answer allowed, then cycle through and delect the other answers
         if (! myQuestion.GetComponent<QuestionEvent>().multipleAnswers) {
             // cycle through answers and deselect all but the new one
@@ -128,18 +134,22 @@ public class QuestionDisplayManager : MonoBehaviour {
     /// <summary>
     /// Checks to see if the currently-selected answer(s) is / are correct.
     /// </summary>
-    public void CheckAnswers() {
+    public void CheckAnswers()
+    {
         // Set the sumbit button (and select all button) to inactive
         mySubmitButton.SetActive(false);
         mySelectAll.SetActive(false);
-
-        if (myQuestion.openEnded) {
-          
+        
+        // If the question is open-ended...
+        if (myQuestion.openEnded)
+        {
             // find selected answers
             List <AnswerManager> thingsSelected = new List<AnswerManager>();
-            foreach (AnswerManager thisAnswer in answerObjects) {
+            foreach (AnswerManager thisAnswer in answerObjects)
+            {
                 // check to see if it's selected
-                if (thisAnswer.selected) {
+                if (thisAnswer.selected)
+                {
                     // add it to the list if so
                     thingsSelected.Add(thisAnswer);
                 }
@@ -147,34 +157,51 @@ public class QuestionDisplayManager : MonoBehaviour {
             // report back to the original question
             myQuestion.ReportAnswer(thingsSelected);
         }
+        // Else, the question is not open-ended...
         else {
             // Start by assuming that each answer selection is correct
             bool allIsWell = true;      // ...then work to disprove that notion
 
+            // Make a new answer list
+            List<AnswerManager> selectedAnswers = new List<AnswerManager>();
+            List<AnswerManager> correctAnswers = new List<AnswerManager>();
+
             // loop through all answers
             AnswerManager curAnswer;
-            for (int i = 0; i < answerObjects.Length; i++) {
+            for (int i = 0; i < answerObjects.Length; i++)
+            {
                 curAnswer = answerObjects[i].GetComponent<AnswerManager>();
+
+                // If this is a selected answer, add it to the list
+                if (curAnswer.selected)
+                {
+                    selectedAnswers.Add(curAnswer);
+                }
+
                 // check to see if it's selected-state (t/f) matches the isCorrect parameter of corresponding answer data
                 if (curAnswer.selected != curAnswer.isCorrect)
-                {  //...check for mismatch, !=
-                   // mismatch found, so all is not well... this question is wrong
-                   //  this could be a correct item skipped or a wrong item selected
+                {   //...check for mismatch, !=
+                    // mismatch found, so all is not well... this question is wrong
+                    //  this could be a correct item skipped or a wrong item selected
                     allIsWell = false;
                     // change highlight color to note that this particular selection was wrong
                     answerObjects[i].GetComponent<Text>().color = infoBoard.wrongColor;
                 }
+
                 // for correct answers, highlight them to denote correctness
                 if (curAnswer.isCorrect)
                 {
                     // note that this will over-write the "Wrong" color for skipped items that should have been selected
                     answerObjects[i].GetComponent<Text>().color = infoBoard.rightColor;
+
+                    // Add this to the list of correct answers
+                    correctAnswers.Add(curAnswer);
                 }
 
             }
 
             // once looping through all answers is done, report back to QuestionEvent
-            myQuestion.SubmitAnswer(allIsWell);
+            myQuestion.SubmitAnswer(allIsWell, selectedAnswers, correctAnswers);
         }
 
 	}

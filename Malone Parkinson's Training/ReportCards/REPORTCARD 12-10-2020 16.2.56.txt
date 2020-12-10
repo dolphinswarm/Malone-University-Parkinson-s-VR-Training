@@ -1,0 +1,4 @@
+TEST OCCURED ON 12/10/2020 4:02:56 PM
+0.) Pickup Event (3. Pick Up Cube)
+ - Elapsed Time: 4.37 seconds
+0.) Object Interation Event (5. Locate Targets)

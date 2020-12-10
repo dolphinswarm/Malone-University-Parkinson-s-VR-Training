@@ -1,0 +1,8 @@
+TEST OCCURED ON 12/10/2020 2:41:36 PM
+16.) Question Event (a. Check medicine contradiction)
+- Before medicating the patient, take a look at the PD medication on your clipboard. Is there anything noteworthy, and if so, what?: INCORRECT
+- Answer(s) selected:
+  - Conflicting meds.
+- Correct Answer(s):
+  - Diltazem CD
+  - Dosage method

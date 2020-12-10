@@ -8,7 +8,7 @@ using TMPro;
 /// </summary>
 [DisallowMultipleComponent]  // shouldn't have multiple event as components of the same gameObject
 public class InfoBoardEvent : MonoBehaviour {
-    // ======================================================== Variables
+    // =============================st=========================== Variables
     [Header("Info Board Interface")]
     public InfoBoardUI infoBoard;               // Which message board are we displaying to?
     [TextArea]
@@ -18,6 +18,7 @@ public class InfoBoardEvent : MonoBehaviour {
 
     [Header("Game Manager")]
     public GameManager gameManager;
+    public ReportCardManager reportCard;
 
     [Header("Event Properties")]
     public InfoBoardEvent nextEvent;            // should an event be triggered after this?
@@ -66,7 +67,8 @@ public class InfoBoardEvent : MonoBehaviour {
     /// <summary>
     /// On start of game, initialize this event.
     /// </summary>
-    void Start() {
+    void Start()
+    {
         // Call the intialize script
         Initialize();
     }
@@ -83,6 +85,16 @@ public class InfoBoardEvent : MonoBehaviour {
         // If game manager is not set, then set it
         if (gameManager == null)
             gameManager = FindObjectOfType<GameManager>(); // Should only be one GameManager
+        
+        // If game manager is not set, then set it
+        if (reportCard == null)
+        {
+            reportCard = FindObjectOfType<ReportCardManager>(); // Should only be one GameManager
+
+            // If still null, get it from the game manager
+            if (reportCard == null) reportCard = gameManager.reportCardManager;
+        }
+            
     }
 
     /// <summary>
@@ -124,7 +136,8 @@ public class InfoBoardEvent : MonoBehaviour {
     /// The alter Go method, which takes a parameter for tracking the event number. Called externally to start an event.
     /// </summary>
     /// <param name="prevEventNum">The previous event number</param>
-	public virtual void Go(int prevEventNum) {
+	public virtual void Go(int prevEventNum)
+    {
         Go(); // this needs to come before toggling useEventNum to true
         useEventNum = true;
 
@@ -136,7 +149,8 @@ public class InfoBoardEvent : MonoBehaviour {
     /// <summary>
     /// The default Go method, which takes no parameters. Called externally to start an event.
     /// </summary>
-    public virtual void Go() {
+    public virtual void Go()
+    {
         gameManager.currentEvent = this;
         useEventNum = false;
         isActive = true;
@@ -151,7 +165,8 @@ public class InfoBoardEvent : MonoBehaviour {
     /// <summary>
     /// Finish this event, and begin transition to next event.
     /// </summary>
-    public virtual void Finished() {
+    public virtual void Finished()
+    {
         // Wait until animation finishes playing
 
         // Mark this step as completed
@@ -168,7 +183,8 @@ public class InfoBoardEvent : MonoBehaviour {
         // probably should write data in each event, not here
         
         // Finally.... if there's another event after this, make it go
-        if (nextEvent != null) {
+        if (nextEvent != null)
+        {
             //Debug.Log("trying to start event: " + nextEvent.name);
             if (useEventNum) { nextEvent.Go(myEventNum); }  // or change nextEvent type to InfoBoardEvent
             else { nextEvent.Go(); }

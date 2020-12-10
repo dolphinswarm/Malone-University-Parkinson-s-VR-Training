@@ -17,9 +17,11 @@ public class ClickToNext : InteractiveText {
     /// <summary>
     /// Once this object is selected, advances the event.
     /// </summary>
-    protected override void Select() {
+    protected override void Select()
+    {
         // To prevent spam-clicking...
-        if (!finishedClicking) { 
+        if (!finishedClicking)
+        { 
             // Get current number in list
             int currentItemInList = informationEvent.currentIndex + 1;
 

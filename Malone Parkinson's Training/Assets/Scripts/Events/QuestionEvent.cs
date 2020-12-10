@@ -79,37 +79,37 @@ public class QuestionEvent : InfoBoardEvent
 
         // Print message to console
         Debug.Log("*** Starting + " + name + " (Question Event: Event #" + myEventNum + ")");
+
+        // Add a beginning line to the report card manager
+        if (reportCard != null && reportCard.shouldWriteToReportCard)
+            reportCard.writeLine(myEventNum + ".) Question Event (" + name + ")");
     }
 
     /// <summary>
     /// Marks an answer as sumbmitted, and prosses a list of open-ended answers.
     /// </summary>
     /// <param name="thingsSelected">A list of selected answers</param>
-    public void ReportAnswer(List<AnswerManager> thingsSelected) {
+    public void ReportAnswer(List<AnswerManager> thingsSelected)
+    {
         // we've been notified that an answer was given, as a selected list
         // These will be special cases... let's pass them on.
         GetComponent<OpenEndedQuestion>().ProcessAnswers(thingsSelected);
 
         // Submit this answer as "correct" and move on (can't get open-ended questions wrong)
-        SubmitAnswer(true);
+        SubmitAnswer(true, thingsSelected, new List<AnswerManager>());
     }
 
     /// <summary>
     /// Handles whether a question has been answered correctly / incorrectly.
     /// </summary>
     /// <param name="answerIsCorrect"></param>
-    public void SubmitAnswer(bool answerIsCorrect) {
+    public void SubmitAnswer(bool answerIsCorrect, List<AnswerManager> thingsSelected, List<AnswerManager> correctAnswers)
+    {
 		// save right/wrong state
 		completedCorrectly = answerIsCorrect;
 
         // Set this question to answered
         hasBeenSubmitted = true;
-
-        // empty string for writing to log file
-        string outString = "";
-
-        // Get the report card, if used
-        //gameManager.reportCard;
 
         // If we answered correctly...
         if (answerIsCorrect) {
@@ -125,18 +125,22 @@ public class QuestionEvent : InfoBoardEvent
             // Play the sfx and narration
             StartCoroutine(PlayProperSoundAndNarration(correctSFX, correctNarration));
 
-            // write appropriate entry to the logfile here
-            //outString += myEventNum.ToString() + "\t";
-            //outString += questionText + "\t";
-            //outString += "CORRECT";
-            //outString += "#";
+            // If report card is used, write a line
+            if (reportCard != null && reportCard.isActiveAndEnabled)
+            {
+                // write appropriate entry to the logfile here
+                reportCard.writeLine(" - QUESTION: " + questionText);
+                reportCard.writeLine(" - ANSWERED CORRECTLY!");
+                reportCard.writeLine(" - Answer(s) selected:");
+                foreach (AnswerManager answer in thingsSelected)
+                {
+                    reportCard.writeLine("   - " + answer.answerText);
+                }
 
-            //// INCREMENT SCORE HERE????
-            //// If report card is used, write a line
-            //if (reportCard != null && reportCard.isActiveAndEnabled)
-            //{
-            //    reportCard.writeLine(outString);
-            //}
+                // Add the scores
+                reportCard.currentScore += 1;
+                reportCard.totalScore += 1;
+            }
 
         }
         else {
@@ -151,19 +155,31 @@ public class QuestionEvent : InfoBoardEvent
             // Play the sfx and narration
             StartCoroutine(PlayProperSoundAndNarration(wrongSFX, wrongNarration));
 
-            // write appropriate entry to the logfile here
-            //outString += myEventNum.ToString() + "\t";
-            //outString += questionText + "\t";
-            //outString += "INCORRECT" + "\t";
-            //outString += "Answer given???" + "\t";
-            //outString += redirectionText;
-            //outString += "#";
+            // If report card is used, write a line
+            if (reportCard != null && reportCard.isActiveAndEnabled)
+            {
+                // write appropriate entry to the logfile here
+                reportCard.writeLine(" - QUESTION: " + questionText);
+                reportCard.writeLine(" - ANSWERED INCORRECTLY!");
+                reportCard.writeLine(" - Answer(s) selected:");
+                foreach (AnswerManager answer in thingsSelected)
+                {
+                    reportCard.writeLine("   - " + answer.answerText);
+                }
+                if (correctAnswers.Count > 0)
+                {
+                    reportCard.writeLine("- Correct Answer(s):");
+                    foreach (AnswerManager answer in correctAnswers)
+                    {
+                        reportCard.writeLine("   - " + answer.answerText);
+                    }
+                }
 
-            //// If report card is used, write a line
-            //if (reportCard != null && reportCard.isActiveAndEnabled)
-            //{
-            //    reportCard.writeLine(outString);
-            //}
+                // Add the scores
+                reportCard.currentScore += correctAnswers.Count / thingsSelected.Count;
+                reportCard.totalScore += 1;
+
+            }
         }           
 	}
 
@@ -175,6 +191,10 @@ public class QuestionEvent : InfoBoardEvent
     /// <returns></returns>
     IEnumerator PlayProperSoundAndNarration(AudioClip sfx, AudioClip narration)
     {
+        // Record the ending time
+        if (reportCard != null && reportCard.shouldWriteToReportCard)
+            reportCard.writeLine(" - Elapsed Time: " + System.Math.Round(Time.time - startTime, 2) + " seconds");
+
         // Play the proper audio clip
         infoBoard.GetComponent<AudioSource>().PlayOneShot(sfx);
 

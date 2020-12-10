@@ -40,7 +40,8 @@ public class DestinationEvent : InfoBoardEvent {
     /// <summary>
     /// On event completion...
     /// </summary>
-    public override void Clicked() {
+    public override void Clicked()
+    {
         // Log stuff to file here
         base.Clicked();
     }
@@ -49,9 +50,15 @@ public class DestinationEvent : InfoBoardEvent {
     /// Tells this event to begin.
     /// </summary>
     /// <param name="prevEventNum"></param>
-    public override void Go(int prevEventNum) {
+    public override void Go(int prevEventNum)
+    {
         // Print message to console
         Debug.Log("Starting Destination Event: Event #" + prevEventNum);
+
+        // Print to the report card manager
+        if (reportCard != null && reportCard.shouldWriteToReportCard)
+            reportCard.writeLine(myEventNum + ".) Destination Event (" + name + ")");
+
 
         // Re-enable the destination trigger
         destinationTrigger.enabled = true;
@@ -81,7 +88,12 @@ public class DestinationEvent : InfoBoardEvent {
     /// <summary>
     /// Tells this event to finish and become deactivated.
     /// </summary>
-    public override void Finished() {
+    public override void Finished()
+    {
+        // Record the ending time
+        if (reportCard != null && reportCard.shouldWriteToReportCard)
+            reportCard.writeLine(" - Elapsed Time: " + System.Math.Round(Time.time - startTime, 2) + " seconds");
+
         // Turn off particles
         particles.Stop();
 

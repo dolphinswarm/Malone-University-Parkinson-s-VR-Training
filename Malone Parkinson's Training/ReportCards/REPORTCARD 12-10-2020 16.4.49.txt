@@ -1,0 +1,33 @@
+=========================
+TEST OCCURED ON 12/10/2020 4:04:49 PM
+=========================
+
+0.) Pickup Event (3. Pick Up Cube)
+ - Elapsed Time: 17.87 seconds
+0.) Object Interation Event (5. Locate Targets)
+ - Elapsed Time: 10.61 seconds
+0.) Microphone Event (6. Microphone Test)
+ - Elapsed Time: 5.52 seconds
+0.) Question Event (7. Sample Question)
+ - Elapsed Time: 3.07 seconds
+ - QUESTION: Lastly, let's have you answer some sample questions to get used to the Info Board. Which of the following are US states?
+ - ANSWERED INCORRECTLY!
+ - Answer(s) selected:
+   - Wyoming
+- Correct Answer(s):
+   - Ohio
+   - California
+   - Wyoming
+0.) Pickup Event (8. Pick Up Clipboard)
+ - Elapsed Time: 5.31 seconds
+0.) Button Event (a. Open Clipboard)
+ - Elapsed Time: 8.33 seconds
+0.) Button Event (b. Close Clipboard)
+ - Elapsed Time: 5.57 seconds
+0.) Button Event (a. Click to Start)
+ - Elapsed Time: 3.93 seconds
+4.) Button Event (3. Review HCP Orders)
+ - Elapsed Time: 0.61 seconds
+5.) Object Interation Event (a. Activate Soap)
+ - Elapsed Time: 9.52 seconds
+6.) Object Interation Event (b. Turn on Sink)

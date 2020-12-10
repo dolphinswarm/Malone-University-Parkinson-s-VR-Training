@@ -17,10 +17,21 @@ public class OVRHapticsManager : MonoBehaviour
             gameManager = FindObjectOfType<GameManager>(); // Should only be one GameManager
 
         // Set the hand in the game manager
-        if (leftHand)
-            gameManager.leftHandOVRHaptics = this;
+        if (gameManager != null)
+        {
+            if (leftHand)
+                gameManager.leftHandOVRHaptics = this;
+            else
+                gameManager.rightHandOVRHaptics = this;
+        }
         else
-            gameManager.rightHandOVRHaptics = this;
+        {
+            if (leftHand)
+                FindObjectOfType<TitleScreenManager>().leftHandOVRHaptics = this;
+            else
+                FindObjectOfType<TitleScreenManager>().rightHandOVRHaptics = this;
+        }
+
     }
 
     /// <summary>

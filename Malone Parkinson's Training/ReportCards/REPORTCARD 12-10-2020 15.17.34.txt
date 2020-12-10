@@ -1,0 +1,27 @@
+TEST OCCURED ON 12/10/2020 3:17:34 PM
+0.) Pickup Event (3. Pick Up Cube)
+ - Elapsed Time: 10.66667 seconds
+1.) Object Interation Event (5. Locate Targets)
+ - Elapsed Time: 6.077778 seconds
+2.) Microphone Event (6. Microphone Test)
+ - Elapsed Time: 4.700001 seconds
+0.) Question Event (7. Sample Question)
+ - Elapsed Time: 4.200001 seconds
+ - Lastly, let's have you answer some sample questions to get used to the Info Board. Which of the following are US states?: INCORRECT
+ - Answer(s) selected:
+   - Ohio
+   - California
+   - Germany
+   - Wyoming
+- Correct Answer(s):
+   - Ohio
+   - California
+   - Wyoming
+0.) Pickup Event (8. Pick Up Clipboard)
+ - Elapsed Time: 7.339176 seconds
+0.) Button Event (a. Open Clipboard)
+ - Elapsed Time: 4 seconds
+0.) Button Event (b. Close Clipboard)
+ - Elapsed Time: 10.1 seconds
+0.) Button Event (a. Click to Start)
+ - Elapsed Time: 5.544441 seconds

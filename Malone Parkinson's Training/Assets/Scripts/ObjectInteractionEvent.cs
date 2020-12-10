@@ -121,6 +121,10 @@ public class ObjectInteractionEvent : InfoBoardEvent
         // Print message to console
         Debug.Log("*** Starting + " + name + " (Interaction Event: Event #" + myEventNum + ")");
 
+        // Add a beginning line to the report card manager
+        if (reportCard != null && reportCard.shouldWriteToReportCard)
+            reportCard.writeLine(myEventNum + ".) Object Interation Event (" + name + ")");
+
     }
 
     /// <summary>
@@ -162,6 +166,10 @@ public class ObjectInteractionEvent : InfoBoardEvent
     /// </summary>
     public override void Finished()
     {
+        // Record the ending time
+        if (reportCard != null && reportCard.shouldWriteToReportCard)
+            reportCard.writeLine(" - Elapsed Time: " + System.Math.Round(Time.time - startTime, 2) + " seconds");
+
         // Disable each interactive object
         foreach (GameObject interactiveObject in interactionObjects)
         {

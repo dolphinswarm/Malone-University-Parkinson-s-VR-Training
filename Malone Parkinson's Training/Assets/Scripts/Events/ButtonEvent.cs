@@ -61,6 +61,10 @@ public class ButtonEvent : InfoBoardEvent
 
         // Print message to console
         Debug.Log("*** Starting + " + name + " (Button Event: Event #" + myEventNum + ")");
+
+        // Add a beginning line to the report card manager
+        if (reportCard != null && reportCard.shouldWriteToReportCard)
+            reportCard.writeLine(myEventNum + ".) Button Event (" + name + ")");
     }
 
     /// <summary>
@@ -77,6 +81,10 @@ public class ButtonEvent : InfoBoardEvent
     /// </summary>
     public override void Finished()
     {
+        // Record the ending time
+        if (reportCard != null && reportCard.shouldWriteToReportCard)
+            reportCard.writeLine(" - Elapsed Time: " + System.Math.Round(Time.time - startTime, 2) + " seconds");
+
         base.Finished();
     }
 

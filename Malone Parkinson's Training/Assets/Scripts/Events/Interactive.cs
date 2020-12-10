@@ -85,7 +85,7 @@ public class Interactive : MonoBehaviour {
     protected virtual void OnMouseEnter() 
     { 
         // If not highlighted, highlight
-        if (!isHighlighted && gameManager.controlType == ControlType.MOUSE_KEYBOARD && isCurrentlyInteractable)
+        if (!isHighlighted && ((gameManager != null && gameManager.controlType == ControlType.MOUSE_KEYBOARD) || !OVRManager.isHmdPresent) && isCurrentlyInteractable)
         {
             Highlight(); 
             isHighlighted = true;
@@ -101,7 +101,7 @@ public class Interactive : MonoBehaviour {
     protected virtual void OnMouseExit()
     {
         // If not highlighted, dim
-        if (isHighlighted && gameManager.controlType == ControlType.MOUSE_KEYBOARD && isCurrentlyInteractable)
+        if (isHighlighted && ((gameManager != null && gameManager.controlType == ControlType.MOUSE_KEYBOARD) || !OVRManager.isHmdPresent) && isCurrentlyInteractable)
         {
             Dim();
             isHighlighted = false;

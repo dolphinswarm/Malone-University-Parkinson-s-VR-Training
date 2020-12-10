@@ -388,6 +388,7 @@
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\InformationEvent.cs" />
     <Compile Include="Assets\Scripts\InteractiveObject.cs" />
+    <Compile Include="Assets\Scripts\InteractiveUIButton.cs" />
     <Compile Include="Assets\Scripts\IVScript.cs" />
     <Compile Include="Assets\Scripts\LocatorEvent.cs" />
     <Compile Include="Assets\Scripts\LocatorObject.cs" />
@@ -399,6 +400,7 @@
     <Compile Include="Assets\Scripts\PointObjectAtEvent.cs" />
     <Compile Include="Assets\Scripts\ReverseNormals.cs" />
     <Compile Include="Assets\Scripts\RoomOrganizationEvent.cs" />
+    <Compile Include="Assets\Scripts\TitleScreenManager.cs" />
     <Compile Include="Assets\Scripts\Utility\AdjustCharecterHeight.cs" />
     <Compile Include="Assets\Scripts\Utility\AlwaysShowCursor.cs" />
     <Compile Include="Assets\Scripts\Utility\AnimationActionContainer.cs" />

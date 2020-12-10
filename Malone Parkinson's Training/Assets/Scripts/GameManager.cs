@@ -163,9 +163,19 @@ public class GameManager : MonoBehaviour {
         if (skipControlChoose)
         {
             // Set control types
-            controlType = ControlType.OCULUS;
-            dominantHand = DominantHand.RIGHT;
-            ovrController.SetActive(true);
+            if (OVRManager.isHmdPresent)
+            {
+                controlType = ControlType.OCULUS;
+                dominantHand = DominantHand.RIGHT;
+                ovrController.SetActive(true);
+            }
+            else
+            {
+                controlType = ControlType.MOUSE_KEYBOARD;
+            }
+
+
+
 
             // Proceed to title screen
             FinishSimulationSetup();
