@@ -1,9 +1,0 @@
-TEST OCCURED ON 12/10/2020 3:08:09 PM
-0.) Event PRE. Tutorial
- - Elapsed Time: 0 seconds
-0.) Event FADE IN
- - Elapsed Time: 3.001709 seconds
-0.) Event a. Interact w/ Button
- - Elapsed Time: 50.33992 seconds
-0.) Event b. Information
- - Elapsed Time: 0.6583748 seconds
