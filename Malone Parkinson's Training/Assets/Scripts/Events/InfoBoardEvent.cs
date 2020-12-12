@@ -85,7 +85,7 @@ public class InfoBoardEvent : MonoBehaviour {
         // If game manager is not set, then set it
         if (gameManager == null)
             gameManager = FindObjectOfType<GameManager>(); // Should only be one GameManager
-        
+
         // If game manager is not set, then set it
         if (reportCard == null)
         {

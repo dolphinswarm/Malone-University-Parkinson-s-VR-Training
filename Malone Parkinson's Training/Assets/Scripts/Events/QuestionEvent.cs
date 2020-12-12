@@ -176,7 +176,7 @@ public class QuestionEvent : InfoBoardEvent
                 }
 
                 // Add the scores
-                reportCard.currentScore += correctAnswers.Count / thingsSelected.Count;
+                reportCard.currentScore += correctAnswers.Count / Math.Max(thingsSelected.Count, 1);
                 reportCard.totalScore += 1;
 
             }

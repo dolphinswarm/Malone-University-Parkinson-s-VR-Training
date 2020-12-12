@@ -166,7 +166,6 @@ public class GameManager : MonoBehaviour {
             if (OVRManager.isHmdPresent)
             {
                 controlType = ControlType.OCULUS;
-                dominantHand = DominantHand.RIGHT;
                 ovrController.SetActive(true);
             }
             else
@@ -174,11 +173,35 @@ public class GameManager : MonoBehaviour {
                 controlType = ControlType.MOUSE_KEYBOARD;
             }
 
+            // If we also want to skip the hand selection...
+            if (skipHandSelection)
+            {
+                // Choose right hand by default
+                dominantHand = DominantHand.RIGHT;
+
+                // Proceed to title screen
+                FinishSimulationSetup();
+            }
+            // Else, show it
+            else
+            {
+                // Find the needed components
+                settingsText = GameObject.Find("Settings Text");
+                ovrButton = GameObject.Find("Oculus Button");
+                mouseButton = GameObject.Find("Mouse and Keyboard Button");
+                leftButton = GameObject.Find("Left Hand Button");
+                rightButton = GameObject.Find("Right Hand Button");
+
+                // Set the components
+                settingsText.GetComponent<Text>().text = "Select your dominant hand:";
+                ovrButton.SetActive(false);
+                mouseButton.SetActive(false);
+                leftButton.SetActive(true);
+                rightButton.SetActive(true);
+            }
 
 
 
-            // Proceed to title screen
-            FinishSimulationSetup();
         }
 
         // Else, get the UI elements and wait until a button is selected
