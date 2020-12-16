@@ -159,6 +159,9 @@ public class GameManager : MonoBehaviour {
             audioPlayer.loop = true;
         }
 
+        // Make the cursor visible
+        HideCursor(false);
+
         // Set the default control type and dominant hand, if skipped
         if (skipControlChoose)
         {
