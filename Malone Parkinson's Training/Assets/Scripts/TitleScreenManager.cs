@@ -15,6 +15,9 @@ public class TitleScreenManager : MonoBehaviour
     public OVRHapticsManager rightHandOVRHaptics;
     public OVRScreenFade screenFade;
 
+    [Header("Music")]
+    public AudioSource music;
+
     // ======================================================== Methods
     /// <summary>
     /// On game start...
@@ -34,6 +37,13 @@ public class TitleScreenManager : MonoBehaviour
             genericTitleSceenCamera.SetActive(true);
             screenFade = genericTitleSceenCamera.GetComponentInChildren<OVRScreenFade>();
         }
+
+        // Start the music
+        if (music == null)
+            music = GetComponent<AudioSource>();
+
+        music.loop = true;
+        music.Play();
     }
 
     /// <summary>
@@ -76,5 +86,13 @@ public class TitleScreenManager : MonoBehaviour
 
         // Load the main game scene
         SceneManager.LoadScene("Main Scene");
+    }
+
+    /// <summary>
+    /// Stops the music.
+    /// </summary>
+    public void StopMusic()
+    {
+        music.Stop();
     }
 }

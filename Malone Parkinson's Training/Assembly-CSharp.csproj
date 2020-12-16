@@ -390,6 +390,7 @@
     <Compile Include="Assets\Scripts\InteractiveObject.cs" />
     <Compile Include="Assets\Scripts\InteractiveUIButton.cs" />
     <Compile Include="Assets\Scripts\IVScript.cs" />
+    <Compile Include="Assets\Scripts\LIWSScript.cs" />
     <Compile Include="Assets\Scripts\LocatorEvent.cs" />
     <Compile Include="Assets\Scripts\LocatorObject.cs" />
     <Compile Include="Assets\Scripts\MyMouseLook.cs" />

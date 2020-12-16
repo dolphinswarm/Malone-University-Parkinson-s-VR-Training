@@ -7,10 +7,15 @@ public class InteractiveUIButton : Interactive
 {
     // ======================================================== Properties
     [Header("Button Properties")]
-    Button button;                      // The button for this object.
+    public Button button;                      // The button for this object.
+
+    [Header("Audio")]
+    public AudioClip selectClip;
+    public AudioClip highlightClip;
 
     [Header("Management")]
-    TitleScreenManager titleScreenManager;
+    public TitleScreenManager titleScreenManager;
+    bool pressed = false;
 
     // ======================================================== Methods
     /// <summary>
@@ -24,7 +29,7 @@ public class InteractiveUIButton : Interactive
 
         // Add a button, if not already set
         if (button == null)
-            button = gameObject.GetComponent<Button>();
+            button = GetComponent<Button>();
 
         // Set the events for highlighting, clicking, etc.
         //button.OnSelect(Highlight());
@@ -35,6 +40,7 @@ public class InteractiveUIButton : Interactive
     /// </summary>
     protected override void Highlight()
     {
+        if (highlightClip != null) AudioSource.PlayClipAtPoint(highlightClip, transform.position);
         button.Select();
     }
 
@@ -51,7 +57,13 @@ public class InteractiveUIButton : Interactive
     /// </summary>
     protected override void Select()
     {
-        button.onClick.Invoke();
+        if (!pressed)
+        {
+            button.onClick.Invoke();
+            titleScreenManager.StopMusic();
+            if (selectClip != null) AudioSource.PlayClipAtPoint(selectClip, transform.position);
+            pressed = true;
+        }
     }
 
 

@@ -127,7 +127,15 @@ public class Interactive : MonoBehaviour {
         {
             Highlight();
             isHighlighted = true;
-            if (!requireClick) Select();
+            if (!requireClick)
+            {
+                if (other.gameObject.name.ToLower().Contains("left"))
+                    gameManager.mostRecentHandUsed = DominantHand.LEFT;
+                else if (other.gameObject.name.ToLower().Contains("right"))
+                    gameManager.mostRecentHandUsed = DominantHand.RIGHT;
+
+                Select();
+            }
         }
     }
 
@@ -156,9 +164,16 @@ public class Interactive : MonoBehaviour {
         if ((matchTag && other.gameObject.CompareTag(requiredTag) || !matchTag) && isCurrentlyInteractable)
         {
             // If we haven't been clicked and we receive the appropriate input button, toggle
-            if (Input.GetButtonDown("Fire1") || OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger) ||
-                OVRInput.GetDown(OVRInput.RawButton.LIndexTrigger))
+            if (Input.GetButtonDown("Fire1") || OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger) || OVRInput.GetDown(OVRInput.RawButton.LIndexTrigger))
+            {
+                if (OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
+                    gameManager.mostRecentHandUsed = DominantHand.RIGHT;
+                else if (OVRInput.GetDown(OVRInput.RawButton.LIndexTrigger))
+                    gameManager.mostRecentHandUsed = DominantHand.LEFT;
+
                 Select();
+            }
+
         }
     }
 
@@ -176,7 +191,15 @@ public class Interactive : MonoBehaviour {
         {
             Highlight();
             isHighlighted = true;
-            if (!requireClick) Select();
+            if (!requireClick)
+            {
+                if (other.gameObject.name.ToLower().Contains("left"))
+                    gameManager.mostRecentHandUsed = DominantHand.LEFT;
+                else if (other.gameObject.name.ToLower().Contains("right"))
+                    gameManager.mostRecentHandUsed = DominantHand.RIGHT;
+
+                Select();
+            }
         }
     }
 
@@ -205,9 +228,15 @@ public class Interactive : MonoBehaviour {
         if ((matchTag && other.gameObject.CompareTag(requiredTag) || !matchTag) && isCurrentlyInteractable)
         {
             // If we haven't been clicked and we receive the appropriate input button, toggle
-            if (Input.GetButtonDown("Fire1") || OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger) ||
-                OVRInput.GetDown(OVRInput.RawButton.LIndexTrigger))
+            if (Input.GetButtonDown("Fire1") || OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger) || OVRInput.GetDown(OVRInput.RawButton.LIndexTrigger))
+            {
+                if (OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
+                    gameManager.mostRecentHandUsed = DominantHand.RIGHT;
+                else if (OVRInput.GetDown(OVRInput.RawButton.LIndexTrigger))
+                    gameManager.mostRecentHandUsed = DominantHand.LEFT;
+
                 Select();
+            }
         }
     }
 }

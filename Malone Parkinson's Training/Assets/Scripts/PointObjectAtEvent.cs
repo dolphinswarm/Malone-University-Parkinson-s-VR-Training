@@ -123,6 +123,39 @@ public class PointObjectAtEvent : InfoBoardEvent
         // If the script is active...
         if (isActive)
         {
+            // If we have a mouse and keyboard controller, wait check if we
+            if (gameManager.controlType == ControlType.MOUSE_KEYBOARD)
+            {
+                foreach (PointAtObject pointObject in objectsToPointAt)
+                {
+                    // Calculate the vector between the two
+                    Vector3 vector = gameManager.mouseController.transform.position - pointerObject.transform.position;
+
+                    // Find the distance and angle
+                    float dist = vector.magnitude;
+                    float angle = Vector3.Dot(vector.normalized, gameManager.mouseController.transform.forward);
+
+                    // Check distance and angles. If good...
+                    if (dist <= minDistance && angle >= anglePrecision)
+                    {
+                        // Increment the time
+                        pointObject.SetTime(pointObject.GetTime() + Time.deltaTime);
+
+                        // If time is sufficient, mark as good
+                        if (pointObject.GetTime() >= pointObject.pointAtDuration)
+                        {
+                            // If we require a button press and the key is down, activate
+                            if ((requireButtonPress && (Input.GetKeyDown(keyButton) || OVRInput.GetDown(oVRButton))) || !requireButtonPress)
+                            {
+                                pointObject.hasBeenPointedAt = true;
+                                Clicked();
+                            }
+                        }
+                    }
+                }
+                return;
+            }
+
             // For each gameobject...
             foreach (PointAtObject pointObject in objectsToPointAt)
             {

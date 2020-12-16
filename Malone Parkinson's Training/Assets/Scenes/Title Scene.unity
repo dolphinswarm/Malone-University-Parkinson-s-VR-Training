@@ -781,6 +781,7 @@ MonoBehaviour:
   leftHandOVRHaptics: {fileID: 0}
   rightHandOVRHaptics: {fileID: 0}
   screenFade: {fileID: 0}
+  music: {fileID: 121439444}
 --- !u!4 &121439443
 Transform:
   m_ObjectHideFlags: 0
@@ -1231,6 +1232,10 @@ MonoBehaviour:
   hideBeforeEvent: 0
   hideAfterInteraction: 0
   requireClick: 1
+  button: {fileID: 0}
+  selectClip: {fileID: 8300000, guid: bbc02359bdfd1534ca2a7a502b85b04e, type: 3}
+  highlightClip: {fileID: 8300000, guid: 1bd7346c13679af418bf8c4cf5e60f30, type: 3}
+  titleScreenManager: {fileID: 0}
 --- !u!1 &221148128 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7692437531602960969, guid: 34548dce79e55b4468fa9becacdb36ac,
@@ -2391,6 +2396,10 @@ MonoBehaviour:
   hideBeforeEvent: 0
   hideAfterInteraction: 0
   requireClick: 1
+  button: {fileID: 0}
+  selectClip: {fileID: 8300000, guid: bbc02359bdfd1534ca2a7a502b85b04e, type: 3}
+  highlightClip: {fileID: 8300000, guid: 1bd7346c13679af418bf8c4cf5e60f30, type: 3}
+  titleScreenManager: {fileID: 0}
 --- !u!65 &566995774
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5300,7 +5309,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1449745426}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -6.65, y: 1.8000002, z: 6.97}
+  m_LocalPosition: {x: -5.08, y: 1.8000002, z: 6.97}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 112034328}

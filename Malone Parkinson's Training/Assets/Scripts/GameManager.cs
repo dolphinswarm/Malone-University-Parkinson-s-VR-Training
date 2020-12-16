@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour {
     public GameObject tutorialParentEvent;                      // The event which houses the tutorial stuff.
     public OVRScreenFade screenFader;                           // Oculus screen fade script
     public bool playAnimations = true;                          // Should we play animations?
-
+    public DominantHand mostRecentHandUsed = DominantHand.RIGHT;
 
     [Header("Clipboard and Scoring Mangaing")]
     public GameObject clipboardUI;                              // The clipboard object for the camera.

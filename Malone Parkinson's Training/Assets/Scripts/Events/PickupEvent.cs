@@ -48,7 +48,8 @@ public class PickupEvent : InfoBoardEvent
     /// When the event should go...
     /// </summary>
     /// <param name="prevEventNum"></param>
-    public override void Go(int prevEventNum) {
+    public override void Go(int prevEventNum)
+    {
         // Show the object
         pickupObject.SetActive(true);
 

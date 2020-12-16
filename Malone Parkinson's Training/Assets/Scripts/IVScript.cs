@@ -99,20 +99,34 @@ public class IVScript : EndActivate
     /// Sets the value of the IV to a given number.
     /// </summary>
     /// <param name="num"></param>
-    public void setIVValue(int num)
+    public void SetIVValue(int num)
     {
-        ivValue = num;
-        iVLabel.text = ivValue + " ml/hr";
+        if (num == 0)
+        {
+            iVLabel.text = "OFF";
+        }
+        else
+        {
+            ivValue = num;
+            iVLabel.text = ivValue + " ml/hr";
+        }
     }
     
     /// <summary>
     /// Sets the value of the NGT to a given number.
     /// </summary>
     /// <param name="num"></param>
-    public void setNGTValue(int num)
+    public void SetNGTValue(int num)
     {
-        ngtValue = num;
-        nGTLabel.text = ngtValue + " ml/hr";
+        if (num == 0)
+        {
+            nGTLabel.text = "OFF";
+        }
+        else
+        {
+            ngtValue = num;
+            nGTLabel.text = ngtValue + " ml/hr";
+        }
     }
 
 

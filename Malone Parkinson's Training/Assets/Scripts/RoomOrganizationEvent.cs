@@ -126,9 +126,9 @@ public class RoomOrganizationEvent : InfoBoardEvent
         {
             IVScript machine = FindObjectOfType<IVScript>();
 
-            if (alterIV) machine.setIVValue(iVValue);
+            if (alterIV) machine.SetIVValue(iVValue);
             
-            if (alterNGT) machine.setNGTValue(nGTValue);
+            if (alterNGT) machine.SetNGTValue(nGTValue);
         }
 
         // Immediately call finished
