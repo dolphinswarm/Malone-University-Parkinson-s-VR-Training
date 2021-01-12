@@ -14,7 +14,7 @@ public enum ObjectType { PICKUP, TOUCH, POINTAT, HANDS_BELOW };
 /// An enumeration to determine the type of interactive object.
 /// </summary>
 [System.Serializable]
-public enum HighlightType { BODY_DISTANCE, HAND_DISTANCE, LOOKAT, POINTAT, RETICLE_OVER, ALWAYS, NEVER };
+public enum HighlightType { BODY_DISTANCE, HAND_DISTANCE, LOOKAT, POINTAT, RETICLE_OVER, ALWAYS, FLICKER, NEVER };
 
 /// <summary>
 /// The class for a generic interactive object.
@@ -35,6 +35,7 @@ public class InteractiveObject : Interactive
     public HighlightType highlightType;                     // How should this object be highlit?
     [Range(0.0f, 25.0f)]
     public float highlightDistance = 10.0f;                 // The highlight distance.
+    private float duration = 2.0f;
 
 
     [Header("Animation Properties")]
@@ -136,7 +137,23 @@ public class InteractiveObject : Interactive
             {
                 Highlight();
             }
-            // Else, if always, highlight
+            // Else, if flicker, calculate the highlight
+            else if (highlightType == HighlightType.FLICKER)
+            {
+                // Calculate the time
+                float lerp = Mathf.PingPong(Time.time, duration) / duration;
+
+                // Check all the renderers attached to this object and its children
+                foreach (Renderer renderer in GetComponentsInChildren<Renderer>())
+                {
+                    // For each material...
+                    foreach(Material material in objectMaterials[renderer.GetHashCode()])
+                    {
+                        renderer.material.Lerp(material, highlightMaterial, lerp);
+                    }
+                }
+            }
+            // Else, if always, calculate the highlight
             else if (highlightType == HighlightType.ALWAYS)
             {
                 Highlight();
@@ -200,6 +217,12 @@ public class InteractiveObject : Interactive
         foreach (Renderer renderer in GetComponentsInChildren<Renderer>())
         {
             renderer.materials = objectMaterials[renderer.GetHashCode()];
+
+            // For each material...
+            foreach (Material material in objectMaterials[renderer.GetHashCode()])
+            {
+                renderer.material.Lerp(material, highlightMaterial, 0);
+            }
         }
     }
 
@@ -211,6 +234,9 @@ public class InteractiveObject : Interactive
         // If we have an owning event AND we can currently interact with this object...
         if (owningEvent != null && isCurrentlyInteractable)
         {
+            // Dim the highlight
+            Dim();
+
             // If we have an animator and an animation name, pass them to the owning event
             if (animator != null && animationName != "")
                 owningEvent.SetAnimation(animator, animationName);

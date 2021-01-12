@@ -32,6 +32,7 @@ public class InfoBoardEvent : MonoBehaviour {
     public float delayBeforeAdvance;            // The duration before starting the next event
     public bool isTutorialEvent = false;        // This is event a tutorial event?
     public bool playJingle = true;              // Should we play the jingle upon completion?
+    public bool skipIfNoVRDetected = false;     // Should we skip if no VR is detected?
 
     [Header("Animation Properties")]
     public ParticleSystem particleSystemForAnimation;   // A particle system used by the success animation. ALWAYS IN THIS OBJECT

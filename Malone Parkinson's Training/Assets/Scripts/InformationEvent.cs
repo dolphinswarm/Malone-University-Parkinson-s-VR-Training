@@ -38,6 +38,9 @@ public class InformationEvent : InfoBoardEvent
     /// <param name="prevEventNum"></param>
     public override void Go(int prevEventNum)
     {
+        // If we should skip due to lack of VR, then do so
+        if (skipIfNoVRDetected && !OVRManager.isHmdPresent) nextEvent.Go();
+
         // If nothing is in the list...
         if (infoTextList.Count == 0)
         {

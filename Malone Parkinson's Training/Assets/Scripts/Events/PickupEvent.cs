@@ -13,6 +13,7 @@ public class PickupEvent : InfoBoardEvent
     public ParticleSystem particles;
     public List<GameObject> stuffToHideOnPickup;
     public bool placeInMainHand = true;
+    public bool useSpecialTrigger = false;
 
     [Header("Transform Properties")]
     public bool useSpecialInstructions = false;
@@ -190,6 +191,9 @@ public class PickupEvent : InfoBoardEvent
         // Turn off particles
         if (particles != null)
             particles.Stop();
+
+        // If we have a special trigger, use it
+        if (useSpecialTrigger) gameManager.CallTrigger(name);
 
         // Call base clicked
         base.Clicked();

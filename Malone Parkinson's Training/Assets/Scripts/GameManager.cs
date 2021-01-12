@@ -82,7 +82,9 @@ public class GameManager : MonoBehaviour {
 
     [Header("Clipboard and Scoring Mangaing")]
     public GameObject clipboardUI;                              // The clipboard object for the camera.
+    public GameObject clipboardObject;                          // The clipboard object for the camera.
     public ClipboardScript clipboardText;                       // The script for getting / changing clipboard information.
+    public DominantHand clipboardHand = DominantHand.RIGHT;     // The hand the keyboard is in.
     public OVRInput.RawButton targetButtonType;                 // The OVR button type to check for.
     public KeyCode targetKey;                                   // The keyboard type to check for.
     public ReportCardManager reportCardManager;                 // The report card manager, for collecting user metrics
@@ -94,6 +96,7 @@ public class GameManager : MonoBehaviour {
     private GameObject mouseButton;
     private GameObject leftButton;
     private GameObject rightButton;
+    private bool canUseClipboard = true;
 
     // ======================================================== Methods
     /// <summary>
@@ -220,6 +223,18 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Uses a special trigger event.
+    /// </summary>
+    /// <param name="eventName">The name of the calling event</param>
+    public void CallTrigger(string eventName)
+    {
+        if (eventName == "8. Pick Up Clipboard")
+        {
+            canUseClipboard = true;
+        }
+    }
+
     // ---------- BUTTON SCRIPTS ----------
     /// <summary>
     /// Method for the buttons to select Oculus controls.
@@ -338,11 +353,13 @@ public class GameManager : MonoBehaviour {
             interactiveObject.SetCameraPos(cameraTransform);
 
         // Set the clipboard properties
-        clipboardUI.transform.parent = Camera.main.transform;
-        clipboardUI.GetComponentInChildren<Canvas>().worldCamera = Camera.main;
-        clipboardUI.GetComponentInChildren<Canvas>().planeDistance = 0.5f;
-        clipboardUI.SetActive(false);
-        clipboardText = clipboardUI.GetComponentInChildren<ClipboardScript>();
+        //clipboardUI.transform.parent = Camera.main.transform;
+        //clipboardUI.GetComponentInChildren<Canvas>().worldCamera = Camera.main;
+        //clipboardUI.GetComponentInChildren<Canvas>().planeDistance = 0.5f;
+        //clipboardUI.SetActive(false);
+        //clipboardText = clipboardUI.GetComponentInChildren<ClipboardScript>();
+        if (startAtState == SimState.Tutorial) canUseClipboard = false;
+
 
         // Set which event is the first
         foreach (var item in firstEventDictionary)
@@ -375,17 +392,91 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     void Update()
     {
-        // Check if the button is pressed
-        if (OVRInput.GetDown(targetButtonType) || Input.GetKeyDown(targetKey))
-        {
-            clipboardUI.SetActive(!clipboardUI.activeSelf);
-        }
-
         // Commmand for skipping the current event
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Tab) && currentEvent != null)
         {
             currentEvent.Finished();
         }
+
+        // Check if we should swap the dominant hand
+        if (OVRManager.isHmdPresent)
+        {
+            // Clipboard button
+            //if (canUseClipboard && OVRInput.GetDown(targetButtonType) || Input.GetKeyDown(targetKey))
+            if (canUseClipboard)
+            {
+                // If we want to switch to the right hand, do so
+                if (OVRInput.GetDown(OVRInput.RawButton.A) && clipboardObject.activeSelf && clipboardHand == DominantHand.LEFT)
+                {
+                    // Get the right hand
+                    var rightHand = GameObject.Find("hand_right");
+                    clipboardObject.transform.parent = rightHand.transform;
+                    clipboardObject.transform.localPosition = new Vector3(-0.102f, 0.098f, -0.034f);
+                    clipboardObject.transform.localRotation = Quaternion.Euler(45.0f, 180.0f, 0.0f);
+
+                    // Set the hand to right
+                    clipboardHand = DominantHand.RIGHT;
+                }
+                // If we want to switch to the left hand, do so
+                else if (OVRInput.GetDown(OVRInput.RawButton.X) && clipboardObject.activeSelf && clipboardHand == DominantHand.RIGHT)
+                {
+                    // Get the left hand
+                    var leftHand = GameObject.Find("hand_left");
+                    clipboardObject.transform.parent = leftHand.transform;
+                    clipboardObject.transform.localPosition = new Vector3(0.102f, 0.098f, -0.034f);
+                    clipboardObject.transform.localRotation = Quaternion.Euler(45.0f, 180.0f, 0.0f);
+
+                    // Set the hand to left
+                    clipboardHand = DominantHand.LEFT;
+                }
+                // Else, hide or show the clipboard
+                else if ((OVRInput.GetDown(OVRInput.RawButton.A) && clipboardHand == DominantHand.RIGHT) || (OVRInput.GetDown(OVRInput.RawButton.X) && clipboardHand == DominantHand.LEFT))
+                {
+                    clipboardObject.SetActive(!clipboardObject.activeSelf);
+                }
+            }
+
+            // Left hand
+            //if (OVRInput.GetDown(OVRInput.RawButton.B))
+            if (OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger) && dominantHand == DominantHand.LEFT)
+            {
+                // Set the dominant hand
+                dominantHand = DominantHand.RIGHT;
+
+                // Mess with the reticles
+                if (leftReticle.activeSelf)
+                {
+                    rightReticle.SetActive(true);
+                    leftReticle.SetActive(false);
+                }
+                currentReticle = rightReticle;
+
+                // Mess with the hands
+                currentHand = GameObject.Find("hand_right");
+                offHand = GameObject.Find("hand_left");
+            }
+
+            // Right hand
+            //else if (OVRInput.GetDown(OVRInput.RawButton.Y))
+            else if (OVRInput.GetDown(OVRInput.RawButton.LIndexTrigger) && dominantHand == DominantHand.RIGHT)
+            {
+                // Set the dominant hand
+                dominantHand = DominantHand.LEFT;
+
+                // Mess with the reticles
+                if (rightReticle.activeSelf)
+                {
+                    rightReticle.SetActive(false);
+                    leftReticle.SetActive(true);
+                }
+                currentReticle = leftReticle ;
+
+                // Mess with the hands
+                currentHand = GameObject.Find("hand_left");
+                offHand = GameObject.Find("hand_right");
+            }
+        }
+
     }
 }
 

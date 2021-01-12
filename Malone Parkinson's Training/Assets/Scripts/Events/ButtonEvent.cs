@@ -18,6 +18,7 @@ public class ButtonEvent : InfoBoardEvent
     public float buttonPushDuration;                // How long should this button be pushed for?
     public bool useDefaultInteract;                 // Should we use the default interact type?
     public OVRInput.RawButton defaultButton;        // The default hand button
+    public bool showReticles = false;
 
     private float timePushedSoFar = 0.0f;
     private bool hasBeenActivated = false;
@@ -38,6 +39,9 @@ public class ButtonEvent : InfoBoardEvent
     /// <param name="prevEventNum"></param>
     public override void Go(int prevEventNum)
     {
+        // If we should skip due to lack of VR, then do so
+        if (skipIfNoVRDetected && !OVRManager.isHmdPresent) nextEvent.Go();
+
         // Set if we should make this a default OVR event
         if (gameManager.currentFPC.name == "Mouse and Keyboard Player Controller")
             isOVRButton = false;
@@ -54,6 +58,14 @@ public class ButtonEvent : InfoBoardEvent
         if (infoText != "")
         {
             infoBoard.ShowInstructions(infoText);
+        }
+
+        // If we should show reticles, do so
+        if (showReticles)
+        {
+            // Show / hide the appropriate reticles
+            showOnStart.Add(gameManager.currentReticle);
+            hideAtEnd.Add(gameManager.currentReticle);
         }
 
         // Go to base event
