@@ -41,6 +41,7 @@ public class PointObjectAtEvent : InfoBoardEvent
     public bool requireButtonPress = false;
     public KeyCode keyButton = KeyCode.Z;
     public OVRInput.RawButton oVRButton = OVRInput.RawButton.RIndexTrigger;
+    private float pointAtStartTime;
 
     // ======================================================== Methods
     /// <summary>
@@ -76,7 +77,7 @@ public class PointObjectAtEvent : InfoBoardEvent
         {
             oVRButton = OVRInput.RawButton.LIndexTrigger;
         }
-            
+
         // Print message to console
         Debug.Log("*** Starting + " + name + " (Point-At Event: Event #" + myEventNum + ")");
     }
@@ -149,6 +150,26 @@ public class PointObjectAtEvent : InfoBoardEvent
                             {
                                 pointObject.hasBeenPointedAt = true;
                                 Clicked();
+
+                                // Record to the report card
+                                //writeLine("eventName,elapsedTime,wasCorrect,providedAnswers,questionScore");
+                                if (reportCard != null && reportCard.shouldWriteToReportCard)
+                                {
+                                    reportCard.writeLine(
+                                        // eventName
+                                        myEventNum + ".) " + name + " (pointing at " + pointObject.gameObject.name + ")," +
+                                        // elapsedTime
+                                        System.Math.Round(Time.time - startTime, 2) + "," +
+                                        // wasCorrect
+                                        "n/a," +
+                                        // providedAnswers
+                                        "n/a," +
+                                        // questionScore
+                                        "n/a");
+                                }
+
+                                // Reset the start time
+                                startTime = Time.time;
                             }
                         }
                     }
@@ -182,6 +203,26 @@ public class PointObjectAtEvent : InfoBoardEvent
                             {
                                 pointObject.hasBeenPointedAt = true;
                                 Clicked();
+
+                                // Record to the report card
+                                //writeLine("eventName,elapsedTime,wasCorrect,providedAnswers,questionScore");
+                                if (reportCard != null && reportCard.shouldWriteToReportCard)
+                                {
+                                    reportCard.writeLine(
+                                        // eventName
+                                        myEventNum + ".) " + name + " (pointing at " + pointObject.gameObject.name + ")," +
+                                        // elapsedTime
+                                        System.Math.Round(Time.time - startTime, 2) + "," +
+                                        // wasCorrect
+                                        "n/a," +
+                                        // providedAnswers
+                                        "n/a," +
+                                        // questionScore
+                                        "n/a");
+                                }
+
+                                // Reset the start time
+                                startTime = Time.time;
                             }
                         }
                     }

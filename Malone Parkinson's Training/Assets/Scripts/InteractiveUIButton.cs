@@ -33,6 +33,7 @@ public class InteractiveUIButton : Interactive
 
         // Set the events for highlighting, clicking, etc.
         //button.OnSelect(Highlight());
+        base.Start();
     }
 
     /// <summary>
@@ -57,7 +58,7 @@ public class InteractiveUIButton : Interactive
     /// </summary>
     protected override void Select()
     {
-        if (!pressed)
+        if (!pressed && !OVRInput.GetDown(OVRInput.RawButton.A))
         {
             button.onClick.Invoke();
             titleScreenManager.StopMusic();

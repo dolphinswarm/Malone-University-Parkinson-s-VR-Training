@@ -82,7 +82,8 @@ public class DeliveryEvent : InfoBoardEvent
     /// <summary>
     /// When this item is clicked...
     /// </summary>
-    public override void Clicked() {
+    public override void Clicked()
+    {
         // Show everything that should be hidden
         foreach (GameObject showThing in stuffToShowOnDelivery)
         {
@@ -114,7 +115,25 @@ public class DeliveryEvent : InfoBoardEvent
     /// <summary>
     /// When event is finished...
     /// </summary>
-    public override void Finished() {
+    public override void Finished()
+    {
+        // Record to the report card
+        //writeLine("eventName,elapsedTime,wasCorrect,providedAnswers,questionScore");
+        if (reportCard != null && reportCard.shouldWriteToReportCard)
+        {
+            reportCard.writeLine(
+                // eventName
+                myEventNum + ".) " + name + "," +
+                // elapsedTime
+                System.Math.Round(Time.time - startTime, 2) + "," +
+                // wasCorrect
+                "n/a," +
+                // providedAnswers
+                "n/a," +
+                // questionScore
+                "n/a");
+        }
+
         // If should be hidden, hide now
         if (hideType == DeliveryState.HIDE_AFTER_EVENT)
         {

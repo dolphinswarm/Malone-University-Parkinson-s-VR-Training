@@ -64,8 +64,8 @@ public class MicrophoneEvent : InfoBoardEvent
         Debug.Log("*** Starting + " + name + " (Microphone Event: Event #" + myEventNum + ")");
 
         // Add a beginning line to the report card manager
-        if (reportCard != null && reportCard.shouldWriteToReportCard)
-            reportCard.writeLine(myEventNum + ".) Microphone Event (" + name + ")");
+        //if (reportCard != null && reportCard.shouldWriteToReportCard)
+        //    reportCard.writeLine(myEventNum + ".) Microphone Event (" + name + ")");
 
 
     }
@@ -178,8 +178,25 @@ public class MicrophoneEvent : InfoBoardEvent
     public override void Finished()
     {
         // Record the ending time
+        //if (reportCard != null && reportCard.shouldWriteToReportCard)
+        //    reportCard.writeLine(" - Elapsed Time: " + System.Math.Round(Time.time - startTime, 2) + " seconds");
+
+        // Record to the report card
+        //writeLine("eventName,elapsedTime,wasCorrect,providedAnswers,questionScore");
         if (reportCard != null && reportCard.shouldWriteToReportCard)
-            reportCard.writeLine(" - Elapsed Time: " + System.Math.Round(Time.time - startTime, 2) + " seconds");
+        {
+            reportCard.writeLine(
+                // eventName
+                myEventNum + ".) " + name + "," +
+                // elapsedTime
+                System.Math.Round(Time.time - startTime, 2) + "," +
+                // wasCorrect
+                "n/a," +
+                // providedAnswers
+                "n/a," +
+                // questionScore
+                "n/a");
+        }
 
         // Stop the microphone and audiosource, if playing
         if (audioSource.isPlaying)

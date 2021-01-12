@@ -81,8 +81,8 @@ public class QuestionEvent : InfoBoardEvent
         Debug.Log("*** Starting + " + name + " (Question Event: Event #" + myEventNum + ")");
 
         // Add a beginning line to the report card manager
-        if (reportCard != null && reportCard.shouldWriteToReportCard)
-            reportCard.writeLine(myEventNum + ".) Question Event (" + name + ")");
+        //if (reportCard != null && reportCard.shouldWriteToReportCard)
+        //    reportCard.writeLine(myEventNum + ".) Question Event (" + name + ")");
     }
 
     /// <summary>
@@ -125,22 +125,22 @@ public class QuestionEvent : InfoBoardEvent
             // Play the sfx and narration
             StartCoroutine(PlayProperSoundAndNarration(correctSFX, correctNarration));
 
-            // If report card is used, write a line
-            if (reportCard != null && reportCard.isActiveAndEnabled)
-            {
-                // write appropriate entry to the logfile here
-                reportCard.writeLine(" - QUESTION: " + questionText);
-                reportCard.writeLine(" - ANSWERED CORRECTLY!");
-                reportCard.writeLine(" - Answer(s) selected:");
-                foreach (AnswerManager answer in thingsSelected)
-                {
-                    reportCard.writeLine("   - " + answer.answerText);
-                }
+            //// If report card is used, write a line
+            //if (reportCard != null && reportCard.isActiveAndEnabled)
+            //{
+            //    // write appropriate entry to the logfile here
+            //    reportCard.writeLine(" - QUESTION: " + questionText);
+            //    reportCard.writeLine(" - ANSWERED CORRECTLY!");
+            //    reportCard.writeLine(" - Answer(s) selected:");
+            //    foreach (AnswerManager answer in thingsSelected)
+            //    {
+            //        reportCard.writeLine("   - " + answer.answerText);
+            //    }
 
-                // Add the scores
-                reportCard.currentScore += 1;
-                reportCard.totalScore += 1;
-            }
+            //    // Add the scores
+            //    reportCard.currentScore += 1;
+            //    reportCard.totalScore += 1;
+            //}
 
         }
         else {
@@ -155,33 +155,64 @@ public class QuestionEvent : InfoBoardEvent
             // Play the sfx and narration
             StartCoroutine(PlayProperSoundAndNarration(wrongSFX, wrongNarration));
 
-            // If report card is used, write a line
-            if (reportCard != null && reportCard.isActiveAndEnabled)
-            {
-                // write appropriate entry to the logfile here
-                reportCard.writeLine(" - QUESTION: " + questionText);
-                reportCard.writeLine(" - ANSWERED INCORRECTLY!");
-                reportCard.writeLine(" - Answer(s) selected:");
-                foreach (AnswerManager answer in thingsSelected)
-                {
-                    reportCard.writeLine("   - " + answer.answerText);
-                }
-                if (correctAnswers.Count > 0)
-                {
-                    reportCard.writeLine("- Correct Answer(s):");
-                    foreach (AnswerManager answer in correctAnswers)
-                    {
-                        reportCard.writeLine("   - " + answer.answerText);
-                    }
-                }
+            //// If report card is used, write a line
+            //if (reportCard != null && reportCard.isActiveAndEnabled)
+            //{
+            //    // write appropriate entry to the logfile here
+            //    reportCard.writeLine(" - QUESTION: " + questionText);
+            //    reportCard.writeLine(" - ANSWERED INCORRECTLY!");
+            //    reportCard.writeLine(" - Answer(s) selected:");
+            //    foreach (AnswerManager answer in thingsSelected)
+            //    {
+            //        reportCard.writeLine("   - " + answer.answerText);
+            //    }
+            //    if (correctAnswers.Count > 0)
+            //    {
+            //        reportCard.writeLine("- Correct Answer(s):");
+            //        foreach (AnswerManager answer in correctAnswers)
+            //        {
+            //            reportCard.writeLine("   - " + answer.answerText);
+            //        }
+            //    }
 
-                // Add the scores
-                reportCard.currentScore += correctAnswers.Count / Math.Max(thingsSelected.Count, 1);
-                reportCard.totalScore += 1;
+            //    // Add the scores
+            //    reportCard.currentScore += correctAnswers.Count / Math.Max(thingsSelected.Count, 1);
+            //    reportCard.totalScore += 1;
 
-            }
-        }           
-	}
+            //}
+        }
+
+        // Add the scores
+        float score = correctAnswers.Count / Math.Max(thingsSelected.Count, 1);
+        reportCard.currentScore += score;
+        reportCard.totalScore += 1;
+
+        // Make a string of provided answers
+        string answerString = "";
+        foreach (AnswerManager answer in thingsSelected)
+        {
+            answerString += answer.answerText + ";";
+        }
+        answerString.TrimEnd(';');
+        if (answerString == "") answerString = "none";
+
+        // Record to the report card
+        //writeLine("eventName,elapsedTime,wasCorrect,providedAnswers,questionScore");
+        if (reportCard != null && reportCard.shouldWriteToReportCard)
+        {
+            reportCard.writeLine(
+                // eventName
+                myEventNum + ".) " + name + "(" + questionText.Replace(',', '/') + ")" + "," +
+                // elapsedTime
+                Math.Round(Time.time - startTime, 2) + "," +
+                // wasCorrect
+                answerIsCorrect + "," +
+                // providedAnswers
+                answerString + "," +
+                // questionScore
+                Math.Round(score, 2));
+        }
+    }
 
     /// <summary>
     /// A coroutine for playing the proper sound effects, then ending the event
@@ -192,8 +223,8 @@ public class QuestionEvent : InfoBoardEvent
     IEnumerator PlayProperSoundAndNarration(AudioClip sfx, AudioClip narration)
     {
         // Record the ending time
-        if (reportCard != null && reportCard.shouldWriteToReportCard)
-            reportCard.writeLine(" - Elapsed Time: " + System.Math.Round(Time.time - startTime, 2) + " seconds");
+        //if (reportCard != null && reportCard.shouldWriteToReportCard)
+        //    reportCard.writeLine(" - Elapsed Time: " + System.Math.Round(Time.time - startTime, 2) + " seconds");
 
         // Play the proper audio clip
         infoBoard.GetComponent<AudioSource>().PlayOneShot(sfx);

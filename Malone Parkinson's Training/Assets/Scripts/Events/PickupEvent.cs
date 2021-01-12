@@ -87,8 +87,8 @@ public class PickupEvent : InfoBoardEvent
         Debug.Log("*** Starting + " + name + " (Pickup Event: Event #" + myEventNum + ")");
 
         // Add a beginning line to the report card manager
-        if (reportCard != null && reportCard.shouldWriteToReportCard)
-            reportCard.writeLine(myEventNum + ".) Pickup Event (" + name + ")");
+        //if (reportCard != null && reportCard.shouldWriteToReportCard)
+        //    reportCard.writeLine(myEventNum + ".) Pickup Event (" + name + ")");
     }
 
     /// <summary>
@@ -204,9 +204,26 @@ public class PickupEvent : InfoBoardEvent
     /// </summary>
     public override void Finished()
     {
-        // Record the ending time
+        //// Record the ending time
+        //if (reportCard != null && reportCard.shouldWriteToReportCard)
+        //    reportCard.writeLine(" - Elapsed Time: " + System.Math.Round(Time.time - startTime, 2) + " seconds");
+
+        // Record to the report card
+        //writeLine("eventName,elapsedTime,wasCorrect,providedAnswers,questionScore");
         if (reportCard != null && reportCard.shouldWriteToReportCard)
-            reportCard.writeLine(" - Elapsed Time: " + System.Math.Round(Time.time - startTime, 2) + " seconds");
+        {
+            reportCard.writeLine(
+                // eventName
+                myEventNum + ".) " + name + "," +
+                // elapsedTime
+                System.Math.Round(Time.time - startTime, 2) + "," +
+                // wasCorrect
+                "n/a," +
+                // providedAnswers
+                "n/a," +
+                // questionScore
+                "n/a");
+        }
 
         // If the pickup object isn't picked up, un-activate it
         InteractiveObject interactiveObject = pickupObject.GetComponent<InteractiveObject>();

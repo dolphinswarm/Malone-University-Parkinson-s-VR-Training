@@ -8,11 +8,12 @@ public class ReportCardManager : MonoBehaviour
     // ======================================================== Variables
     // Declaration of score variables accessible by external objects. Used for "Scoring" a 
     // given report card.
-    public int currentScore = 0;
-    public int totalScore = 0;
+    public float currentScore = 0.0f;
+    public float totalScore = 0.0f;
 
-	// The filename of the file to write the report card to.
-	public string enteredFileName = "REPORTCARD";
+    // The filename of the file to write the report card to.
+    public string enteredFileName = "REPORTCARD";
+    public string extension = ".csv";
 
     // The filename of the file to write to
     private string fileName = "";
@@ -33,8 +34,8 @@ public class ReportCardManager : MonoBehaviour
 		fileName += "ReportCards/";
 		fileName += enteredFileName;
 		fileName += " " + today.Month.ToString () + "-" + today.Day.ToString() + "-" + today.Year.ToString() + " " + today.Hour.ToString () + "." + today.Minute.ToString () + "." + today.Second.ToString ();
-		fileName += ".txt";
-		Debug.Log (fileName);
+        fileName += extension;
+		Debug.Log(fileName);
 
 		// If the file already exists (In case of a weird error), then the previous file is
 		// deleted and overwritten by the new file.
@@ -49,8 +50,9 @@ public class ReportCardManager : MonoBehaviour
         writeLine("Malone University - Parkinson's VR Training");
         writeLine("TEST OCCURED ON " + DateTime.Now.ToString());
         writeLine("=========================");
-        writeLine("");
 
+        // Write the columns
+        writeLine("eventName,elapsedTime,wasCorrect,providedAnswers,questionScore");
     }
 
 

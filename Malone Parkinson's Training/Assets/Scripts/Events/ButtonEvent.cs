@@ -75,8 +75,8 @@ public class ButtonEvent : InfoBoardEvent
         Debug.Log("*** Starting + " + name + " (Button Event: Event #" + myEventNum + ")");
 
         // Add a beginning line to the report card manager
-        if (reportCard != null && reportCard.shouldWriteToReportCard)
-            reportCard.writeLine(myEventNum + ".) Button Event (" + name + ")");
+        //if (reportCard != null && reportCard.shouldWriteToReportCard)
+        //    reportCard.writeLine(myEventNum + ".) " + name);
     }
 
     /// <summary>
@@ -93,9 +93,26 @@ public class ButtonEvent : InfoBoardEvent
     /// </summary>
     public override void Finished()
     {
-        // Record the ending time
+        // Record to the report card
+        //writeLine("eventName,elapsedTime,wasCorrect,providedAnswers,questionScore");
         if (reportCard != null && reportCard.shouldWriteToReportCard)
-            reportCard.writeLine(" - Elapsed Time: " + System.Math.Round(Time.time - startTime, 2) + " seconds");
+        {
+            reportCard.writeLine(
+                // eventName
+                myEventNum + ".) " + name + "," +
+                // elapsedTime
+                System.Math.Round(Time.time - startTime, 2) + "," +
+                // wasCorrect
+                "n/a," +
+                // providedAnswers
+                "n/a," +
+                // questionScore
+                "n/a");
+        }
+
+        // Record the ending time
+        //if (reportCard != null && reportCard.shouldWriteToReportCard)
+        //    reportCard.writeLine(" - Elapsed Time: " + System.Math.Round(Time.time - startTime, 2) + " seconds");
 
         base.Finished();
     }

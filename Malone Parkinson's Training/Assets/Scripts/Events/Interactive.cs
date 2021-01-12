@@ -166,9 +166,9 @@ public class Interactive : MonoBehaviour {
             // If we haven't been clicked and we receive the appropriate input button, toggle
             if (Input.GetButtonDown("Fire1") || OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger) || OVRInput.GetDown(OVRInput.RawButton.LIndexTrigger))
             {
-                if (OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
+                if (OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger) && gameManager != null)
                     gameManager.mostRecentHandUsed = DominantHand.RIGHT;
-                else if (OVRInput.GetDown(OVRInput.RawButton.LIndexTrigger))
+                else if (OVRInput.GetDown(OVRInput.RawButton.LIndexTrigger) && gameManager != null)
                     gameManager.mostRecentHandUsed = DominantHand.LEFT;
 
                 Select();
