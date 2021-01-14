@@ -73,6 +73,7 @@ public class InformationEvent : InfoBoardEvent
         {
             nextButton.SetActive(true);
             nextButton.GetComponent<ClickToNext>().informationEvent = this;
+            nextButton.GetComponent<ClickToNext>().showScoreEvent = null;
             nextButton.GetComponent<ClickToNext>().finishedClicking = false;
         }
         else Debug.LogError("Cannot find next button!");

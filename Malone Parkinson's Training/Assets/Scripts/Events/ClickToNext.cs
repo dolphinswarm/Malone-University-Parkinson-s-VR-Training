@@ -9,6 +9,7 @@ public class ClickToNext : InteractiveText {
     // ======================================================== Properties
     [Header("Current Information Event")]
     public InformationEvent informationEvent;
+    public ShowScoreEvent showScoreEvent;
     public bool finishedClicking = false;
 
     // ======================================================== Methods
@@ -19,26 +20,37 @@ public class ClickToNext : InteractiveText {
     /// </summary>
     protected override void Select()
     {
-        // To prevent spam-clicking...
-        if (!finishedClicking)
-        { 
-            // Get current number in list
-            int currentItemInList = informationEvent.currentIndex + 1;
-
-            // Are we on the last item?
-            if (currentItemInList == informationEvent.infoTextList.Count)
+        // If we have an information event...
+        if (informationEvent != null)
+        {
+            // To prevent spam-clicking...
+            if (!finishedClicking)
             {
-                informationEvent.GetComponent<InformationEvent>().Clicked();
-                finishedClicking = true;
-            }
+                // Get current number in list
+                int currentItemInList = informationEvent.currentIndex + 1;
 
-            // Else, show the next instruction
-            else
-            {
-                informationEvent.infoBoard.ShowInstructions(informationEvent.infoTextList[currentItemInList]);
-                informationEvent.currentIndex++;
-                Debug.Log("Displaying message at index " + informationEvent.currentIndex + ".");
+                // Are we on the last item?
+                if (currentItemInList == informationEvent.infoTextList.Count)
+                {
+                    informationEvent.GetComponent<InformationEvent>().Clicked();
+                    finishedClicking = true;
+                }
+
+                // Else, show the next instruction
+                else
+                {
+                    informationEvent.infoBoard.ShowInstructions(informationEvent.infoTextList[currentItemInList]);
+                    informationEvent.currentIndex++;
+                    Debug.Log("Displaying message at index " + informationEvent.currentIndex + ".");
+                }
             }
         }
+
+        // Else, we have a score show event
+        else if (showScoreEvent != null)
+        {
+            showScoreEvent.GetComponent<InformationEvent>().Clicked();
+        }
+
     }
 }

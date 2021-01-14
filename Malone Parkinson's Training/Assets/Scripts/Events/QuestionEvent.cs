@@ -103,7 +103,7 @@ public class QuestionEvent : InfoBoardEvent
     /// Handles whether a question has been answered correctly / incorrectly.
     /// </summary>
     /// <param name="answerIsCorrect"></param>
-    public void SubmitAnswer(bool answerIsCorrect, List<AnswerManager> thingsSelected, List<AnswerManager> correctAnswers)
+    public void SubmitAnswer(bool answerIsCorrect, List<AnswerManager> thingsSelected, List<AnswerManager> correctAnswers, float percentRight = 1.0f)
     {
 		// save right/wrong state
 		completedCorrectly = answerIsCorrect;
@@ -183,7 +183,7 @@ public class QuestionEvent : InfoBoardEvent
         }
 
         // Add the scores
-        float score = correctAnswers.Count / Math.Max(thingsSelected.Count, 1);
+        float score = percentRight;
         reportCard.currentScore += score;
         reportCard.totalScore += 1;
 

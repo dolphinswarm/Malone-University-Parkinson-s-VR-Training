@@ -7,8 +7,9 @@ using TMPro;
 /// A generic event.
 /// </summary>
 [DisallowMultipleComponent]  // shouldn't have multiple event as components of the same gameObject
-public class InfoBoardEvent : MonoBehaviour {
-    // =============================st=========================== Variables
+public class InfoBoardEvent : MonoBehaviour
+{
+    // ======================================================== Variables
     [Header("Info Board Interface")]
     public InfoBoardUI infoBoard;               // Which message board are we displaying to?
     [TextArea]

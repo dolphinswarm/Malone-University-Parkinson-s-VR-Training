@@ -1,0 +1,17 @@
+=========================
+Malone University - Parkinson's VR Training
+TEST OCCURED ON 1/14/2021 5:41:57 PM
+=========================
+eventName,elapsedTime,wasCorrect,providedAnswers,questionScore
+4.) a. Pickup Phone,0.19,n/a,n/a,n/a
+5.) b. Vocalize to Doctor,0.18,n/a,n/a,n/a
+7.) d. Return Phone,0.19,n/a,n/a,n/a
+8.) c. Turn on gauge,0.17,n/a,n/a,n/a
+9.) 3. Identify Patient via ID Bracelet,0.16,n/a,n/a,n/a
+10.) i. Pick up Syringe,0.18,n/a,n/a,n/a
+11.) ii. Unscrew Cap,0.15,n/a,n/a,n/a
+14.) v. Re-screw Cap,0.22,n/a,n/a,n/a
+15.) vi. Unscrew Cap,0.36,n/a,n/a,n/a
+18.) ix. Re-screw Cap,0.38,n/a,n/a,n/a
+21.) xi. Return Syringe,0.42,n/a,n/a,n/a
+22.) xii. Other Times(According to the HCP instructions/ when else should we medicate Mr. Minor?),1.69,False,none,0

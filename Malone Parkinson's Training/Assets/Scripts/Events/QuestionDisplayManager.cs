@@ -139,7 +139,8 @@ public class QuestionDisplayManager : MonoBehaviour {
         // Set the sumbit button (and select all button) to inactive
         mySubmitButton.SetActive(false);
         mySelectAll.SetActive(false);
-        
+        int totalRight = 0;
+
         // If the question is open-ended...
         if (myQuestion.openEnded)
         {
@@ -186,6 +187,9 @@ public class QuestionDisplayManager : MonoBehaviour {
                     allIsWell = false;
                     // change highlight color to note that this particular selection was wrong
                     answerObjects[i].GetComponent<Text>().color = infoBoard.wrongColor;
+
+                    // Decrease the total right by 1
+                    totalRight -= 1;
                 }
 
                 // for correct answers, highlight them to denote correctness
@@ -196,12 +200,16 @@ public class QuestionDisplayManager : MonoBehaviour {
 
                     // Add this to the list of correct answers
                     correctAnswers.Add(curAnswer);
+
+                    // Increase the total right by 1
+                    totalRight += 1;
                 }
 
             }
 
             // once looping through all answers is done, report back to QuestionEvent
-            myQuestion.SubmitAnswer(allIsWell, selectedAnswers, correctAnswers);
+            float percentRight = (float)totalRight / (float)correctAnswers.Count;
+            myQuestion.SubmitAnswer(allIsWell, selectedAnswers, correctAnswers, Mathf.Max(0.0f, percentRight));
         }
 
 	}

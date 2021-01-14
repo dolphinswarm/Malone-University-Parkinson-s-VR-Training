@@ -1,8 +1,0 @@
-=========================
-Malone University - Parkinson's VR Training
-TEST OCCURED ON 12/16/2020 4:22:53 PM
-=========================
-
-0.) Pickup Event (3. Pick Up Cube)
- - Elapsed Time: 3.72 seconds
-0.) Object Interation Event (5. Locate Targets)

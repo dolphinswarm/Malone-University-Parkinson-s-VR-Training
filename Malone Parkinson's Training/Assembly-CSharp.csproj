@@ -348,6 +348,7 @@
     <Compile Include="Assets\Oculus\VoiceMod\Scripts\OVRVoiceModContext.cs" />
     <Compile Include="Assets\Prefabs\Controllers\FirstPersion AIO Pack\DemoScene\MiscScripts\Doors.cs" />
     <Compile Include="Assets\Prefabs\Controllers\FirstPersion AIO Pack\FirstPersonAIO\FirstPersonAIO.cs" />
+    <Compile Include="Assets\RainbowTextScript.cs" />
     <Compile Include="Assets\Scripts\DeliveryManager.cs" />
     <Compile Include="Assets\Scripts\Deprecated\AnimationHandlerForSink.cs" />
     <Compile Include="Assets\Scripts\Deprecated\DeliveryEventOld.cs" />
@@ -401,6 +402,7 @@
     <Compile Include="Assets\Scripts\PointObjectAtEvent.cs" />
     <Compile Include="Assets\Scripts\ReverseNormals.cs" />
     <Compile Include="Assets\Scripts\RoomOrganizationEvent.cs" />
+    <Compile Include="Assets\Scripts\ShowScoreEvent.cs" />
     <Compile Include="Assets\Scripts\TitleScreenManager.cs" />
     <Compile Include="Assets\Scripts\Utility\AdjustCharecterHeight.cs" />
     <Compile Include="Assets\Scripts\Utility\AlwaysShowCursor.cs" />

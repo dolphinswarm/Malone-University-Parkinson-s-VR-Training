@@ -98,6 +98,10 @@ public class GameManager : MonoBehaviour {
     private GameObject rightButton;
     private bool canUseClipboard = true;
 
+    // Start time
+    public float absoluteStartTime = 0.0f;
+    public float absoluteEndTime = 0.0f;
+
     // ======================================================== Methods
     /// <summary>
     /// When the game is started, initialize the game settings.
@@ -106,6 +110,9 @@ public class GameManager : MonoBehaviour {
     {
         // Print to console
         Debug.Log("==================================================== Starting simulation!");
+
+        // Set the absolute start time
+        absoluteStartTime = Time.time;
 
         // Immediately set the game state to pre-tutorial
         currentState = SimState.Tutorial;
