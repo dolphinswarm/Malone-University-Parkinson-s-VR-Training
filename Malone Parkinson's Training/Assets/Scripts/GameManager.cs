@@ -419,7 +419,7 @@ public class GameManager : MonoBehaviour {
                     // Get the right hand
                     var rightHand = GameObject.Find("hand_right");
                     clipboardObject.transform.parent = rightHand.transform;
-                    clipboardObject.transform.localPosition = new Vector3(-0.102f, 0.098f, -0.034f);
+                    clipboardObject.transform.localPosition = new Vector3(-0.13f, 0.098f, -0.034f);
                     clipboardObject.transform.localRotation = Quaternion.Euler(45.0f, 180.0f, 0.0f);
 
                     // Set the hand to right
@@ -431,7 +431,7 @@ public class GameManager : MonoBehaviour {
                     // Get the left hand
                     var leftHand = GameObject.Find("hand_left");
                     clipboardObject.transform.parent = leftHand.transform;
-                    clipboardObject.transform.localPosition = new Vector3(0.102f, 0.098f, -0.034f);
+                    clipboardObject.transform.localPosition = new Vector3(0.13f, 0.098f, -0.034f);
                     clipboardObject.transform.localRotation = Quaternion.Euler(45.0f, 180.0f, 0.0f);
 
                     // Set the hand to left
