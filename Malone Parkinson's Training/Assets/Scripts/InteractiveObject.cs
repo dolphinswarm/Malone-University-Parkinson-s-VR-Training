@@ -126,14 +126,16 @@ public class InteractiveObject : Interactive
                 Highlight();
             }
             // Else, if point at, check it via the dot procduct
-            else if (highlightType == HighlightType.POINTAT && (isMouseOver || 
-                Vector3.Dot(domHandVec.normalized, gameManager.currentHand.transform.forward) > 0.97f ||
-                Vector3.Dot(offHandVec.normalized, gameManager.offHand.transform.forward) > 0.97f))
+            else if (highlightType == HighlightType.POINTAT && (
+                isMouseOver ||
+                (OVRManager.isHmdPresent && 
+                    (Vector3.Dot(domHandVec.normalized, gameManager.currentHand.transform.forward) > 0.97f ||
+                    Vector3.Dot(offHandVec.normalized, gameManager.offHand.transform.forward) > 0.97f))))
             {
                 Highlight();
             }
             // Else, if reticle over, check via intersection with reticle
-            else if (highlightType == HighlightType.RETICLE_OVER && isHighlighted)
+            else if (highlightType == HighlightType.RETICLE_OVER && (isHighlighted || (!OVRManager.isHmdPresent && isMouseOver)))
             {
                 Highlight();
             }

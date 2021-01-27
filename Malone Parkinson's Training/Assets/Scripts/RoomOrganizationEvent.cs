@@ -99,9 +99,18 @@ public class RoomOrganizationEvent : InfoBoardEvent
             
 
         // Set the clipboard text
-        gameManager.clipboardText.titleText.text = titleText;
-        gameManager.clipboardText.colOneText.text = side1Text;
-        gameManager.clipboardText.colTwoText.text = side2Text;
+        if (OVRManager.isHmdPresent)
+        {
+            gameManager.clipboardText.titleText.text = titleText;
+            gameManager.clipboardText.colOneText.text = side1Text;
+            gameManager.clipboardText.colTwoText.text = side2Text;
+        }
+        else
+        {
+            gameManager.clipboardTextMouseAndKeyboard.titleText.text = titleText;
+            gameManager.clipboardTextMouseAndKeyboard.colOneText.text = side1Text;
+            gameManager.clipboardTextMouseAndKeyboard.colTwoText.text = side2Text;
+        }
 
         // Move the player, if we should
         if (movePlayer)

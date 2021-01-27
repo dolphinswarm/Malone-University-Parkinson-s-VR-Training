@@ -40,7 +40,12 @@ public class ButtonEvent : InfoBoardEvent
     public override void Go(int prevEventNum)
     {
         // If we should skip due to lack of VR, then do so
-        if (skipIfNoVRDetected && !OVRManager.isHmdPresent) nextEvent.Go();
+        if (skipIfNoVRDetected && !OVRManager.isHmdPresent)
+        {
+            base.Go(prevEventNum);
+            base.Finished();
+            return;
+        }
 
         // Set if we should make this a default OVR event
         if (gameManager.currentFPC.name == "Mouse and Keyboard Player Controller")

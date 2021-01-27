@@ -51,9 +51,6 @@ public class DeliveryEvent : InfoBoardEvent
     /// <param name="prevEventNum"></param>
     public override void Go(int prevEventNum)
     {
-        // Start particle effect
-        if (particles != null) particles.Play();
-
         // Display info text, if present
         if (infoText != "") infoBoard.ShowInstructions(infoText);
 
@@ -74,6 +71,9 @@ public class DeliveryEvent : InfoBoardEvent
 
         // Go to base event
         base.Go(prevEventNum);
+
+        // Start particle effect
+        if (particles != null) particles.Play();
 
         // Print message to console
         Debug.Log("*** Starting + " + name + " (Delivery Event: Event #" + myEventNum + ")");

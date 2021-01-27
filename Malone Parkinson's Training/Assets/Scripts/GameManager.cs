@@ -84,6 +84,8 @@ public class GameManager : MonoBehaviour {
     public GameObject clipboardUI;                              // The clipboard object for the camera.
     public GameObject clipboardObject;                          // The clipboard object for the camera.
     public ClipboardScript clipboardText;                       // The script for getting / changing clipboard information.
+    public GameObject clipboardUIMouseAndKeyboard;              // The clipboard object for the camera.
+    public ClipboardScript clipboardTextMouseAndKeyboard;       // The script for getting / changing clipboard information.
     public DominantHand clipboardHand = DominantHand.RIGHT;     // The hand the keyboard is in.
     public OVRInput.RawButton targetButtonType;                 // The OVR button type to check for.
     public KeyCode targetKey;                                   // The keyboard type to check for.
@@ -367,7 +369,6 @@ public class GameManager : MonoBehaviour {
         //clipboardText = clipboardUI.GetComponentInChildren<ClipboardScript>();
         if (startAtState == SimState.Tutorial) canUseClipboard = false;
 
-
         // Set which event is the first
         foreach (var item in firstEventDictionary)
         {
@@ -481,6 +482,15 @@ public class GameManager : MonoBehaviour {
                 // Mess with the hands
                 currentHand = GameObject.Find("hand_left");
                 offHand = GameObject.Find("hand_right");
+            }
+        }
+
+        // If we don't have an Oculus controller
+        else 
+        {
+            if (Input.GetKeyDown(KeyCode.Z) && canUseClipboard)
+            {
+                clipboardUIMouseAndKeyboard.SetActive(!clipboardUIMouseAndKeyboard.activeSelf);
             }
         }
 

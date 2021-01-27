@@ -14,6 +14,7 @@ public class PickupEvent : InfoBoardEvent
     public List<GameObject> stuffToHideOnPickup;
     public bool placeInMainHand = true;
     public bool useSpecialTrigger = false;
+    public bool mouseAndKeyboardHideOnPickup = true;
 
     [Header("Transform Properties")]
     public bool useSpecialInstructions = false;

@@ -129,47 +129,51 @@ public class PointObjectAtEvent : InfoBoardEvent
             {
                 foreach (PointAtObject pointObject in objectsToPointAt)
                 {
-                    // Calculate the vector between the two
-                    Vector3 vector = gameManager.mouseController.transform.position - pointerObject.transform.position;
-
-                    // Find the distance and angle
-                    float dist = vector.magnitude;
-                    float angle = Vector3.Dot(vector.normalized, gameManager.mouseController.transform.forward);
-
-                    // Check distance and angles. If good...
-                    if (dist <= minDistance && angle >= anglePrecision)
+                    if (!pointObject.hasBeenPointedAt)
                     {
-                        // Increment the time
-                        pointObject.SetTime(pointObject.GetTime() + Time.deltaTime);
+                        // Calculate the vector between the two
+                        //Vector3 vector = gameManager.mouseController.transform.position - pointerObject.transform.position;
+                        Vector3 vector = pointObject.gameObject.transform.position - Camera.main.transform.position;
 
-                        // If time is sufficient, mark as good
-                        if (pointObject.GetTime() >= pointObject.pointAtDuration)
+                        // Find the distance and angle
+                        float angle = Vector3.Dot(vector.normalized, Camera.main.transform.forward); //gameManager.mouseController.transform.forward);
+                        Debug.Log(pointObject.gameObject.name + ": " + angle);
+
+                        // Check distance and angles. If good...
+                        if (angle >= anglePrecision)
                         {
-                            // If we require a button press and the key is down, activate
-                            if ((requireButtonPress && (Input.GetKeyDown(keyButton) || OVRInput.GetDown(oVRButton))) || !requireButtonPress)
+                            // Increment the time
+                            pointObject.SetTime(pointObject.GetTime() + Time.deltaTime);
+
+                            // If time is sufficient, mark as good
+                            if (pointObject.GetTime() >= pointObject.pointAtDuration)
                             {
-                                pointObject.hasBeenPointedAt = true;
-                                Clicked();
-
-                                // Record to the report card
-                                //writeLine("eventName,elapsedTime,wasCorrect,providedAnswers,questionScore");
-                                if (reportCard != null && reportCard.shouldWriteToReportCard)
+                                // If we require a button press and the key is down, activate
+                                if ((requireButtonPress && (Input.GetKeyDown(keyButton) || OVRInput.GetDown(oVRButton))) || !requireButtonPress)
                                 {
-                                    reportCard.writeLine(
-                                        // eventName
-                                        myEventNum + ".) " + name + " (pointing at " + pointObject.gameObject.name + ")," +
-                                        // elapsedTime
-                                        System.Math.Round(Time.time - startTime, 2) + "," +
-                                        // wasCorrect
-                                        "n/a," +
-                                        // providedAnswers
-                                        "n/a," +
-                                        // questionScore
-                                        "n/a");
-                                }
+                                    pointObject.hasBeenPointedAt = true;
+                                    Clicked();
 
-                                // Reset the start time
-                                startTime = Time.time;
+                                    // Record to the report card
+                                    //writeLine("eventName,elapsedTime,wasCorrect,providedAnswers,questionScore");
+                                    if (reportCard != null && reportCard.shouldWriteToReportCard)
+                                    {
+                                        reportCard.writeLine(
+                                            // eventName
+                                            myEventNum + ".) " + name + " (pointing at " + pointObject.gameObject.name + ")," +
+                                            // elapsedTime
+                                            System.Math.Round(Time.time - startTime, 2) + "," +
+                                            // wasCorrect
+                                            "n/a," +
+                                            // providedAnswers
+                                            "n/a," +
+                                            // questionScore
+                                            "n/a");
+                                    }
+
+                                    // Reset the start time
+                                    startTime = Time.time;
+                                }
                             }
                         }
                     }
