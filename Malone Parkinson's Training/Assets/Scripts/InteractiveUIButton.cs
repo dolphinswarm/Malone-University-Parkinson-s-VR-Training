@@ -41,8 +41,11 @@ public class InteractiveUIButton : Interactive
     /// </summary>
     protected override void Highlight()
     {
-        if (highlightClip != null) AudioSource.PlayClipAtPoint(highlightClip, transform.position);
-        button.Select();
+        if (!titleScreenManager.hasButtonBeenPressed)
+        {
+            if (highlightClip != null) AudioSource.PlayClipAtPoint(highlightClip, transform.position);
+            button.Select();
+        }
     }
 
     /// <summary>
@@ -58,7 +61,7 @@ public class InteractiveUIButton : Interactive
     /// </summary>
     protected override void Select()
     {
-        if (!pressed && !OVRInput.GetDown(OVRInput.RawButton.A))
+        if (!titleScreenManager.hasButtonBeenPressed && !pressed && !OVRInput.GetDown(OVRInput.RawButton.A))
         {
             button.onClick.Invoke();
             titleScreenManager.StopMusic();

@@ -18,6 +18,7 @@ public class TitleScreenManager : MonoBehaviour
     private GameObject leftReticle;                             // The left hand reticle
     private GameObject rightReticle;                            // The right hand reticle
     public GameObject currentReticle;                           // The active reticle
+    public bool hasButtonBeenPressed = false;
 
     [Header("Music")]
     public AudioSource music;
@@ -104,6 +105,12 @@ public class TitleScreenManager : MonoBehaviour
     /// </summary>
     public void StartSimulation()
     {
+        // Check if button has been pressed
+        if (hasButtonBeenPressed) return;
+
+        // Flip the toggle
+        hasButtonBeenPressed = true;
+
         // Fade the screen
         screenFade.FadeOut();
 
@@ -116,6 +123,12 @@ public class TitleScreenManager : MonoBehaviour
     /// </summary>
     public void QuitSimulation()
     {
+        // Check if button has been pressed
+        if (hasButtonBeenPressed) return;
+
+        // Flip the toggle
+        hasButtonBeenPressed = true;
+
         // Quits the game
         Application.Quit();
     }
