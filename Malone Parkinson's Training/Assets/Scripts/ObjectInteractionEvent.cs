@@ -12,7 +12,6 @@ public class ObjectInteractionEvent : InfoBoardEvent
     public List<GameObject> interactionObjects;         // The list of possible interaction objects.
     public bool interactWithAllObjects = false;         // Do we need to interact with all objects?
     public ParticleSystem particles;                    // The particle system used for display. ALWAYS IN CHILD
-    public bool hideReticles = true;                    // Should we hide the reticles?
 
     [System.Obsolete("Don't use this - instead, an animation component plays in the child")]
     public SpecialAnimationInstructions specialAnimationInstructions; // <------- Removed in favor of animation component

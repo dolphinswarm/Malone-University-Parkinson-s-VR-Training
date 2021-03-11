@@ -6,6 +6,13 @@ using OVR;
 using UnityEngine.EventSystems;
 
 /// <summary>
+/// An enumeration to determine the type of interactive object.
+/// </summary>
+[System.Serializable]
+public enum HighlightType { BODY_DISTANCE, HAND_DISTANCE, LOOKAT, POINTAT, RETICLE_OVER, ALWAYS, FLICKER, NEVER };
+
+
+/// <summary>
 /// The base class for interaction.
 /// </summary>
 public class Interactive : MonoBehaviour {
@@ -26,6 +33,8 @@ public class Interactive : MonoBehaviour {
     public bool hideBeforeEvent = false;                   // Should this object be hidden before its event?
     public bool hideAfterInteraction = false;               // Should we hide with this object after interacting with it?
     public bool requireClick = true;                        // Should w
+
+    public HighlightType highlightType;                     // How should this object be highlit?
 
     // ======================================================== Methods
     /// <summary>
@@ -146,7 +155,7 @@ public class Interactive : MonoBehaviour {
     protected void OnCollisionExit(Collision other)
     {
         // If currently highlighted, dim
-        if (isHighlighted && isCurrentlyInteractable)
+        if (isHighlighted && isCurrentlyInteractable && highlightType != HighlightType.ALWAYS)
         {
             Dim();
             isHighlighted = false;
@@ -210,7 +219,7 @@ public class Interactive : MonoBehaviour {
     protected virtual void OnTriggerExit(Collider other)
     {
         // If currently highlighted, dim
-        if (isHighlighted && isCurrentlyInteractable)
+        if (isHighlighted && isCurrentlyInteractable && highlightType != HighlightType.ALWAYS)
         {
             Dim();
             isHighlighted = false;

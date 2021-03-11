@@ -446,7 +446,7 @@ public class GameManager : MonoBehaviour {
 
             // Left hand
             //if (OVRInput.GetDown(OVRInput.RawButton.B))
-            if (OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger) && dominantHand == DominantHand.LEFT)
+            if (OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger) && dominantHand == DominantHand.LEFT && !currentEvent.hideReticles)
             {
                 // Set the dominant hand
                 dominantHand = DominantHand.RIGHT;
@@ -466,7 +466,7 @@ public class GameManager : MonoBehaviour {
 
             // Right hand
             //else if (OVRInput.GetDown(OVRInput.RawButton.Y))
-            else if (OVRInput.GetDown(OVRInput.RawButton.LIndexTrigger) && dominantHand == DominantHand.RIGHT)
+            else if (OVRInput.GetDown(OVRInput.RawButton.LIndexTrigger) && dominantHand == DominantHand.RIGHT && !currentEvent.hideReticles)
             {
                 // Set the dominant hand
                 dominantHand = DominantHand.LEFT;

@@ -11,12 +11,6 @@ using UnityEditor;
 public enum ObjectType { PICKUP, TOUCH, POINTAT, HANDS_BELOW };
 
 /// <summary>
-/// An enumeration to determine the type of interactive object.
-/// </summary>
-[System.Serializable]
-public enum HighlightType { BODY_DISTANCE, HAND_DISTANCE, LOOKAT, POINTAT, RETICLE_OVER, ALWAYS, FLICKER, NEVER };
-
-/// <summary>
 /// The class for a generic interactive object.
 /// </summary>
 public class InteractiveObject : Interactive
@@ -32,7 +26,7 @@ public class InteractiveObject : Interactive
     [Header("Object Hightlight")]
     public Dictionary<int, Material[]> objectMaterials;     // A dictionary of this object's materials.
     public Material highlightMaterial;                      // The highlight material of this object.
-    public HighlightType highlightType;                     // How should this object be highlit?
+    //public HighlightType highlightType;                     // How should this object be highlit?
     [Range(0.0f, 25.0f)]
     public float highlightDistance = 10.0f;                 // The highlight distance.
     private float duration = 2.0f;
@@ -221,10 +215,10 @@ public class InteractiveObject : Interactive
             renderer.materials = objectMaterials[renderer.GetHashCode()];
 
             // For each material...
-            foreach (Material material in objectMaterials[renderer.GetHashCode()])
-            {
-                renderer.material.Lerp(material, highlightMaterial, 0);
-            }
+            //foreach (Material material in objectMaterials[renderer.GetHashCode()])
+            //{
+            //    renderer.material.Lerp(material, highlightMaterial, 0);
+            //}
         }
     }
 

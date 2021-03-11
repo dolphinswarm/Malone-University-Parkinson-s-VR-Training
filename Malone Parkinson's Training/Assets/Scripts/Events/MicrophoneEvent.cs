@@ -49,6 +49,11 @@ public class MicrophoneEvent : InfoBoardEvent
         // Display info text, if present
         if (infoText != "") infoBoard.ShowInstructions(infoText);
 
+        // Hide the pointers
+        hideReticles = true;
+        hideOnStart.Add(gameManager.currentReticle);
+        showAtEnd.Add(gameManager.currentReticle);
+
         // If we do, then record it
         if (validMic)
             RecordAudio();

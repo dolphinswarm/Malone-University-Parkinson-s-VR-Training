@@ -45,6 +45,7 @@ public class InfoBoardEvent : MonoBehaviour
     public List<GameObject> hideOnStart;
     public List<GameObject> showAtEnd;
     public List<GameObject> hideAtEnd;
+    public bool hideReticles = false;
 
     //public GameObject[] showOnStart;
     //public GameObject[] hideOnStart;
@@ -95,8 +96,7 @@ public class InfoBoardEvent : MonoBehaviour
 
             // If still null, get it from the game manager
             if (reportCard == null) reportCard = gameManager.reportCardManager;
-        }
-            
+        }   
     }
 
     /// <summary>
@@ -153,6 +153,12 @@ public class InfoBoardEvent : MonoBehaviour
     /// </summary>
     public virtual void Go()
     {
+        // If reticles should be hidden, hide them
+        if (hideReticles)
+        {
+            gameManager.currentReticle.SetActive(false);
+        }
+
         gameManager.currentEvent = this;
         useEventNum = false;
         isActive = true;
@@ -169,6 +175,12 @@ public class InfoBoardEvent : MonoBehaviour
     /// </summary>
     public virtual void Finished()
     {
+        // If reticles should be hidden, hide them
+        if (hideReticles)
+        {
+            gameManager.currentReticle.SetActive(true);
+        }
+
         // Wait until animation finishes playing
 
         // Mark this step as completed
