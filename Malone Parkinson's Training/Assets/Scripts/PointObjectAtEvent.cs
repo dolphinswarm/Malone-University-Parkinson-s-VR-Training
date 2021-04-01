@@ -192,6 +192,7 @@ public class PointObjectAtEvent : InfoBoardEvent
                     // Find the distance and angle
                     float dist = vector.magnitude;
                     float angle = Vector3.Dot(vector.normalized, pointerObject.transform.forward);
+                    Debug.Log($"Angle: {angle}, Distance: {dist}");
 
                     // Check distance and angles. If good...
                     if (dist <= minDistance && angle >= anglePrecision)
