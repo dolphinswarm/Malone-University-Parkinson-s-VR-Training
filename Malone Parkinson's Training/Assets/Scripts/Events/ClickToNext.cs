@@ -32,7 +32,7 @@ public class ClickToNext : InteractiveText {
                 // Are we on the last item?
                 if (currentItemInList == informationEvent.infoTextList.Count)
                 {
-                    informationEvent.GetComponent<InformationEvent>().Clicked();
+                    informationEvent.Clicked();
                     finishedClicking = true;
                 }
 
@@ -49,7 +49,11 @@ public class ClickToNext : InteractiveText {
         // Else, we have a score show event
         else if (showScoreEvent != null)
         {
-            showScoreEvent.GetComponent<InformationEvent>().Clicked();
+            // To prevent spam-clicking...
+            if (!finishedClicking)
+            {
+                showScoreEvent.Clicked();
+            }
         }
 
     }

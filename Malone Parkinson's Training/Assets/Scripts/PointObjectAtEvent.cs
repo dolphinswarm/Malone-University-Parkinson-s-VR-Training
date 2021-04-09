@@ -42,6 +42,7 @@ public class PointObjectAtEvent : InfoBoardEvent
     public KeyCode keyButton = KeyCode.Z;
     public OVRInput.RawButton oVRButton = OVRInput.RawButton.RIndexTrigger;
     private float pointAtStartTime;
+    public ParticleSystem particles;                    // The particle system used for display. ALWAYS IN CHILD
 
     // ======================================================== Methods
     /// <summary>
@@ -49,6 +50,14 @@ public class PointObjectAtEvent : InfoBoardEvent
     /// </summary>
     protected override void Initialize()
     {
+        // If particles is not set, set it
+        if (particles == null)
+            particles = GetComponentInChildren<ParticleSystem>();
+
+        // Stop the particles
+        if (particles != null)
+            particles.Stop();
+
         // Call base intialize
         base.Initialize();
     }
@@ -59,11 +68,12 @@ public class PointObjectAtEvent : InfoBoardEvent
     /// <param name="prevEventNum"></param>
     public override void Go(int prevEventNum)
     {
+        // Start particle effect
+        if (particles != null) particles.Play();
+
         // If we have info text, add it
         if (infoText != "")
-        {
             infoBoard.ShowInstructions(infoText);
-        }
 
         // Hide the reticles
         hideOnStart.Add(gameManager.currentReticle);
@@ -90,6 +100,10 @@ public class PointObjectAtEvent : InfoBoardEvent
         // Check if we should continue or not. if we should...
         if ((interactWithAllObjects && CheckChildrenForPointed()) || !interactWithAllObjects)
         {
+            // Stop the particles
+            if (particles != null)
+                particles.Stop();
+
             // Check animation
             if (animator != null && animationName != "")
                 SetAnimation(animator, animationName);

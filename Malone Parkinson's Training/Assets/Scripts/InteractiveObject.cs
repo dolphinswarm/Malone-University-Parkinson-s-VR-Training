@@ -84,7 +84,7 @@ public class InteractiveObject : Interactive
         else
             requiredTag = "Reticle";
 
-        // Lastly, set this to inactive after intialization
+        // Lastly, set this to inactive after intialization (if we want to)
         enabled = false;
         isCurrentlyInteractable = false;
         if (hideBeforeEvent) gameObject.SetActive(false);
@@ -274,7 +274,7 @@ public class InteractiveObject : Interactive
     protected override void OnMouseEnter()
     {
         // If not highlighted, highlight
-        if (!isHighlighted && gameManager.controlType == ControlType.MOUSE_KEYBOARD && isCurrentlyInteractable)
+        if (!isHighlighted && gameManager != null && gameManager.controlType == ControlType.MOUSE_KEYBOARD && isCurrentlyInteractable)
         {
             isMouseOver = true;
         }
@@ -286,7 +286,7 @@ public class InteractiveObject : Interactive
     protected override void OnMouseExit()
     {
         // If not highlighted, dim
-        if (!isHighlighted && gameManager.controlType == ControlType.MOUSE_KEYBOARD && isCurrentlyInteractable)
+        if (!isHighlighted && gameManager != null && gameManager.controlType == ControlType.MOUSE_KEYBOARD && isCurrentlyInteractable)
         {
             isMouseOver = false;
         }

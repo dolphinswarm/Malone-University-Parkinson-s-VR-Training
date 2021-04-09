@@ -40,7 +40,6 @@ public class ShowScoreEvent : InfoBoardEvent
             timeText = GameObject.Find("Time Text").GetComponent<Text>();
             scoreBoard.SetActive(false);
         }
-            
 
         // Call base intialize
         base.Initialize();
@@ -52,11 +51,14 @@ public class ShowScoreEvent : InfoBoardEvent
     /// <param name="prevEventNum"></param>
     public override void Go(int prevEventNum)
     {
+        // Show the text
+        infoBoard.ShowInstructions("");
+
         // Set the game manager's absolute end time
         gameManager.absoluteEndTime = Time.time;
 
         // Set the various items
-        scoreText.text = Math.Round(reportCard.currentScore, 2) + " / " + Mathf.Round(reportCard.totalScore) + " (" + Math.Round(reportCard.currentScore / reportCard.totalScore, 2) + "%)";
+        scoreText.text = Math.Round(reportCard.currentScore, 2) + " / " + Mathf.Round(reportCard.totalScore) + " (" + Math.Round((reportCard.currentScore / reportCard.totalScore) * 100, 2) + "%)";
         float totalTime = gameManager.absoluteEndTime - gameManager.absoluteStartTime;
         int minutes = (int)totalTime / 60;
         int seconds = (int)totalTime % 60;
@@ -100,6 +102,9 @@ public class ShowScoreEvent : InfoBoardEvent
     /// </summary>
     public override void Clicked()
     {
+        // Show the scorecard
+        scoreBoard.SetActive(false);
+
         // Call the base clicked
         base.Clicked();
     }
