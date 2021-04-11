@@ -75,18 +75,11 @@ public class PointObjectAtEvent : InfoBoardEvent
         if (infoText != "")
             infoBoard.ShowInstructions(infoText);
 
-        // Hide the reticles
-        hideOnStart.Add(gameManager.currentReticle);
-        showAtEnd.Add(gameManager.currentReticle);
+        // Show the reticles
+        hideReticles = false;
 
         // Go to base event
         base.Go(prevEventNum);
-
-        // Update to left hand, if applicable
-        if (gameManager.dominantHand == DominantHand.LEFT && oVRButton == OVRInput.RawButton.RIndexTrigger)
-        {
-            oVRButton = OVRInput.RawButton.LIndexTrigger;
-        }
 
         // Print message to console
         Debug.Log("*** Starting + " + name + " (Point-At Event: Event #" + myEventNum + ")");
@@ -176,13 +169,7 @@ public class PointObjectAtEvent : InfoBoardEvent
                                             // eventName
                                             myEventNum + ".) " + name + " (pointing at " + pointObject.gameObject.name + ")," +
                                             // elapsedTime
-                                            System.Math.Round(Time.time - startTime, 2) + "," +
-                                            // wasCorrect
-                                            "n/a," +
-                                            // providedAnswers
-                                            "n/a," +
-                                            // questionScore
-                                            "n/a");
+                                            System.Math.Round(Time.time - startTime, 2));
                                     }
 
                                     // Reset the start time
@@ -231,13 +218,7 @@ public class PointObjectAtEvent : InfoBoardEvent
                                         // eventName
                                         myEventNum + ".) " + name + " (pointing at " + pointObject.gameObject.name + ")," +
                                         // elapsedTime
-                                        System.Math.Round(Time.time - startTime, 2) + "," +
-                                        // wasCorrect
-                                        "n/a," +
-                                        // providedAnswers
-                                        "n/a," +
-                                        // questionScore
-                                        "n/a");
+                                        System.Math.Round(Time.time - startTime, 2));
                                 }
 
                                 // Reset the start time
@@ -251,6 +232,16 @@ public class PointObjectAtEvent : InfoBoardEvent
                         pointObject.SetTime(0.0f);
                     }
                 }
+            }
+
+            // Update the dominant hand
+            if (gameManager.dominantHand == DominantHand.LEFT && oVRButton == OVRInput.RawButton.RIndexTrigger)
+            {
+                oVRButton = OVRInput.RawButton.LIndexTrigger;
+            }
+            else if (gameManager.dominantHand == DominantHand.RIGHT && oVRButton == OVRInput.RawButton.LIndexTrigger)
+            {
+                oVRButton = OVRInput.RawButton.RIndexTrigger;
             }
         }
     }

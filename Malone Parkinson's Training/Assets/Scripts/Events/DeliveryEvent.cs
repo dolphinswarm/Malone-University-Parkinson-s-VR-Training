@@ -125,13 +125,7 @@ public class DeliveryEvent : InfoBoardEvent
                 // eventName
                 myEventNum + ".) " + name + "," +
                 // elapsedTime
-                System.Math.Round(Time.time - startTime, 2) + "," +
-                // wasCorrect
-                "n/a," +
-                // providedAnswers
-                "n/a," +
-                // questionScore
-                "n/a");
+                System.Math.Round(Time.time - startTime, 2));
         }
 
         // If should be hidden, hide now

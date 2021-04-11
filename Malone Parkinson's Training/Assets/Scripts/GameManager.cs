@@ -477,11 +477,30 @@ public class GameManager : MonoBehaviour {
                     rightReticle.SetActive(false);
                     leftReticle.SetActive(true);
                 }
-                currentReticle = leftReticle ;
+                currentReticle = leftReticle;
 
                 // Mess with the hands
                 currentHand = GameObject.Find("hand_left");
                 offHand = GameObject.Find("hand_right");
+            }
+
+            // Check to make sure both reticles aren't active - if they are, default to right
+            if (rightReticle.activeSelf && leftReticle.activeSelf)
+            {
+                // Set the dominant hand
+                dominantHand = DominantHand.RIGHT;
+
+                // Mess with the reticles
+                if (leftReticle.activeSelf)
+                {
+                    rightReticle.SetActive(true);
+                    leftReticle.SetActive(false);
+                }
+                currentReticle = rightReticle;
+
+                // Mess with the hands
+                currentHand = GameObject.Find("hand_right");
+                offHand = GameObject.Find("hand_left");
             }
         }
 

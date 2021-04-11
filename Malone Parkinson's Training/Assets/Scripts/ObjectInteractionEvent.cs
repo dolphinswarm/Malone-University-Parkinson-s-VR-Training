@@ -102,18 +102,6 @@ public class ObjectInteractionEvent : InfoBoardEvent
             }
         }
 
-        // If using Oculus, hide the reticle
-        if (gameManager.controlType == ControlType.OCULUS && hideReticles)
-        {
-            hideOnStart.Add(gameManager.currentReticle);
-            showAtEnd.Add(gameManager.currentReticle);
-        }
-        else
-        {
-            showOnStart.Add(gameManager.currentReticle);
-            hideAtEnd.Add(gameManager.currentReticle);
-        }
-
         // Go to base event
         base.Go(prevEventNum);
 
@@ -177,13 +165,7 @@ public class ObjectInteractionEvent : InfoBoardEvent
                 // eventName
                 myEventNum + ".) " + name + "," +
                 // elapsedTime
-                System.Math.Round(Time.time - startTime, 2) + "," +
-                // wasCorrect
-                "n/a," +
-                // providedAnswers
-                "n/a," +
-                // questionScore
-                "n/a");
+                System.Math.Round(Time.time - startTime, 2));
         }
 
         // Disable each interactive object

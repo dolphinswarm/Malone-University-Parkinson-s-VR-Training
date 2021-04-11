@@ -124,24 +124,6 @@ public class QuestionEvent : InfoBoardEvent
 
             // Play the sfx and narration
             StartCoroutine(PlayProperSoundAndNarration(correctSFX, correctNarration));
-
-            //// If report card is used, write a line
-            //if (reportCard != null && reportCard.isActiveAndEnabled)
-            //{
-            //    // write appropriate entry to the logfile here
-            //    reportCard.writeLine(" - QUESTION: " + questionText);
-            //    reportCard.writeLine(" - ANSWERED CORRECTLY!");
-            //    reportCard.writeLine(" - Answer(s) selected:");
-            //    foreach (AnswerManager answer in thingsSelected)
-            //    {
-            //        reportCard.writeLine("   - " + answer.answerText);
-            //    }
-
-            //    // Add the scores
-            //    reportCard.currentScore += 1;
-            //    reportCard.totalScore += 1;
-            //}
-
         }
         else {
             // Srt the incorrect text
@@ -154,38 +136,15 @@ public class QuestionEvent : InfoBoardEvent
 
             // Play the sfx and narration
             StartCoroutine(PlayProperSoundAndNarration(wrongSFX, wrongNarration));
-
-            //// If report card is used, write a line
-            //if (reportCard != null && reportCard.isActiveAndEnabled)
-            //{
-            //    // write appropriate entry to the logfile here
-            //    reportCard.writeLine(" - QUESTION: " + questionText);
-            //    reportCard.writeLine(" - ANSWERED INCORRECTLY!");
-            //    reportCard.writeLine(" - Answer(s) selected:");
-            //    foreach (AnswerManager answer in thingsSelected)
-            //    {
-            //        reportCard.writeLine("   - " + answer.answerText);
-            //    }
-            //    if (correctAnswers.Count > 0)
-            //    {
-            //        reportCard.writeLine("- Correct Answer(s):");
-            //        foreach (AnswerManager answer in correctAnswers)
-            //        {
-            //            reportCard.writeLine("   - " + answer.answerText);
-            //        }
-            //    }
-
-            //    // Add the scores
-            //    reportCard.currentScore += correctAnswers.Count / Math.Max(thingsSelected.Count, 1);
-            //    reportCard.totalScore += 1;
-
-            //}
         }
 
         // Add the scores
         float score = percentRight;
-        reportCard.currentScore += score;
-        reportCard.totalScore += 1;
+        if (!isTutorialEvent)
+        {
+            reportCard.currentScore += score;
+            reportCard.totalScore += 1;
+        }
 
         // Make a string of provided answers
         string answerString = "";

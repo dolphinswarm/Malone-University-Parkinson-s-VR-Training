@@ -159,11 +159,16 @@ public class InfoBoardEvent : MonoBehaviour
             gameManager.currentReticle.SetActive(false);
         }
 
+
         gameManager.currentEvent = this;
         useEventNum = false;
         isActive = true;
         //GameObject.Find("Instruction_Text").GetComponent<TextMeshPro>().text = helpReminderText;
         startTime = Time.time;
+
+        if (reportCard == null)
+            reportCard = FindObjectOfType<ReportCardManager>(); // Should only be one GameManager
+        reportCard.shouldWriteToReportCard = !gameManager.currentEvent.isTutorialEvent;
 
         // Show / hide things as necessary
         Show(showOnStart, true);        // if there are things to be shown, then show them

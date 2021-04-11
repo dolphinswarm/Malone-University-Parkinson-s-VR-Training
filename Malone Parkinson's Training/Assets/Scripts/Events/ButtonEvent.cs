@@ -106,13 +106,7 @@ public class ButtonEvent : InfoBoardEvent
                 // eventName
                 myEventNum + ".) " + name + "," +
                 // elapsedTime
-                System.Math.Round(Time.time - startTime, 2) + "," +
-                // wasCorrect
-                "n/a," +
-                // providedAnswers
-                "n/a," +
-                // questionScore
-                "n/a");
+                System.Math.Round(Time.time - startTime, 2));
         }
 
         // Record the ending time

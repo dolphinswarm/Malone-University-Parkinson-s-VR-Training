@@ -217,13 +217,7 @@ public class PickupEvent : InfoBoardEvent
                 // eventName
                 myEventNum + ".) " + name + "," +
                 // elapsedTime
-                System.Math.Round(Time.time - startTime, 2) + "," +
-                // wasCorrect
-                "n/a," +
-                // providedAnswers
-                "n/a," +
-                // questionScore
-                "n/a");
+                System.Math.Round(Time.time - startTime, 2));
         }
 
         // If the pickup object isn't picked up, un-activate it
