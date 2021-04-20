@@ -62,6 +62,8 @@ public class GameManager : MonoBehaviour {
     public OVRHapticsManager leftHandOVRHaptics;
     public OVRHapticsManager rightHandOVRHaptics;
     //public bool hideCursor = false;                           // Should the cursor be hidden?
+    public bool lHandHasSomething = false;
+    public bool rHandHasSomething = false;
 
 
     [Header("Game Flow")]

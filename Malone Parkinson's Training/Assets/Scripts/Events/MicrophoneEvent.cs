@@ -23,6 +23,7 @@ public class MicrophoneEvent : InfoBoardEvent
     private bool hasBaselineBeenSet = false;
     private bool hasBeenTriggered = false;
     private bool checkerRunning = false;
+    private float timer = 0;
 
     // ======================================================== Methods
     /// <summary>
@@ -84,7 +85,10 @@ public class MicrophoneEvent : InfoBoardEvent
         //audioSource.volume = 0.0f;
 
         // Play back the recording
-        while (!(Microphone.GetPosition(null) > 0)) { }
+        while (!(Microphone.GetPosition(null) > 0) && timer < 0.1)
+        {
+            timer += Time.deltaTime;
+        }
         audioSource.Play();
     }
 

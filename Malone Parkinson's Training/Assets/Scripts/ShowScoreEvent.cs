@@ -118,8 +118,8 @@ public class ShowScoreEvent : InfoBoardEvent
         if (nextButton != null)
             nextButton.SetActive(false);
 
-        // Show the scorecard
-        scoreBoard.SetActive(true);
+        // Hide the scorecard
+        scoreBoard.SetActive(false);
 
         base.Finished();
     }
